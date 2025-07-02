@@ -61,7 +61,7 @@ public class Guerrier
         Console.WriteLine($"{Nom}: [PV= {PointsDeVie}, Nbr= {NbDesAttaque}]");
     }
 
-    public int Attaquer()
+    public virtual int Attaquer()
     {
         Random random  = new Random();
         int totalDamage = 0;
@@ -69,10 +69,14 @@ public class Guerrier
         {
             totalDamage += random.Next(1, 7);
         }
+        if (totalDamage <= NbDesAttaque)
+        {
+            totalDamage =  NbDesAttaque;
+        }
         return totalDamage;
     }
 
-    public void SubirDegats(int degats)
+    public virtual void SubirDegats(int degats)
     {
         Console.Write(PointsDeVie);
         PointsDeVie -= degats;
