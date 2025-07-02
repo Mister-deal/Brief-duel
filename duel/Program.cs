@@ -7,41 +7,62 @@ Guerrier galahad = new Guerrier("galahad", 30, 4);
 Elfe legolas = new Elfe("legolas", 25, 5, 5);
 Nain gimli = new Nain("gimli", 38, 3, true);
 
-while (lancelot.GetPointsDeVie() > 0 || galahad.GetPointsDeVie() > 0)
+int count = 1;
+Console.WriteLine($"\n--- Début du Combat N°{count} ---");
+
+
+while (lancelot.GetPointsDeVie() > 0 && galahad.GetPointsDeVie() > 0)
 {
-    galahad.SubirDegats(lancelot.Attaquer());
+    Console.WriteLine("\n--- Nouveau Tour ---");
+
+    // Lancelot attaque Galahad
+    int degats1 = lancelot.Attaquer();
+    galahad.SubirDegats(degats1);
+    Console.WriteLine($"{lancelot.GetNom()} inflige {degats1} dégâts à {galahad.GetNom()}.");
     galahad.AfficherInfos();
 
-    lancelot.SubirDegats(galahad.Attaquer());
-    lancelot.AfficherInfos();
-    if (galahad.GetPointsDeVie() == 0 && legolas.GetPointsDeVie() == 0)
-    {
-        Console.Write($"{galahad.GetPointsDeVie()}");
-        Console.Write($"{legolas.GetPointsDeVie()}");
+    if (galahad.GetPointsDeVie() <= 0)
         break;
-    }
+
+    // Galahad attaque Lancelot
+    int degats2 = galahad.Attaquer();
+    lancelot.SubirDegats(degats2);
+    Console.WriteLine($"{galahad.GetNom()} inflige {degats2} dégâts à {lancelot.GetNom()}.");
+    lancelot.AfficherInfos();
 }
-/*
-lancelot.AfficherInfos();
-galahad.AfficherInfos();
 
-galahad.SubirDegats(lancelot.Attaquer());
-galahad.AfficherInfos();
+count++;
 
-lancelot.SubirDegats(galahad.Attaquer());
-lancelot.AfficherInfos();
+Console.WriteLine("\n--- Fin du Combat ---");
 
-galahad.SubirDegats(lancelot.Attaquer());
-galahad.AfficherInfos();
+ if (lancelot.GetPointsDeVie() > 0)
+    Console.WriteLine($"{lancelot.GetNom()} a gagné !");
+else
+    Console.WriteLine($"{galahad.GetNom()} a gagné !");
 
-lancelot.SubirDegats(galahad.Attaquer());
-lancelot.AfficherInfos();
 
-galahad.SubirDegats(lancelot.Attaquer());
-galahad.AfficherInfos();
+Console.WriteLine($"\n--- Début du Combat N°{count} ---");
 
-lancelot.SubirDegats(galahad.Attaquer());
-lancelot.AfficherInfos();
 
-*/
+while (gimli.GetPointsDeVie() > 0 && legolas.GetPointsDeVie() > 0)
+{
+    Console.WriteLine("\n--- Nouveau Tour ---");
+
+    // Gimli attaque Legolas
+    int degats1 = gimli.Attaquer();
+    legolas.SubirDegats(degats1);
+    Console.WriteLine($"{gimli.GetNom()} inflige {degats1} dégâts à {legolas.GetNom()}.");
+    legolas.AfficherInfos();
+
+    if (legolas.GetPointsDeVie() <= 0)
+        break;
+
+    // Legolas attaque Gimli
+    int degats2 = legolas.Attaquer();
+    gimli.SubirDegats(degats2);
+    Console.WriteLine($"{legolas.GetNom()} inflige {degats2} dégâts à {gimli.GetNom()}.");
+    gimli.AfficherInfos();
+}
+
+Console.WriteLine("\n--- Fin du Combat ---");
 

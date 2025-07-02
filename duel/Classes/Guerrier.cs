@@ -37,7 +37,7 @@ public class Guerrier
 
     public string GetNom()
     {
-        return $"{Nom} est le guerrier que vous avez selectionné";
+        return $"{Nom}";
     }
 
     public int GetPointsDeVie()
@@ -81,10 +81,6 @@ public class Guerrier
         Console.Write(PointsDeVie);
         PointsDeVie -= degats;
         Console.WriteLine($" - {degats} = {PointsDeVie} de point de vie actuel");
-        if (PointsDeVie <= 0)
-        {
-            Console.WriteLine($"{Nom} a été vaincu !");
-        }
     }
     
     
