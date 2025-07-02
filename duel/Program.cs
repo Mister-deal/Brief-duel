@@ -57,8 +57,11 @@ while (gimli.GetPointsDeVie() > 0 && legolas.GetPointsDeVie() > 0)
     if (legolas.GetPointsDeVie() <= 0)
         break;
 
+    //appel de la fonction polymorphique Attaquer() provenant de la classe enfant Elfe
     // Legolas attaque Gimli
+    
     int degats2 = legolas.Attaquer();
+    //appel de la fonction polymorphique SubirDegats() provenant de la classe enfant Nain
     gimli.SubirDegats(degats2);
     Console.WriteLine($"{legolas.GetNom()} inflige {degats2} dégâts à {gimli.GetNom()}.");
     gimli.AfficherInfos();
