@@ -1,6 +1,8 @@
-﻿namespace duel.Classes;
+﻿using duel.Interfaces;
 
-public class Elfe: Guerrier
+namespace duel.Classes;
+
+public class Elfe: Guerrier, Icombattant
 {
     private int magie;
     public Elfe(string nom, int pointsDeVie, int nbDesAttaque, int magie) : base(nom, pointsDeVie, nbDesAttaque)

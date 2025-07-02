@@ -1,6 +1,8 @@
-﻿namespace duel.Classes;
+﻿using duel.Interfaces;
 
-public class Guerrier
+namespace duel.Classes;
+
+public class Guerrier: Icombattant
 {
     // Champs privés
     private string _nom;

@@ -2,6 +2,31 @@
 
 using duel.Classes;
 
+List<Guerrier> guerriers = new List<Guerrier>();
+
+while (true)
+{
+    Console.WriteLine("\n=== MENU PRINCIPAL ===");
+    Console.WriteLine("1. Créer un guerrier");
+    Console.WriteLine("2. Afficher les guerriers");
+    Console.WriteLine("3. Lancer un duel");
+    Console.WriteLine("4. Quitter");
+
+    Console.Write("faites votre choix");
+    string choix = Console.ReadLine();
+
+    /*
+    switch (choix)
+    {
+        case "1":
+            
+    }
+    */
+}
+{
+    
+}
+/*
 Guerrier lancelot = new Guerrier("Lancelot", 35, 3);
 Guerrier galahad = new Guerrier("galahad", 30, 4);
 Elfe legolas = new Elfe("legolas", 25, 5, 5);
@@ -68,4 +93,5 @@ while (gimli.GetPointsDeVie() > 0 && legolas.GetPointsDeVie() > 0)
 }
 
 Console.WriteLine("\n--- Fin du Combat ---");
+*/
 

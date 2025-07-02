@@ -1,6 +1,8 @@
-﻿namespace duel.Classes;
+﻿using duel.Interfaces;
 
-public class Nain: Guerrier
+namespace duel.Classes;
+
+public class Nain: Guerrier, Icombattant
 {
     private bool armureLourde;
     public Nain(string nom, int pointsDeVie, int nbDesAttaque, bool armureLourde) : base(nom, pointsDeVie, nbDesAttaque)
