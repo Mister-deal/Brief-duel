@@ -157,16 +157,11 @@ void AjouterElfe()
 
 void AjouterGuerrier()
 {
-    Console.Write("Nom du guerrier : ");
-    string nom = Console.ReadLine();
+    string nom = DemanderTexte("Nom du Guerrier: ");
 
-    Console.Write("Points de vie (10-100) : ");
-    int pv = int.Parse(Console.ReadLine());
+    int pv = DemanderEntier("Points de vie: ", 10, 100);
 
-    Console.Write("Nombre de dés d'attaque (1-10) : ");
-    int nbDes = int.Parse(Console.ReadLine());
-    
-    
+    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
 
     Guerrier guerrier = new Guerrier(nom, pv, nbDes);
     guerriers.Add(guerrier);
