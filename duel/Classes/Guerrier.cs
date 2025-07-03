@@ -7,7 +7,7 @@ public abstract class Guerrier: Icombattant
 {
     // Attributs 
 
-    public static List<List<Icombattant>> guerriers = new List<List<Icombattant>>();
+    public static List<Icombattant> guerriers = new List<Icombattant>();
 
     // Champs privés
     private string _nom;
