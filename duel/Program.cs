@@ -93,5 +93,10 @@ while (gimli.GetPointsDeVie() > 0 && legolas.GetPointsDeVie() > 0)
 }
 
 Console.WriteLine("\n--- Fin du Combat ---");
+
+ if (gimli.GetPointsDeVie() > 0)
+    Console.WriteLine($"{gimli.GetNom()} a gagné !");
+else
+    Console.WriteLine($"{legolas.GetNom()} a gagné !");
 */
 
