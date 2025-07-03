@@ -1,10 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using duel.Classes;
+using duel.Interfaces;
 
-List<Guerrier> guerriers = new List<Guerrier>();
+
 List<Nain> guerriersNains = new List<Nain>();
-List<Elfe> guerriersElfe = new List<Elfe>();
+List<Elfe> guerriersElfes = new List<Elfe>();
+Guerrier.guerriers.Add(guerriersNains.Cast<Icombattant>().ToList());
+Guerrier.guerriers.Add(guerriersElfes.Cast<Icombattant>().ToList());
+
 
 string choix = "";
 int choixVerifie = 0;
@@ -150,40 +154,9 @@ void AjouterElfe()
     int magie = DemanderEntier("Points de magie(10 - 40): ", 10, 40);
 
     Elfe elfe = new Elfe(nom, pv, nbDes, magie);
-    guerriersElfe.Add(elfe);
+    guerriersElfes.Add(elfe);
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
-}
-
-void AjouterGuerrier()
-{
-    string nom = DemanderTexte("Nom du Guerrier: ");
-
-    int pv = DemanderEntier("Points de vie: ", 10, 100);
-
-    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
-
-    Guerrier guerrier = new Guerrier(nom, pv, nbDes);
-    guerriers.Add(guerrier);
-
-    Console.WriteLine($"{nom} a été ajouté à la liste.");
-}
-
-
-void AfficherListeGuerriers()
-{
-    if (guerriers.Count == 0)
-    {
-        Console.WriteLine("Aucun guerrier créé pour l’instant.");
-        return;
-    }
-
-    Console.WriteLine("--- Liste des Guerriers ---");
-    for (int i = 0; i < guerriers.Count; i++)
-    {
-        Console.Write($"{i + 1}. ");
-        guerriers[i].AfficherInfos();
-    }
 }
 
 void AfficherListeGuerriersNains()
@@ -202,19 +175,19 @@ void AfficherListeGuerriersNains()
     }
 }
 
-void AfficherListeGuerriersElfes()
+void AfficherListeguerriersElfess()
 {
-    if (guerriersElfe.Count == 0)
+    if (guerriersElfes.Count == 0)
     {
         Console.WriteLine("Aucun guerrier créé pour l’instant.");
         return;
     }
 
     Console.WriteLine("--- Liste des Guerriers elfes ---");
-    for (int i = 0; i < guerriersElfe.Count; i++)
+    for (int i = 0; i < guerriersElfes.Count; i++)
     {
         Console.Write($"{i + 1}. ");
-        guerriersElfe[i].AfficherInfos();
+        guerriersElfes[i].AfficherInfos();
     }
 }
 

@@ -1,9 +1,14 @@
-﻿using duel.Interfaces;
+﻿
+using duel.Interfaces;
 
 namespace duel.Classes;
 
-public class Guerrier: Icombattant
+public abstract class Guerrier: Icombattant
 {
+    // Attributs 
+
+    public static List<List<Icombattant>> guerriers = new List<List<Icombattant>>();
+
     // Champs privés
     private string _nom;
     private int _pointsDeVie;
