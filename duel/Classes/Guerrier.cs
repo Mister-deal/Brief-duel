@@ -70,7 +70,7 @@ public abstract class Guerrier: Icombattant
         return NbDesAttaque;
     }
 
-    public void AfficherInfos()
+    public virtual void AfficherInfos()
     {
         Console.WriteLine($"{Nom}: [PV= {PointsDeVie}, Nbr= {NbDesAttaque}]");
     }

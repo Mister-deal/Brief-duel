@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\duel.csproj": {}
+    "C:\\Users\\max-9\\OneDrive\\Bureau\\test\\Brief-duel\\duel\\duel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\duel.csproj": {
+    "C:\\Users\\max-9\\OneDrive\\Bureau\\test\\Brief-duel\\duel\\duel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\duel.csproj",
+        "projectUniqueName": "C:\\Users\\max-9\\OneDrive\\Bureau\\test\\Brief-duel\\duel\\duel.csproj",
         "projectName": "duel",
-        "projectPath": "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\duel.csproj",
+        "projectPath": "C:\\Users\\max-9\\OneDrive\\Bureau\\test\\Brief-duel\\duel\\duel.csproj",
         "packagesPath": "C:\\Users\\max-9\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\obj\\",
+        "outputPath": "C:\\Users\\max-9\\OneDrive\\Bureau\\test\\Brief-duel\\duel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\max-9\\AppData\\Roaming\\NuGet\\NuGet.Config"

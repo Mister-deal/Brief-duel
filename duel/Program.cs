@@ -8,6 +8,7 @@ using duel.Interfaces;
 
 List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
+List<Sorcier> sorciers = new List<Sorcier>();
 
 int choix = 0;
 int choixClass = 0;
@@ -15,22 +16,38 @@ AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
 {
-    Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
-    Console.WriteLine("║                             NAINS VS ELFES                           ║");
-    Console.WriteLine("║                 L'Internationale de la Chicanerie des Hautes terres  ║");
-    Console.WriteLine("║                              Nain VS Elfe                            ║");
-    Console.WriteLine("╚══════════════════════════════════════════════════════════════════════╝\n");
+    Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                      NAINS VS ELFES : LE DESTIN DES CIMES                    ║");
+    Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════╝\n");
 
-    Console.WriteLine("Bienvenue, valeureux guerriers et sages stratèges.");
-    Console.WriteLine("Dans ces terres anciennes, où la rancune entre Nains et Elfes perdure,");
-    Console.WriteLine("le moment est venu de clore ces querelles ancestrales.");
-    Console.WriteLine("Un tournoi sera organisé, où chaque champion combattra pour la gloire,");
-    Console.WriteLine("l’honneur et la suprématie de sa race.");
+    Console.WriteLine("  *Récit des Chroniques Anciennes...*\n");
 
-    Console.WriteLine("\nQue les dés soient lancés, que les armes s’entrechoquent,");
-    Console.WriteLine("et que le plus digne triomphe dans ce combat sans merci.");
+    Console.WriteLine("Il fut un temps, oublié de la plupart, où les hautes terres résonnaient");
+    Console.WriteLine("non pas du fracas des armes, mais du chant des alliances. Les Nains,");
+    Console.WriteLine("forgerons du roc et bâtisseurs d'empire, partageaient jadis la montagne");
+    Console.WriteLine("avec les Elfes, maîtres des arcanes et gardiens des forêts éternelles.");
+    
+    Console.WriteLine("\nMais le temps corrompt, et l’orgueil creuse des failles plus profondes que la pierre.");
+    Console.WriteLine("Un différend ancien, oublié des sages mais nourri par les rancunes séculaires,");
+    Console.WriteLine("ressurgit aujourd’hui dans le fracas d’un dernier serment.");
+    
+    Console.WriteLine("\nLes traités sont rompus. Les anciennes runes de paix se sont éteintes.");
+    Console.WriteLine("Les chants elfiques ne résonnent plus que comme des promesses brisées,");
+    Console.WriteLine("et les marteaux des Nains battent l’appel à la guerre.");
 
-    Console.WriteLine("\nPréparez-vous, car l’épopée commence ici même, et l’histoire s’écrira au fil du sang et du courage.\n");
+    Console.WriteLine("\nPlutôt que de voir leurs royaumes s’anéantir, les anciens souverains décidèrent :");
+    Console.WriteLine("UN TOURNOI. Une épreuve d'honneur. Un affrontement rituel.");
+    Console.WriteLine("Chaque race y enverra ses champions. Et lorsque le sang aura coulé,");
+    Console.WriteLine("l’un des peuples sera déclaré vainqueur. L'autre devra plier le genou...");
+
+    Console.WriteLine("\nCe tournoi ne désignera pas simplement un gagnant.");
+    Console.WriteLine("Il écrira l’avenir. Il fera taire les poètes. Il scellera le destin des cimes.\n");
+
+    Console.WriteLine("Êtes-vous prêt à forger la légende ? À inscrire votre nom dans les chroniques éternelles ?");
+    Console.WriteLine("Prenez les armes, invoquez le courage, et entrez dans l’arène sacrée.");
+    
+    Console.WriteLine("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
+    Console.ReadKey(true);
     while (true)
     {
         var player = new SoundPlayer("Dragon Quest III.wav");
@@ -48,8 +65,8 @@ void AfficherMenuPrincipal()
         {
             case 1:
                 Console.WriteLine("Que voulez-vous ajouter \n" +
-                    "  1. Ajouter un guerrier nain \n" +
-                    "  2. Ajouter un guerrier elfe");
+                    "  1. Ajouter un guerrier saint nain \n" +
+                    "  2. Ajouter un guerrier saint elfe");
                choixClass =  DemanderEntier("Donnez un chiffre: ", 1, 2);
 
                 switch (choixClass)
@@ -73,10 +90,10 @@ void AfficherMenuPrincipal()
                 LancerDuel();
                 break;
             case 4:
-                
+                LancerTournoi();
                 break;
             case 5:
-                Console.WriteLine("Merci et à bientôt");
+                Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
                 return;
         }
 
@@ -164,29 +181,29 @@ else
 
 void AjouterNain()
 {
-    var player = new SoundPlayer("Dragonborn.wav");
-    player.Play(); // Joue la musique et bloque jusqu'à la fin
-    string nom = DemanderTexte("Nom du Guerrier Nain: ");
+    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
+    string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
 
     int pv = DemanderEntier("Points de vie: ", 10, 100);
 
     int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
 
-    bool armureLourde = DemanderBool("Souhaitez-vous donner une armure lourdre à votre nain ? (oui/non): ");
+    bool armureLourde = DemanderBool("Souhaitez-vous donner une armure lourde à votre nain ? (oui/non): ");
 
     Nain nain = new Nain(nom, pv, nbDes, armureLourde);
-    guerriersNains.Add(nain); // Attention : ici c’est bien la liste `Guerriers`
+    guerriersNains.Add(nain);
     Guerrier.guerriers.Add(nain);
 
-    Console.WriteLine($"{nom} a été ajouté à la liste.");
+    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains");
     player.Stop();
 }
 
 void AjouterElfe()
 {
-    var player = new SoundPlayer("Dragonborn.wav");
-    player.Play(); // Joue la musique et bloque jusqu'à la fin
-    string nom = DemanderTexte("Nom du Guerrier Elfe: ");
+    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
+    string nom = DemanderTexte("Nom du saint Guerrier Elfe: ");
 
     int pv = DemanderEntier("Points de vie: ", 10, 100);
 
@@ -198,7 +215,7 @@ void AjouterElfe()
     guerriersElfes.Add(elfe);
     Guerrier.guerriers.Add(elfe);
 
-    Console.WriteLine($"{nom} a été ajouté à la liste.");
+    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra vaillamment afin de sauvegarder les forêts qui lui sont chères !");
     player.Stop();
 }
 
@@ -206,7 +223,7 @@ void AfficherListeGuerriersNains()
 {
     if (guerriersNains.Count == 0)
     {
-        Console.WriteLine("Aucun guerrier créé pour l’instant.");
+        Console.WriteLine("Aucun guerrier nain créé pour l’instant.");
         return;
     }
 
@@ -222,7 +239,7 @@ void AfficherListeguerriersElfes()
 {
     if (guerriersElfes.Count == 0)
     {
-        Console.WriteLine("Aucun guerrier créé pour l’instant.");
+        Console.WriteLine("Aucun guerrier elfe créé pour l’instant.");
         return;
     }
 
@@ -309,27 +326,28 @@ bool DemanderBool(string message)
 void LancerDuel()
 {
     var player = new SoundPlayer("Final Fantasy IX OST - Battle 1.wav");
-    player.Play(); // Joue la musique et bloque jusqu'à la fin
+    player.Play();
+
     if (Guerrier.guerriers.Count < 2)
     {
         Console.WriteLine("Pas assez de combattants pour un duel !");
         return;
     }
 
-    Console.WriteLine("--- Choisissez les deux combattants ---");
+    Console.WriteLine("\n--- Choisissez les deux combattants ---\n");
 
     for (int i = 0; i < Guerrier.guerriers.Count; i++)
     {
         Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
     }
 
-    int index1 = DemanderEntier("Combatant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
-    int index2 = DemanderEntier("Combatant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    int index1 = DemanderEntier("Combattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    int index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
 
     while (index1 == index2)
     {
         Console.WriteLine("Vous devez choisir deux combattants différents !");
-        index2 = DemanderEntier("Combatant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+        index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
     }
 
     Icombattant gagnant = Combattre(Guerrier.guerriers[index1], Guerrier.guerriers[index2]);
@@ -337,22 +355,140 @@ void LancerDuel()
     player.Stop();
 }
 
+void LancerTournoi()
+{
+    var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
+    player.Play();
+    
+    if (Guerrier.guerriers.Count < 2)
+    {
+        Console.WriteLine("Pas assez de combattants pour lancer un tournoi !");
+        return;
+    }
+
+    Console.Clear();
+    Console.WriteLine("\n --- Le Grand Tournoi des Royaumes débute !!!! ---");
+    Console.WriteLine("Les guerriers vont s'affronter dans une série de duels épiques...");
+    Console.WriteLine("Mais qui l'emportera t-il ? Elfes ? Nains ? Ce grand tournoi permettra d'en décider, par la grâce et faveurs des dieux !");
+    Console.WriteLine("\n --- QUE LE GRAND TOURNOI COMMENCE !!!!!! ---");
+    Console.WriteLine();
+    Console.WriteLine("Appuyez sur une touche pour commencer !");
+    Console.ReadKey(true);
+    
+    List<Icombattant> participants = Guerrier.guerriers.OrderBy(x => Guid.NewGuid()).ToList(); // mélange aléatoire
+
+    int tour = 1;
+
+
+    while (participants.Count > 1)
+    {
+        Console.Clear();
+        player.Play();
+        Console.WriteLine($"\n--- Tour {tour} du tournoi ---");
+        List<Icombattant> vainqueursTour = new List<Icombattant>();
+        
+        for (int i = 0; i < participants.Count; i += 2)
+        {
+            if (i + 1 >= participants.Count)
+            {
+                // Nombre impair : le dernier passe automatiquement au tour suivant
+                Console.WriteLine($"⚔️ {participants[i].GetNom()} est qualifié d'office !");
+                vainqueursTour.Add(participants[i]);
+                continue;
+            }
+
+            Icombattant c1 = participants[i];
+            Icombattant c2 = participants[i + 1];
+
+            Console.WriteLine($"\nDuel : {c1.GetNom()} VS {c2.GetNom()}");
+            Console.WriteLine($"{c1.GetNom()} est prêt à en découdre mais {c2.GetNom()} ne se laisse pas intimider ! nous sommes prêts pour voir du combat de HAUT VOL !");
+            Console.WriteLine($"........... COMMENCEZ LE COMBAT !!!");
+            Console.WriteLine("Appuyez sur une touche pour lancer le combat...");
+            Console.ReadKey(true);
+
+            Icombattant vainqueur = Combattre(c1, c2);
+            Victoire(vainqueur);
+            vainqueursTour.Add(vainqueur);
+        }
+        participants = vainqueursTour;
+        tour++;
+
+        Console.WriteLine("\nAppuyez sur une touche pour passer au tour suivant...");
+        Console.ReadKey(true);
+    }
+    player.Stop();
+    Console.Clear();
+    
+    var player1 = new SoundPlayer("Tactics Ogre Glory.wav");
+    player1.PlayLooping();
+    
+    Console.WriteLine("╔════════════════════════════════════════════════════╗");
+    Console.WriteLine("║           !!!! LE TOURNOI EST TERMINÉ !!!!         ║");
+    Console.WriteLine("╚════════════════════════════════════════════════════╝");
+
+    Console.WriteLine($"Le grand champion des hautes terres est : ***{participants[0].GetNom()}*** !!!\n");
+
+    Console.WriteLine("Dans l’arène du destin, face à l’acier, à la magie et au sang,");
+    Console.WriteLine($"{participants[0].GetNom()} a triomphé avec bravoure, ruse et puissance.");
+    Console.WriteLine("Son nom résonnera dans les montagnes comme dans les forêts éternelles.");
+    Console.WriteLine("Les bardes chanteront ses exploits. Les pierres retiendront son nom.");
+    Console.WriteLine("Il ne s’agit plus d’un simple combattant...");
+    Console.WriteLine("C’est un **héros légendaire**, un symbole vivant de la gloire de son peuple !\n");
+
+    Console.WriteLine("Que les feux s’allument, que les cornes sonnent,");
+    Console.WriteLine("le champion est désigné, et les anciens peuvent enfin trouver la paix.\n");
+    
+    Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+    Console.ReadKey(true);
+}
+
+
 Icombattant Combattre(Icombattant c1, Icombattant c2)
 {
     c1.Reset();
     c2.Reset();
 
     Console.WriteLine($"\n⚔️ Début du duel : {c1.GetNom()} VS {c2.GetNom()}\n");
-    
+
+    int tour = 1;
+
     while (c1.GetPointsDeVie() > 0 && c2.GetPointsDeVie() > 0)
     {
-        c2.SubirDegats(c1.Attaquer());
-        if (c2.GetPointsDeVie() <= 0) break;
+        Console.WriteLine($"\n--- Tour {tour} ---\n");
 
+        Console.WriteLine($"{c1.GetNom()} attaque !");
+        c2.SubirDegats(c1.Attaquer());
+
+        if (c2.GetPointsDeVie() <= 0) break;
+        
+
+        Console.WriteLine($"{c2.GetNom()} contre-attaque !");
         c1.SubirDegats(c2.Attaquer());
+
+        if (c1.GetPointsDeVie() <= 0) break;
+
+        Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+        Console.ReadKey(true);
+
+        tour++;
     }
 
     Icombattant vainqueur = c1.GetPointsDeVie() > 0 ? c1 : c2;
-    Console.WriteLine($"\n🏆 Vainqueur : {vainqueur.GetNom()}\n");
-return vainqueur;
+    Victoire(vainqueur);
+
+    return vainqueur;
+}
+
+void Victoire(Icombattant gagnant)
+{
+    Console.Clear();
+    Console.WriteLine("!!!!!! VICTOIRE !!!!!!\n");
+    Console.WriteLine($"{gagnant.GetNom()} sort triomphant du combat ! Félicitation à ce fier guerrier !\n");
+    
+    
+    var player = new SoundPlayer("Final Fantasy Fanfare.wav");
+    player.PlayLooping();
+        
+    Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+    Console.ReadKey(true);
 }
