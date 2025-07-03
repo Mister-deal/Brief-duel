@@ -10,9 +10,26 @@ Guerrier.guerriers.Add(guerriersNains.Cast<Icombattant>().ToList());
 Guerrier.guerriers.Add(guerriersElfes.Cast<Icombattant>().ToList());
 
 int choix = 0;
+AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
 {
+    Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                             NAINS VS ELFES                           ║");
+    Console.WriteLine("║                 L'Internationale de la Chicanerie des Hautes terres  ║");
+    Console.WriteLine("║                            Nain VS Elfe                              ║");
+    Console.WriteLine("╚══════════════════════════════════════════════════════════════════════╝\n");
+
+    Console.WriteLine("Bienvenue, valeureux guerriers et sages stratèges.");
+    Console.WriteLine("Dans ces terres anciennes, où la rancune entre Nains et Elfes perdure,");
+    Console.WriteLine("le moment est venu de clore ces querelles ancestrales.");
+    Console.WriteLine("Un tournoi sera organisé, où chaque champion combattra pour la gloire,");
+    Console.WriteLine("l’honneur et la suprématie de sa race.");
+
+    Console.WriteLine("\nQue les dés soient lancés, que les armes s’entrechoquent,");
+    Console.WriteLine("et que le plus digne triomphe dans ce combat sans merci.");
+
+    Console.WriteLine("\nPréparez-vous, car l’épopée commence ici même, et l’histoire s’écrira au fil du sang et du courage.\n");
     while (true)
     {
         Console.WriteLine("\n=== MENU PRINCIPAL ===");
@@ -23,7 +40,7 @@ void AfficherMenuPrincipal()
         Console.WriteLine("5. Lancer un tournoi");
         Console.WriteLine("6. Quitter");
 
-        choix = DemanderEntier("Faites votre choix: ", 1, 4);
+        choix = DemanderEntier("Faites votre choix: ", 1, 6);
 
         switch (choix)
         {
