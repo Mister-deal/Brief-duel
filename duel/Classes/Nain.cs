@@ -2,7 +2,7 @@
 
 namespace duel.Classes;
 
-public class Nain: Guerrier, Icombattant
+public class Nain : Guerrier, Icombattant
 {
     private bool armureLourde;
     public Nain(string nom, int pointsDeVie, int nbDesAttaque, bool armureLourde) : base(nom, pointsDeVie, nbDesAttaque)
@@ -12,12 +12,12 @@ public class Nain: Guerrier, Icombattant
 
     public override void SubirDegats(int degats)
     {
+        if (armureLourde != false)
+        {
+            degats /= 2;
+        }
         Console.Write(PointsDeVie);
         PointsDeVie -= degats;
         Console.WriteLine($" - {degats} = {PointsDeVie} de point de vie actuel");
-        if (armureLourde != false)
-        {
-            degats = degats / 2;
-        }
     }
 }
