@@ -120,24 +120,6 @@ else
     Console.WriteLine($"{legolas.GetNom()} a gagné !");
 */
 
-void AjouterGuerrier()
-{
-    Console.Write("Nom du guerrier : ");
-    string nom = Console.ReadLine();
-
-    Console.Write("Points de vie (10-100) : ");
-    int pv = int.Parse(Console.ReadLine());
-
-    Console.Write("Nombre de dés d'attaque (1-10) : ");
-    int nbDes = int.Parse(Console.ReadLine());
-
-
-
-    Guerrier guerrier = new Guerrier(nom, pv, nbDes);
-    guerriers.Add(guerrier);
-
-    Console.WriteLine($"{nom} a été ajouté à la liste.");
-}
 
 
 void AjouterNain()
@@ -163,7 +145,7 @@ void AjouterNain()
     armureLourde = (reponse == "oui");
 
     Nain nain = new Nain(nom, pv, nbDes, armureLourde);
-    guerriersNains.Add(nain);
+    guerriersNains.Add(nain); // Attention : ici c’est bien la liste `Guerriers`
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
 }
@@ -189,3 +171,70 @@ void AjouterElfe()
     Console.WriteLine($"{nom} a été ajouté à la liste.");
 }
 
+void AjouterGuerrier()
+{
+    Console.Write("Nom du guerrier : ");
+    string nom = Console.ReadLine();
+
+    Console.Write("Points de vie (10-100) : ");
+    int pv = int.Parse(Console.ReadLine());
+
+    Console.Write("Nombre de dés d'attaque (1-10) : ");
+    int nbDes = int.Parse(Console.ReadLine());
+    
+    
+
+    Guerrier guerrier = new Guerrier(nom, pv, nbDes);
+    guerriers.Add(guerrier);
+
+    Console.WriteLine($"{nom} a été ajouté à la liste.");
+}
+
+
+void AfficherListeGuerriers()
+{
+    if (guerriers.Count == 0)
+    {
+        Console.WriteLine("Aucun guerrier créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Guerriers ---");
+    for (int i = 0; i < guerriers.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        guerriers[i].AfficherInfos();
+    }
+}
+
+void AfficherListeGuerriersNains()
+{
+    if (guerriersNains.Count == 0)
+    {
+        Console.WriteLine("Aucun guerrier créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Guerriers nains ---");
+    for (int i = 0; i < guerriersNains.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        guerriersNains[i].AfficherInfos();
+    }
+}
+
+void AfficherListeGuerriersElfes()
+{
+    if (guerriersElfe.Count == 0)
+    {
+        Console.WriteLine("Aucun guerrier créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Guerriers elfes ---");
+    for (int i = 0; i < guerriersElfe.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        guerriersElfe[i].AfficherInfos();
+    }
+}
