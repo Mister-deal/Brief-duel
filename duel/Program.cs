@@ -3,6 +3,8 @@
 using duel.Classes;
 
 List<Guerrier> guerriers = new List<Guerrier>();
+List<Nain> guerriersNains = new List<Nain>();
+List<Elfe> guerriersElfe = new List<Elfe>();
 
 string choix = "";
 int choixVerifie = 0;
@@ -117,4 +119,67 @@ Console.WriteLine("\n--- Fin du Combat ---");
 else
     Console.WriteLine($"{legolas.GetNom()} a gagné !");
 */
+
+void AjouterGuerrier()
+{
+    Console.Write("Nom du guerrier : ");
+    string nom = Console.ReadLine();
+
+    Console.Write("Points de vie (10-100) : ");
+    int pv = int.Parse(Console.ReadLine());
+
+    Console.Write("Nombre de dés d'attaque (1-10) : ");
+    int nbDes = int.Parse(Console.ReadLine());
+    
+    
+
+    Guerrier guerrier = new Guerrier(nom, pv, nbDes);
+    guerriers.Add(guerrier);
+
+    Console.WriteLine($"{nom} a été ajouté à la liste.");
+}
+
+
+void AjouterNain()
+{
+    Console.Write("Nom du guerrier Nain : ");
+    string nom = Console.ReadLine();
+
+    Console.Write("Points de vie (10-100) : ");
+    int pv = int.Parse(Console.ReadLine());
+
+    Console.Write("Nombre de dés d'attaque (1-10) : ");
+    int nbDes = int.Parse(Console.ReadLine());
+
+    Console.Write("Souhaitez-vous donner une armure lourde à votre nain ? (oui/non) : ");
+    string reponse = Console.ReadLine().ToLower();
+
+    bool armureLourde = (reponse == "oui");
+
+    Nain nain = new Nain(nom, pv, nbDes, armureLourde);
+    guerriersNains.Add(nain); 
+
+    Console.WriteLine($"{nom} a été ajouté à la liste.");
+}
+
+void AjouterElfe()
+{
+    Console.Write("Nom du guerrier Nain : ");
+    string nom = Console.ReadLine();
+
+    Console.Write("Points de vie (10-100) : ");
+    int pv = int.Parse(Console.ReadLine());
+
+    Console.Write("Nombre de dés d'attaque (1-10) : ");
+    int nbDes = int.Parse(Console.ReadLine());
+
+    Console.Write("Points de magie : ");
+    int magie = int.Parse(Console.ReadLine());
+
+
+    Elfe elfe = new Elfe(nom, pv, nbDes, magie);
+    guerriersElfe.Add(elfe); 
+
+    Console.WriteLine($"{nom} a été ajouté à la liste.");
+}
 
