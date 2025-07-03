@@ -16,6 +16,17 @@ AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
 {
+    Console.Write("Chargement : [");
+
+    int totalBlocks = 30;
+
+    for (int i = 0; i <= totalBlocks; i++)
+    {
+        Console.Write("#");
+        Thread.Sleep(100); 
+    }
+
+    Console.WriteLine("] Terminé !");
     Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                      NAINS VS ELFES : LE DESTIN DES CIMES                    ║");
     Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════╝\n");
@@ -325,6 +336,7 @@ bool DemanderBool(string message)
 
 void LancerDuel()
 {
+    AnimationChargement();
     var player = new SoundPlayer("Final Fantasy IX OST - Battle 1.wav");
     player.Play();
 
@@ -351,12 +363,13 @@ void LancerDuel()
     }
 
     Icombattant gagnant = Combattre(Guerrier.guerriers[index1], Guerrier.guerriers[index2]);
-    Console.WriteLine($"\n🏆 Le gagnant est {gagnant.GetNom()} !");
+    Console.WriteLine($"\nLe gagnant est {gagnant.GetNom()} !");
     player.Stop();
 }
 
 void LancerTournoi()
 {
+    AnimationChargement();
     var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
     player.Play();
     
@@ -457,12 +470,14 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
         Console.WriteLine($"\n--- Tour {tour} ---\n");
 
         Console.WriteLine($"{c1.GetNom()} attaque !");
+        AnimationAttaqueEnCours();
         c2.SubirDegats(c1.Attaquer());
 
         if (c2.GetPointsDeVie() <= 0) break;
         
 
         Console.WriteLine($"{c2.GetNom()} contre-attaque !");
+        AnimationAttaqueEnCours();
         c1.SubirDegats(c2.Attaquer());
 
         if (c1.GetPointsDeVie() <= 0) break;
@@ -491,4 +506,40 @@ void Victoire(Icombattant gagnant)
         
     Console.WriteLine("\nAppuyez sur une touche pour continuer...");
     Console.ReadKey(true);
+}
+
+void AnimationAttaqueEnCours(int dureeEnMs = 2000, int intervalle = 300)
+{
+    int iterations = dureeEnMs / intervalle;
+    Console.Write("Attaque en cours ");
+
+    var couleurs = new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Yellow, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Magenta };
+
+    for (int i = 0; i < iterations; i++)
+    {
+        Console.ForegroundColor = couleurs[i % couleurs.Length];
+        Console.Write(".");
+        Console.ResetColor();
+        Thread.Sleep(intervalle);
+    }
+
+    Console.WriteLine();
+}
+
+void AnimationChargement(int dureeEnMs = 2000, int intervalle = 300)
+{
+    int iterations = dureeEnMs / intervalle;
+    Console.Write("Chargement ");
+
+    var couleurs = new ConsoleColor[] { ConsoleColor.Blue, ConsoleColor.Cyan, ConsoleColor.White, ConsoleColor.Gray };
+
+    for (int i = 0; i < iterations; i++)
+    {
+        Console.ForegroundColor = couleurs[i % couleurs.Length];
+        Console.Write(".");
+        Console.ResetColor();
+        Thread.Sleep(intervalle);
+    }
+
+    Console.WriteLine();
 }
