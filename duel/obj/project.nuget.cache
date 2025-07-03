@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "r3HfwmJ2czk=",
+  "dgSpecHash": "XWWQFF0NSCI=",
   "success": true,
   "projectFilePath": "C:\\Users\\max-9\\OneDrive\\Bureau\\Test revision\\Brief-duel\\duel\\duel.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\max-9\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
     "C:\\Users\\max-9\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.17\\microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
     "C:\\Users\\max-9\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.17\\microsoft.windowsdesktop.app.ref.8.0.17.nupkg.sha512",
     "C:\\Users\\max-9\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.17\\microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512",

@@ -1,7 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Media;
 using duel.Classes;
 using duel.Interfaces;
+
 
 
 List<Nain> guerriersNains = new List<Nain>();
@@ -14,6 +16,8 @@ AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
 {
+    var player = new SoundPlayer("Dragon Quest III.wav");
+    player.Play(); // Joue la musique et bloque jusqu'à la fin
     Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                             NAINS VS ELFES                           ║");
     Console.WriteLine("║                 L'Internationale de la Chicanerie des Hautes terres  ║");
