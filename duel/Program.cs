@@ -17,7 +17,7 @@ void AfficherMenuPrincipal()
     Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                             NAINS VS ELFES                           ║");
     Console.WriteLine("║                 L'Internationale de la Chicanerie des Hautes terres  ║");
-    Console.WriteLine("║                            Nain VS Elfe                              ║");
+    Console.WriteLine("║                              Nain VS Elfe                            ║");
     Console.WriteLine("╚══════════════════════════════════════════════════════════════════════╝\n");
 
     Console.WriteLine("Bienvenue, valeureux guerriers et sages stratèges.");
