@@ -22,7 +22,7 @@ while (true)
         choix = Console.ReadLine();
     } while (!int.TryParse(choix, out choixVerifie) && choixVerifie > 0 && choixVerifie <= 4);
 
-    
+
     switch (choix)
     {
         case "1":
@@ -41,10 +41,10 @@ while (true)
 
             break;
     }
-    
+
 }
 {
-    
+
 }
 /*
 Guerrier lancelot = new Guerrier("Lancelot", 35, 3);
@@ -130,8 +130,8 @@ void AjouterGuerrier()
 
     Console.Write("Nombre de dés d'attaque (1-10) : ");
     int nbDes = int.Parse(Console.ReadLine());
-    
-    
+
+
 
     Guerrier guerrier = new Guerrier(nom, pv, nbDes);
     guerriers.Add(guerrier);
@@ -142,22 +142,28 @@ void AjouterGuerrier()
 
 void AjouterNain()
 {
+    string nom = "";
+    int pv = 0;
+    int nbDes = 0;
+    string reponse = "";
+    bool armureLourde = false;
+
     Console.Write("Nom du guerrier Nain : ");
-    string nom = Console.ReadLine();
+    nom = Console.ReadLine();
 
     Console.Write("Points de vie (10-100) : ");
-    int pv = int.Parse(Console.ReadLine());
+    pv = int.Parse(Console.ReadLine());
 
     Console.Write("Nombre de dés d'attaque (1-10) : ");
-    int nbDes = int.Parse(Console.ReadLine());
+    nbDes = int.Parse(Console.ReadLine());
 
     Console.Write("Souhaitez-vous donner une armure lourde à votre nain ? (oui/non) : ");
-    string reponse = Console.ReadLine().ToLower();
+    reponse = Console.ReadLine().ToLower();
 
-    bool armureLourde = (reponse == "oui");
+    armureLourde = (reponse == "oui");
 
     Nain nain = new Nain(nom, pv, nbDes, armureLourde);
-    guerriersNains.Add(nain); 
+    guerriersNains.Add(nain);
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
 }
@@ -178,7 +184,7 @@ void AjouterElfe()
 
 
     Elfe elfe = new Elfe(nom, pv, nbDes, magie);
-    guerriersElfe.Add(elfe); 
+    guerriersElfe.Add(elfe);
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
 }
