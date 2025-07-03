@@ -26,7 +26,7 @@ while (true)
     switch (choix)
     {
         case "1":
-
+            
             break;
 
         case "2":
@@ -124,25 +124,13 @@ else
 
 void AjouterNain()
 {
-    string nom = "";
-    int pv = 0;
-    int nbDes = 0;
-    string reponse = "";
-    bool armureLourde = false;
+    string nom = DemanderTexte("Nom du Guerrier Nain: ");
 
-    Console.Write("Nom du guerrier Nain : ");
-    nom = Console.ReadLine();
+    int pv = DemanderEntier("Points de vie: ", 10, 100);
 
-    Console.Write("Points de vie (10-100) : ");
-    pv = int.Parse(Console.ReadLine());
+    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
 
-    Console.Write("Nombre de dés d'attaque (1-10) : ");
-    nbDes = int.Parse(Console.ReadLine());
-
-    Console.Write("Souhaitez-vous donner une armure lourde à votre nain ? (oui/non) : ");
-    reponse = Console.ReadLine().ToLower();
-
-    armureLourde = (reponse == "oui");
+    bool armureLourde = DemanderBool("Souhaitez-vous donner une armure lourdre à votre nain ? (oui/non): ");
 
     Nain nain = new Nain(nom, pv, nbDes, armureLourde);
     guerriersNains.Add(nain); // Attention : ici c’est bien la liste `Guerriers`
@@ -152,18 +140,14 @@ void AjouterNain()
 
 void AjouterElfe()
 {
-    Console.Write("Nom du guerrier Nain : ");
-    string nom = Console.ReadLine();
 
-    Console.Write("Points de vie (10-100) : ");
-    int pv = int.Parse(Console.ReadLine());
+    string nom = DemanderTexte("Nom du Guerrier Elfe: ");
 
-    Console.Write("Nombre de dés d'attaque (1-10) : ");
-    int nbDes = int.Parse(Console.ReadLine());
+    int pv = DemanderEntier("Points de vie: ", 10, 100);
 
-    Console.Write("Points de magie : ");
-    int magie = int.Parse(Console.ReadLine());
+    int nbDes = DemanderEntier("Nombre de dés d'attaque (1-10): ", 1, 10);
 
+    int magie = DemanderEntier("Points de magie(10 - 40): ", 10, 40);
 
     Elfe elfe = new Elfe(nom, pv, nbDes, magie);
     guerriersElfe.Add(elfe);
@@ -237,4 +221,76 @@ void AfficherListeGuerriersElfes()
         Console.Write($"{i + 1}. ");
         guerriersElfe[i].AfficherInfos();
     }
+}
+
+string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
+{
+    string texte;
+    do
+    {
+        Console.Write(message);
+        texte = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(texte))
+        {
+            Console.WriteLine("Le texte ne peut pas être vide !");
+        }
+        else if (texte.Length < longueurMin)
+        {
+            Console.WriteLine($"Le texte doit contenir au moins {longueurMin} caractères !");
+        }
+        else if (texte.Length > longueurMax)
+        {
+            Console.WriteLine($"Le texte ne peut pas dépasser {longueurMax} caractères !");
+        }
+    } while (string.IsNullOrWhiteSpace(texte) || texte.Length < longueurMin || texte.Length > longueurMax);
+
+    Console.Clear();
+
+    return texte;
+}
+
+int DemanderEntier(string message, int min, int max)
+{
+    int valeur;
+    do
+    {
+        Console.Write(message);
+        string entree = Console.ReadLine();
+
+        if (int.TryParse(entree, out valeur))
+        {
+            if (valeur < min || valeur > max)
+            {
+                Console.WriteLine($"La valeur doit être entre {min} et {max} !");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Veuillez entrer un nombre valide !");
+            valeur = min - 1;
+        }
+    } while (valeur < min || valeur > max);
+
+    Console.Clear();
+    return valeur;
+}
+
+bool DemanderBool(string message)
+{
+    string reponse;
+    do
+    {
+        Console.Write(message);
+        reponse = Console.ReadLine().ToLower().Trim();
+
+        if (reponse != "oui" && reponse != "non" && reponse != "o" && reponse != "n")
+        {
+            Console.WriteLine("Veuillez répondre par 'oui' ou 'non' !");
+        }
+    } while (reponse != "oui" && reponse != "non" && reponse != "o" && reponse != "n");
+
+    Console.Clear();
+
+    return (reponse == "oui" || reponse == "o");
 }

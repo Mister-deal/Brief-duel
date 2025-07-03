@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("duel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fceb42beb89aec6395d1315c63f27691e6376bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd8b7fc2d7189ef421e30be2faa4b4052c491be5")]
 [assembly: System.Reflection.AssemblyProductAttribute("duel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("duel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
