@@ -176,6 +176,7 @@ void AjouterNain()
 
     Nain nain = new Nain(nom, pv, nbDes, armureLourde);
     guerriersNains.Add(nain); // Attention : ici c’est bien la liste `Guerriers`
+    Guerrier.guerriers.Add(nain);
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
     player.Stop();
@@ -195,6 +196,7 @@ void AjouterElfe()
 
     Elfe elfe = new Elfe(nom, pv, nbDes, magie);
     guerriersElfes.Add(elfe);
+    Guerrier.guerriers.Add(elfe);
 
     Console.WriteLine($"{nom} a été ajouté à la liste.");
     player.Stop();
@@ -308,7 +310,7 @@ void LancerDuel()
 {
     var player = new SoundPlayer("Final Fantasy IX OST - Battle 1.wav");
     player.Play(); // Joue la musique et bloque jusqu'à la fin
-    if (Guerrier.guerriers.Count <= 2)
+    if (Guerrier.guerriers.Count < 2)
     {
         Console.WriteLine("Pas assez de combattants pour un duel !");
         return;
@@ -318,7 +320,7 @@ void LancerDuel()
 
     for (int i = 0; i < Guerrier.guerriers.Count; i++)
     {
-        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i]}");
+        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
     }
 
     int index1 = DemanderEntier("Combatant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
