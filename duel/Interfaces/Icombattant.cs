@@ -6,6 +6,7 @@ public interface Icombattant
     int GetPointsDeVie();
     void SetPointDeVie(int pointDeVie);
     int GetNbDesAttaques();
+    void Reset();
     int Attaquer();
     void SubirDegats(int degats);
     void AfficherInfos();

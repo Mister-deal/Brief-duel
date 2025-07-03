@@ -13,12 +13,14 @@ public abstract class Guerrier: Icombattant
     private string _nom;
     private int _pointsDeVie;
     private int _nbDesAttaque;
+    private int _pointsDeVieInitial;
 
     // Constructeur
     public Guerrier(string nom, int pointsDeVie, int nbDesAttaque)
     {
         _nom = nom;
         _pointsDeVie = pointsDeVie;
+        _pointsDeVieInitial = pointsDeVie;
         _nbDesAttaque = nbDesAttaque;
     }
 
@@ -56,6 +58,11 @@ public abstract class Guerrier: Icombattant
     {
         PointsDeVie = pointsDeVie;
         Console.WriteLine($"les points de vie attribués sont: {pointsDeVie}");
+    }
+    
+    public virtual void Reset()
+    {
+        PointsDeVie = _pointsDeVieInitial;
     }
 
     public int GetNbDesAttaques()

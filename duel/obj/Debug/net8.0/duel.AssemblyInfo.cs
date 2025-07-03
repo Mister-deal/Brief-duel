@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("duel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb012355a196341288ee62d97203379a17209ec2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92379cf5371b664dd96d2a5f62b738c1ca44fe40")]
 [assembly: System.Reflection.AssemblyProductAttribute("duel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("duel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -9,38 +9,51 @@ List<Elfe> guerriersElfes = new List<Elfe>();
 Guerrier.guerriers.Add(guerriersNains.Cast<Icombattant>().ToList());
 Guerrier.guerriers.Add(guerriersElfes.Cast<Icombattant>().ToList());
 
-
 int choix = 0;
-while (true)
+
+void AfficherMenuPrincipal()
 {
-    Console.WriteLine("\n=== MENU PRINCIPAL ===");
-    Console.WriteLine("1. Créer un guerrier");
-    Console.WriteLine("2. Afficher les guerriers");
-    Console.WriteLine("3. Lancer un duel");
-    Console.WriteLine("4. Quitter");
-
-    choix = DemanderEntier("Faites votre choix: ", 1, 4);
-
-    switch (choix)
+    while (true)
     {
-        case 1:
-            
-            break;
+        Console.WriteLine("\n=== MENU PRINCIPAL ===");
+        Console.WriteLine("1. Créer un guerrier nain");
+        Console.WriteLine("2. Créer un guerrier elfe ");
+        Console.WriteLine("3. Afficher les guerriers");
+        Console.WriteLine("4. Lancer un duel");
+        Console.WriteLine("5. Lancer un tournoi");
+        Console.WriteLine("6. Quitter");
 
-        case 2:
+        choix = DemanderEntier("Faites votre choix: ", 1, 4);
 
-            break;
+        switch (choix)
+        {
+            case 1:
+                AjouterNain();
+                break;
 
-        case 3:
+            case 2:
+                AjouterElfe();
+                break;
 
-            break;
+            case 3:
+                AfficherListeguerriersElfes();
+                AfficherListeGuerriersNains();
+                break;
 
-        case 4:
+            case 4:
+                LancerDuel();
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                Console.WriteLine("Merci et à bientôt");
+                return;
+        }
 
-            break;
     }
-
 }
+
 {
 
 }
@@ -169,7 +182,7 @@ void AfficherListeGuerriersNains()
     }
 }
 
-void AfficherListeguerriersElfess()
+void AfficherListeguerriersElfes()
 {
     if (guerriersElfes.Count == 0)
     {
@@ -212,7 +225,7 @@ string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
     return texte;
 }
 
-int DemanderEntier(string message, int min, int max)
+static int DemanderEntier(string message, int min, int max)
 {
     int valeur;
     do
@@ -255,4 +268,53 @@ bool DemanderBool(string message)
     Console.Clear();
 
     return (reponse == "oui" || reponse == "o");
+}
+
+void LancerDuel()
+{
+    List<Icombattant> tousLesCombattants = Guerrier.guerriers.SelectMany(liste => liste).ToList();
+    if (Guerrier.guerriers.Count < 2)
+    {
+        Console.WriteLine("Pas assez de combattants pour un duel !");
+        return;
+    }
+
+    Console.WriteLine("--- Choisissez les deux combattants ---");
+
+    for (int i = 0; i < Guerrier.guerriers.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i]}");
+    }
+
+    int index1 = DemanderEntier("Combatant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    int index2 = DemanderEntier("Combatant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+
+    while (index1 == index2)
+    {
+        Console.WriteLine("Vous devez choisir deux combattants différents !");
+        index2 = DemanderEntier("Combatant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    }
+
+    Icombattant gagnant = Combattre(tousLesCombattants[index1], tousLesCombattants[index2]);
+    Console.WriteLine($"\n🏆 Le gagnant est {gagnant.GetNom()} !");
+}
+
+Icombattant Combattre(Icombattant c1, Icombattant c2)
+{
+    c1.Reset();
+    c2.Reset();
+
+    Console.WriteLine($"\n⚔️ Début du duel : {c1.GetNom()} VS {c2.GetNom()}\n");
+    
+    while (c1.GetPointsDeVie() > 0 && c2.GetPointsDeVie() > 0)
+    {
+        c2.SubirDegats(c1.Attaquer());
+        if (c2.GetPointsDeVie() <= 0) break;
+
+        c1.SubirDegats(c2.Attaquer());
+    }
+
+    Icombattant vainqueur = c1.GetPointsDeVie() > 0 ? c1 : c2;
+    Console.WriteLine($"\n🏆 Vainqueur : {vainqueur.GetNom()}\n");
+return vainqueur;
 }
