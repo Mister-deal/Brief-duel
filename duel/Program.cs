@@ -15,8 +15,6 @@ AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
 {
-    var player = new SoundPlayer("Dragon Quest III.wav");
-    player.Play(); // Joue la musique et bloque jusqu'à la fin
     Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                             NAINS VS ELFES                           ║");
     Console.WriteLine("║                 L'Internationale de la Chicanerie des Hautes terres  ║");
@@ -35,6 +33,8 @@ void AfficherMenuPrincipal()
     Console.WriteLine("\nPréparez-vous, car l’épopée commence ici même, et l’histoire s’écrira au fil du sang et du courage.\n");
     while (true)
     {
+        var player = new SoundPlayer("Dragon Quest III.wav");
+        player.Play(); // Joue la musique et bloque jusqu'à la fin
         Console.WriteLine("\n=== MENU PRINCIPAL ===");
         Console.WriteLine("1. Ajouter un guerrier");
         Console.WriteLine("2. Afficher les guerriers");
@@ -50,7 +50,7 @@ void AfficherMenuPrincipal()
                 Console.WriteLine("Que voulez-vous ajouter \n" +
                     "  1. Ajouter un guerrier nain \n" +
                     "  2. Ajouter un guerrier elfe");
-                DemanderEntier("Donnez un chiffre: ", 1, 2);
+               choixClass =  DemanderEntier("Donnez un chiffre: ", 1, 2);
 
                 switch (choixClass)
                 {
@@ -308,7 +308,7 @@ void LancerDuel()
 {
     var player = new SoundPlayer("Final Fantasy IX OST - Battle 1.wav");
     player.Play(); // Joue la musique et bloque jusqu'à la fin
-    if (Guerrier.guerriers.Count < 2)
+    if (Guerrier.guerriers.Count <= 2)
     {
         Console.WriteLine("Pas assez de combattants pour un duel !");
         return;
