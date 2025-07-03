@@ -4,6 +4,8 @@ using duel.Classes;
 
 List<Guerrier> guerriers = new List<Guerrier>();
 
+string choix = "";
+int choixVerifie = 0;
 while (true)
 {
     Console.WriteLine("\n=== MENU PRINCIPAL ===");
@@ -12,16 +14,32 @@ while (true)
     Console.WriteLine("3. Lancer un duel");
     Console.WriteLine("4. Quitter");
 
-    Console.Write("faites votre choix");
-    string choix = Console.ReadLine();
+    do
+    {
+        Console.Write("faites votre choix");
+        choix = Console.ReadLine();
+    } while (!int.TryParse(choix, out choixVerifie) && choixVerifie > 0 && choixVerifie <= 4);
 
-    /*
+    
     switch (choix)
     {
         case "1":
-            
+
+            break;
+
+        case "2":
+
+            break;
+
+        case "3":
+
+            break;
+
+        case "4":
+
+            break;
     }
-    */
+    
 }
 {
     
