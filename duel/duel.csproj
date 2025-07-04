@@ -7,7 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  //Ajout d'un include Assets pour que l'on puisse jouer les musiques
   <ItemGroup>
     <PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
     <None Include="Assets\Audio\**\*.*">
