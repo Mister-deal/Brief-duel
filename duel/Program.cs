@@ -178,6 +178,9 @@ void AfficherMenuPrincipal()
                 AfficherListeguerriersElfes();
                 AfficherListeGuerriersNains();
                 AfficherListeSorciers();
+                Console.WriteLine("\nAppuyez sur une touche pour fermer la liste");
+                Console.ReadKey(true);
+                Console.Clear();
                 break;
 
             case 3:
