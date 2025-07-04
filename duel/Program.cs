@@ -1,8 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Media;
 using duel.Classes;
 using duel.Interfaces;
+using System.Media;
+using System.Text;
 
 
 // Listes pour stocker les guerriers de chaque race
@@ -120,8 +121,7 @@ void AfficherMenuPrincipal()
     Console.WriteLine("Êtes-vous prêt à forger la légende ? À inscrire votre nom dans les chroniques éternelles ?");
     Console.WriteLine("Prenez les armes, invoquez le courage, et entrez dans l’arène sacrée.");
 
-    Console.WriteLine("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
-    Console.ReadKey(true);
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.Clear();
     
     InitialiserCombattants();
@@ -178,8 +178,8 @@ void AfficherMenuPrincipal()
                 AfficherListeguerriersElfes();
                 AfficherListeGuerriersNains();
                 AfficherListeSorciers();
-                Console.WriteLine("\nAppuyez sur une touche pour fermer la liste");
-                Console.ReadKey(true);
+
+                AppuyerSurUneTouche("\nAppuyez sur une touche pour fermer la liste");
                 Console.Clear();
                 break;
 
@@ -204,7 +204,9 @@ void AfficherMenuPrincipal()
                 AfficherGuideUtilisateur();
                 break;
             case 8:
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
+                Console.ResetColor();
                 return;
         }
 
@@ -219,14 +221,14 @@ void SupprimerGuerrier()
 {
     if (Guerrier.guerriers.Count == 0)
     {
-        Console.WriteLine("Il n'y a aucun combattant à supprimer.");
+        MessageAlerte("Il n'y a aucun combattant à supprimer.");
         return;
     }
 
     Console.WriteLine(" Menu de Suppression de Guerriers");
     Console.WriteLine("Quel guerrier souhaitez-vous envoyer rejoindre ses ancêtres ?");
-    Console.WriteLine("Appuyez sur une touche pour continuer...");
-    Console.ReadKey(true);
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
 
     // Affichage des guerriers disponibles
     for (int i = 0; i < Guerrier.guerriers.Count; i++)
@@ -261,12 +263,12 @@ void SupprimerGuerrier()
         }
         Console.WriteLine($"\n{nomSupprime} combattra peut-être ailleurs... ou veillera depuis l’au-delà.\n");
         Console.WriteLine();
-        Console.WriteLine("Appuyez sur une touche pour continuer...");
-        Console.ReadKey(true);
+
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
     else
     {
-        Console.WriteLine("Index invalide.");
+        MessageAlerte("Index invalide.");
     }
 }
 
@@ -334,7 +336,7 @@ void AfficherListeGuerriersNains()
 {
     if (guerriersNains.Count == 0)
     {
-        Console.WriteLine("Aucun guerrier nain créé pour l’instant.");
+        MessageAlerte("Aucun guerrier nain créé pour l’instant.");
         return;
     }
 
@@ -350,7 +352,7 @@ void AfficherListeguerriersElfes()
 {
     if (guerriersElfes.Count == 0)
     {
-        Console.WriteLine("Aucun guerrier elfe créé pour l’instant.");
+        MessageAlerte("Aucun guerrier elfe créé pour l’instant.");
         return;
     }
 
@@ -366,7 +368,7 @@ void AfficherListeSorciers()
 {
     if (sorciers.Count == 0)
     {
-        Console.WriteLine("Aucun sorcier créé pour l’instant.");
+        MessageAlerte("Aucun sorcier créé pour l’instant.");
         return;
     }
 
@@ -389,15 +391,15 @@ string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
 
         if (string.IsNullOrWhiteSpace(texte))
         {
-            Console.WriteLine("Le texte ne peut pas être vide !");
+            MessageAlerte("Le texte ne peut pas être vide !");
         }
         else if (texte.Length < longueurMin)
         {
-            Console.WriteLine($"Le texte doit contenir au moins {longueurMin} caractères !");
+            MessageAlerte($"Le texte doit contenir au moins {longueurMin} caractères !");
         }
         else if (texte.Length > longueurMax)
         {
-            Console.WriteLine($"Le texte ne peut pas dépasser {longueurMax} caractères !");
+            MessageAlerte($"Le texte ne peut pas dépasser {longueurMax} caractères !");
         }
     } while (string.IsNullOrWhiteSpace(texte) || texte.Length < longueurMin || texte.Length > longueurMax);
 
@@ -407,7 +409,7 @@ string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
 }
 
 // Pose une question numérique et valide l’intervalle
-static int DemanderEntier(string message, int min, int max)
+int DemanderEntier(string message, int min, int max)
 {
     int valeur;
     do
@@ -419,12 +421,12 @@ static int DemanderEntier(string message, int min, int max)
         {
             if (valeur < min || valeur > max)
             {
-                Console.WriteLine($"La valeur doit être entre {min} et {max} !");
+                MessageAlerte($"La valeur doit être entre {min} et {max} !");
             }
         }
         else
         {
-            Console.WriteLine("Veuillez entrer un nombre valide !");
+            MessageAlerte("Veuillez entrer un nombre valide !");
             valeur = min - 1;
         }
     } while (valeur < min || valeur > max);
@@ -444,7 +446,7 @@ bool DemanderBool(string message)
 
         if (reponse != "oui" && reponse != "non" && reponse != "o" && reponse != "n")
         {
-            Console.WriteLine("Veuillez répondre par 'oui' ou 'non' !");
+            MessageAlerte("Veuillez répondre par 'oui' ou 'non' !");
         }
     } while (reponse != "oui" && reponse != "non" && reponse != "o" && reponse != "n");
 
@@ -461,7 +463,7 @@ void LancerDuel()
 
     if (Guerrier.guerriers.Count < 2)
     {
-        Console.WriteLine("Pas assez de combattants pour un duel !");
+        MessageAlerte("Pas assez de combattants pour un duel !");
         return;
     }
 
@@ -475,7 +477,7 @@ void LancerDuel()
 
     while (index1 == index2)
     {
-        Console.WriteLine("Vous devez choisir deux combattants différents !");
+        MessageAlerte("Vous devez choisir deux combattants différents !");
         index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
     }
 
@@ -497,7 +499,7 @@ void LancerTournoi()
     // Si on a moins de 2 combattants, on ne peut pas faire de tournoi
     if (Guerrier.guerriers.Count < 2)
     {
-        Console.WriteLine("Pas assez de combattants pour lancer un tournoi !");
+        MessageAlerte("Pas assez de combattants pour lancer un tournoi !");
         return;
     }
 
@@ -507,8 +509,8 @@ void LancerTournoi()
     Console.WriteLine("Les guerriers vont s'affronter dans une série de duels épiques...");
     Console.WriteLine("Mais qui l'emportera ? Elfes ? Nains ? Ce tournoi le décidera !");
     Console.WriteLine("\n --- QUE LE GRAND TOURNOI COMMENCE !!!!!! ---");
-    Console.WriteLine("Appuyez sur une touche pour commencer !");
-    Console.ReadKey(true);
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour commencer !");
 
     // Mélange aléatoire des combattants
     List<Icombattant> participants = Guerrier.guerriers.OrderBy(x => Guid.NewGuid()).ToList();
@@ -540,8 +542,8 @@ void LancerTournoi()
             Console.WriteLine($"\nDuel : {c1.GetNom()} VS {c2.GetNom()}");
             Console.WriteLine($"{c1.GetNom()} est prêt à en découdre mais {c2.GetNom()} ne se laisse pas intimider !");
             Console.WriteLine("........... COMMENCEZ LE COMBAT !!!");
-            Console.WriteLine("Appuyez sur une touche pour lancer le combat...");
-            Console.ReadKey(true);
+
+            AppuyerSurUneTouche("Appuyez sur une touche pour lancer le combat...");
 
             // Combat entre les deux
             Icombattant vainqueur = Combattre(c1, c2);
@@ -559,8 +561,7 @@ void LancerTournoi()
         participants = vainqueursTour;
         tour++;
 
-        Console.WriteLine("\nAppuyez sur une touche pour passer au tour suivant...");
-        Console.ReadKey(true);
+        AppuyerSurUneTouche("\nAppuyez sur une touche pour passer au tour suivant...");
     }
 
     // Fin du tournoi
@@ -583,8 +584,7 @@ void LancerTournoi()
     Console.WriteLine("Il ne s’agit plus d’un simple combattant...");
     Console.WriteLine("C’est un **héros légendaire**, un symbole vivant de la gloire de son peuple !\n");
 
-    Console.WriteLine("Appuyez sur une touche pour continuer...");
-    Console.ReadKey(true);
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     player1.Stop();
 }
 
@@ -615,8 +615,7 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
 
         if (c1.GetPointsDeVie() <= 0) break;
 
-        Console.WriteLine("\nAppuyez sur une touche pour continuer...");
-        Console.ReadKey(true);
+        AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
 
         tour++;
     }
@@ -638,8 +637,7 @@ void Victoire(Icombattant gagnant)
     var player = new SoundPlayer("Final Fantasy Fanfare.wav");
     player.Play();
 
-    Console.WriteLine("\nAppuyez sur une touche pour continuer...");
-    Console.ReadKey(true);
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
     player.Stop();
     Console.Clear();
 }
@@ -696,7 +694,7 @@ void AfficherHistorique()
 {
     if (historiqueCombats.Count == 0)
     {
-        Console.WriteLine("Aucun combat n’a encore été enregistré dans les annales...");
+        MessageAlerte("Aucun combat n’a encore été enregistré dans les annales...");
         return;
     }
 
@@ -795,7 +793,22 @@ void AfficherGuideUtilisateur()
     Console.ForegroundColor = ConsoleColor.Magenta;
     Console.WriteLine("\nBonne chance, stratège. Que vos guerriers tombent avec gloire ou triomphent avec honneur !");
     Console.ResetColor();
-    Console.WriteLine("\nAppuyez sur une touche pour revenir au menu principal...");
-    Console.ReadKey(true);
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour revenir au menu principal...");
     Console.Clear();
+}
+
+void AppuyerSurUneTouche (string message)
+{
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine(message);
+    Console.ResetColor();
+    Console.ReadKey(true);
+}
+
+void MessageAlerte (string alerte)
+{
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine(alerte);
+    Console.ResetColor();
 }
