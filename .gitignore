@@ -715,3 +715,7 @@ $RECYCLE.BIN/
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains,windows,csharp,visualstudio
+
+# Exception pour les musiques dans bin/Debug/net8.0-windows/
+!duel/bin/Debug/net8.0-windows/*.wav
+!duel/bin/Debug/net8.0-windows/*.mp3
