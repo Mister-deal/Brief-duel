@@ -29,6 +29,11 @@ void InitialiserCombattants()
     Guerrier.guerriers.Add(new Elfe("Luthien Sèveclaire", 100, 5, 25));
     Guerrier.guerriers.Add(new Elfe("Faelar Ombreciel", 85, 8, 35));
     Guerrier.guerriers.Add(new Elfe("Thalor de la Lune", 55, 10, 40));
+    
+    Guerrier.guerriers.Add(new Sorcier("Siri Ventador", 95, 6, 45));
+    Guerrier.guerriers.Add(new Sorcier("Eliogabalus ex", 100, 5, 50));
+    Guerrier.guerriers.Add(new Sorcier("the witch of madness", 65, 10, 70));
+    Guerrier.guerriers.Add(new Sorcier("Yuru higba", 75, 9, 60));
 
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
@@ -105,8 +110,9 @@ void AfficherMenuPrincipal()
             case 1:
                 Console.WriteLine("Que voulez-vous ajouter \n" +
                     "  1. Ajouter un guerrier saint nain \n" +
-                    "  2. Ajouter un guerrier saint elfe");
-                choixClass = DemanderEntier("Donnez un chiffre: ", 1, 2);
+                    "  2. Ajouter un guerrier saint elfe \n" +
+                    "  3. Ajouter un sorcier");
+                choixClass = DemanderEntier("Donnez un chiffre: ", 1, 3);
 
                 switch (choixClass)
                 {
@@ -116,6 +122,9 @@ void AfficherMenuPrincipal()
 
                     case 2:
                         AjouterElfe();
+                        break;
+                    case 3:
+                        AjouterSorcier();
                         break;
                 }
                 break;
@@ -227,6 +236,25 @@ void AjouterNain()
     player.Stop();
 }
 
+void AjouterSorcier()
+{
+    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
+    string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
+
+    int pv = DemanderEntier("Points de vie: ", 10, 100);
+
+    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
+
+    int mana = DemanderEntier("Points de mana: ", 10, 75 );
+
+    Sorcier sorcier = new Sorcier(nom, pv, nbDes, mana);
+    sorciers.Add(sorcier);
+    Guerrier.guerriers.Add(sorcier);
+
+    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains");
+    player.Stop();
+}
 
 void AjouterElfe()
 {
