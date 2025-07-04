@@ -12,7 +12,11 @@ List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
 List<Sorcier> sorciers = new List<Sorcier>();
 
-
+// Listes spécifiques pour catégories de monstres
+List<Monstre> monstresSlimes = new List<Monstre>();
+List<Monstre> monstresGobelins = new List<Monstre>();
+List<Monstre> monstresRats = new List<Monstre>();
+List<Monstre> monstresZombies = new List<Monstre>();
 
 // Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
@@ -81,11 +85,31 @@ void InitialiserCombattants()
 
 void InitialiserMonstres()
 {
-    MonstreManager.AjouterMonstre(new Slime());
-    MonstreManager.AjouterMonstre(new Goblin());
-    MonstreManager.AjouterMonstre(new GoblinBrutal(true));
-    MonstreManager.AjouterMonstre(new RatGeant());
-    MonstreManager.AjouterMonstre(new Zombie());
+    Console.WriteLine("Invocation des créatures sauvages...");
+    Thread.Sleep(500);
+
+    // Création des Slimes
+    Slime slime = new Slime(); // exemple d’un slime plus fort
+    Goblin goblinSimple = new Goblin();
+    GoblinBrutal goblinBrutal = new GoblinBrutal(true);
+    RatGeant ratGeantNormal = new RatGeant();
+    Zombie zombieCommun = new Zombie();
+
+    // Ajout dans les listes spécifiques
+    monstresSlimes.Add(slime);
+    monstresGobelins.Add(goblinSimple);
+    monstresGobelins.Add(goblinBrutal);
+    monstresRats.Add(ratGeantNormal);
+    monstresZombies.Add(zombieCommun);
+
+    Monstre.monstres.Add(slime);
+    Monstre.monstres.Add(goblinBrutal);
+    Monstre.monstres.Add(goblinBrutal);
+    Monstre.monstres.Add(ratGeantNormal);
+    Monstre.monstres.Add(zombieCommun);
+
+    Console.WriteLine("Les monstres rôdent dans les environs.\n");
+    Thread.Sleep(500);
 }
 // Affiche le menu principal du jeu avec ambiance et narration
 AfficherMenuPrincipal();
@@ -136,6 +160,8 @@ void AfficherMenuPrincipal()
     AppuyerSurUneTouche("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.Clear();
     
+    
+    InitialiserMonstres();
     InitialiserCombattants();
     
     // Affiche les options et traite le choix de l'utilisateur en boucle
@@ -151,9 +177,10 @@ void AfficherMenuPrincipal()
         Console.WriteLine("5. Supprimer un guerrier");
         Console.WriteLine("6. Afficher historique");
         Console.WriteLine("7. Afficher le guide de jeu");
-        Console.WriteLine("8. Quitter");
+        Console.WriteLine("8. Entrer dans la zone PVE");
+        Console.WriteLine("9. Quitter");
 
-        choix = DemanderEntier("Faites votre choix: ", 1, 8);
+        choix = DemanderEntier("Faites votre choix: ", 1, 9);
 
         switch (choix)
         {
@@ -220,6 +247,34 @@ void AfficherMenuPrincipal()
                 AfficherGuideUtilisateur();
                 break;
             case 8:
+                Console.Clear();
+                Console.WriteLine("==== Zone PvE ====");
+                Console.WriteLine("1. Affronter un monstre");
+                Console.WriteLine("2. Affronter un boss");
+                Console.WriteLine("3. Affronter une vague de monstres");
+                Console.WriteLine("4. Retour au menu principal");
+                Console.Write("Votre choix : ");
+                choix = DemanderEntier("Faites votre choix: ", 1, 4);
+                switch (choix)
+                {
+                    case 1:
+                        LancerCombatContreMonstre();
+                        break;
+                    case 2:
+                        //LancerCombatContreBoss();
+                        break;
+                    case 3:
+                        LancerCombatContreMonstres();
+                        break;
+                    case 4:
+                        Console.WriteLine("Merci et au revoir.");
+                        break;
+                    default:
+                        Console.WriteLine("Choix invalide !");
+                        break;
+                }
+                break;
+            case 9:
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
                 Console.ResetColor();
@@ -621,7 +676,7 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
     c1.Reset();
     c2.Reset();
 
-    Console.WriteLine($"\n⚔️ Début du duel : {c1.GetNom()} VS {c2.GetNom()}\n");
+    Console.WriteLine($"\nDébut du duel : {c1.GetNom()} VS {c2.GetNom()}\n");
 
     int tour = 1;
 
@@ -839,4 +894,133 @@ void MessageAlerte (string alerte)
     Console.ForegroundColor = ConsoleColor.DarkRed;
     Console.WriteLine(alerte);
     Console.ResetColor();
+}
+
+void LancerCombatContreMonstre()
+{
+    AnimationChargement();
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy IX OST - Battle 1.wav");
+    player.Play();
+
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Pas assez de combattants pour affronter un monstre !");
+        return;
+    }
+    
+    
+    if (Monstre.monstres.Count == 0)
+    {
+        MessageAlerte("Aucun monstre disponible pour le combat !");
+        Console.WriteLine($"Nombre de monstres disponibles : {Monstre.monstres.Count}");
+        player.Stop();
+        return;
+    }
+
+    AfficherCombattant();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int indexGuerrier = DemanderEntier("\nCombattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+    
+    
+    Random rnd = new Random();
+    int indexMonstre = rnd.Next(Monstre.monstres.Count);
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.ResetColor();
+    
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+    Icombattant monstre = Monstre.monstres[indexMonstre];
+
+    Console.WriteLine($"\n Vous affrontez un {monstre.GetNom()} !");
+    
+    Icombattant gagnant = Combattre(guerrier, monstre);
+
+    Console.WriteLine($"\nLe gagnant est {gagnant.GetNom()} !");
+    player.Stop();
+}
+
+void LancerCombatContreMonstres()
+{
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Pas assez de combattants pour affronter les vagues !");
+        return;
+    }
+
+    AfficherCombattant();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int indexGuerrier = DemanderEntier("\nChoisissez votre guerrier (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+
+    int nombreVagues = 3;
+    int monstresParVague = 3;
+
+    for (int vague = 1; vague <= nombreVagues; vague++)
+    {
+        Console.WriteLine($"\n--- Vague {vague} ---");
+        Thread.Sleep(500);
+
+        for (int i = 0; i < monstresParVague; i++)
+        {
+            Random rnd = new Random();
+            int indexMonstre = rnd.Next(Monstre.monstres.Count);
+            Icombattant monstre = Monstre.monstres[indexMonstre];
+
+            Console.WriteLine($"Votre guerrier {guerrier.GetNom()} affronte un {monstre.GetNom()} !");
+
+            Icombattant gagnant = CombattreMonstre(guerrier, monstre);
+
+            Console.WriteLine($"Le gagnant est {gagnant.GetNom()} !");
+            Thread.Sleep(500);
+
+            if (gagnant != guerrier)
+            {
+                Console.WriteLine("Votre guerrier est tombé au combat. Fin des vagues.");
+                return;  // Le guerrier est mort, on arrête
+            }
+        }
+
+        Console.WriteLine($"Bravo ! Vous avez terminé la vague {vague} sans perdre votre guerrier.");
+        Thread.Sleep(700);
+    }
+
+    Console.WriteLine("\nFélicitations ! Toutes les vagues ont été vaincues.");
+}
+
+Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
+{
+    c2.Reset();
+
+    Console.WriteLine($"\nDébut du duel : {c1.GetNom()} VS {c2.GetNom()}\n");
+
+    int tour = 1;
+
+    while (c1.GetPointsDeVie() > 0 && c2.GetPointsDeVie() > 0)
+    {
+        Console.WriteLine($"\n--- Tour {tour} ---\n");
+
+        Console.WriteLine($"{c1.GetNom()} attaque !");
+        AnimationAttaqueEnCours();
+        c2.SubirDegats(c1.Attaquer());
+
+        if (c2.GetPointsDeVie() <= 0) break;
+
+
+        Console.WriteLine($"{c2.GetNom()} contre-attaque !");
+        AnimationAttaqueEnCours();
+        c1.SubirDegats(c2.Attaquer());
+
+        if (c1.GetPointsDeVie() <= 0) break;
+
+        tour++;
+    }
+
+    Icombattant vainqueur = c1.GetPointsDeVie() > 0 ? c1 : c2;
+    Victoire(vainqueur);
+
+    return vainqueur;
 }

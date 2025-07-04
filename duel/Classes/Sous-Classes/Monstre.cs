@@ -6,7 +6,7 @@ public abstract class Monstre: Icombattant
 {
     //Attributs
     
-    public static List<Icombattant> Monstres = new List<Icombattant>();
+    public static List<Icombattant> monstres = new List<Icombattant>();
     
     private string _nom;
     private int _pointsDeVie;
@@ -70,8 +70,7 @@ public abstract class Monstre: Icombattant
     {
         Console.WriteLine($"{Nom}: [PV= {PointsDeVie}, Nbr= {NbDesAttaque}, Niveau = {niveau}]");
     }
-
-    public abstract Monstre Clone();
+    
     public int Attaquer()
     {
         Random random = new Random();

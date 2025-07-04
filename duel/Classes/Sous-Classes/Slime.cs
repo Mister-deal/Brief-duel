@@ -7,11 +7,7 @@ public class Slime: Monstre
     {
         _niveau = niveau;
     }
-
-    public override Monstre Clone()
-    {
-        return new Slime();
-    }
+    
 
     public override void SubirDegats(int degats)
     {

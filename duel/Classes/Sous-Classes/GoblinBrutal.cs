@@ -9,11 +9,7 @@ public class GoblinBrutal: Monstre
         _niveau = niveau;
         _armure = armure;
     }
-
-    public override Monstre Clone()
-    {
-        return new GoblinBrutal(_armure);
-    }
+    
 
     public override void SubirDegats(int degats)
     {

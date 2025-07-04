@@ -7,9 +7,5 @@ public class Zombie: Monstre
     {
         _niveau = niveau;
     }
-
-    public override Monstre Clone()
-    {
-        return new Zombie();
-    }
+    
 }

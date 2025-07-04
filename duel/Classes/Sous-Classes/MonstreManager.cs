@@ -3,6 +3,7 @@
 public static class MonstreManager
 {
     private static List<Monstre> monstres = new List<Monstre>();
+    private static Random rnd = new Random();
 
     public static void AjouterMonstre(Monstre monstre)
     {
@@ -23,9 +24,8 @@ public static class MonstreManager
     
     public static Monstre GetMonstreAleatoire()
     {
-        Random rnd = new Random();
         var modele = monstres[rnd.Next(monstres.Count)];
-        return modele.Clone();
+        return modele;
     }
 
     public static void Reset()
@@ -41,7 +41,6 @@ public static class MonstreManager
     public static Monstre ChoisirMonstreAleatoire()
     {
         if (monstres.Count == 0) return null;
-        Random random = new Random();
-        return monstres[random.Next(monstres.Count)];
+        return monstres[rnd.Next(monstres.Count)];
     }
 }

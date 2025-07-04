@@ -8,8 +8,5 @@ public class RatGeant: Monstre
         _niveau = niveau;
     }
 
-    public override Monstre Clone()
-    {
-        return new RatGeant();
-    }
+    
 }

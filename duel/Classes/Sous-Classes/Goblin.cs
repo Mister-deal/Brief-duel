@@ -8,11 +8,6 @@ public class Goblin: Monstre
         _niveau = niveau;
     }
 
-    public override Monstre Clone()
-    {
-        return new Goblin();
-    }
-
     public override void SubirDegats(int degats)
     {
         
