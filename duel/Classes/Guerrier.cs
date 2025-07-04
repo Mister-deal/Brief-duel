@@ -3,7 +3,7 @@ using duel.Interfaces;
 
 namespace duel.Classes;
 
-public abstract class Guerrier : Icombattant
+public abstract class Guerrier : Icombattant, IEvolutif
 {
     // Attributs 
 
@@ -47,6 +47,7 @@ public abstract class Guerrier : Icombattant
         get => _nbDesAttaque;
         set => _nbDesAttaque = value;
     }
+    
 
 
     public string GetNom()
@@ -89,17 +90,18 @@ public abstract class Guerrier : Icombattant
         }
     }
 
-    public int getNiveau()
+    public int GetNiveau()
     {
         return niveau;
     }
 
-    public int getExperience()
+    public int GetExperience()
     {
         return experience;
     }
 
-    public int getExperienceMax() {
+    public int GetExperienceMax()
+    {
         return experienceMax;
     }
 
