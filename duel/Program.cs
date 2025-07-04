@@ -68,9 +68,11 @@ void AfficherMenuPrincipal()
         Console.WriteLine("2. Afficher les guerriers");
         Console.WriteLine("3. Lancer un duel");
         Console.WriteLine("4. Lancer un tournoi");
-        Console.WriteLine("5. Quitter");
+        Console.WriteLine("5. Supprimer un guerrier");
+        Console.WriteLine("6. Afficher historique");
+        Console.WriteLine("7. Quitter");
 
-        choix = DemanderEntier("Faites votre choix: ", 1, 5);
+        choix = DemanderEntier("Faites votre choix: ", 1, 6);
 
         switch (choix)
         {
@@ -104,6 +106,12 @@ void AfficherMenuPrincipal()
                 LancerTournoi();
                 break;
             case 5:
+                //SupprimerGuerrier();
+                return;
+            case 6:
+                //AfficherHistorique();
+                return;
+            case 7:
                 Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
                 return;
         }
@@ -209,6 +217,7 @@ void AjouterNain()
     Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains");
     player.Stop();
 }
+
 
 void AjouterElfe()
 {
