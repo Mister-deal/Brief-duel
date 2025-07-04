@@ -757,7 +757,7 @@ void AfficherGuideUtilisateur()
     Console.WriteLine("Ce jeu console vous propose de créer des combattants et de les faire s'affronter\n" +
                       "dans des duels épiques ou dans un tournoi sans pitié.\n");
 
-    Console.WriteLine("⚔️ TYPES DE COMBATTANTS DISPONIBLES :");
+    Console.WriteLine("TYPES DE COMBATTANTS DISPONIBLES :");
 
     Console.ForegroundColor = ConsoleColor.DarkGray;
     Console.WriteLine("• Guerrier : Classe de base avec attaque aléatoire.");
@@ -775,17 +775,17 @@ void AfficherGuideUtilisateur()
     Console.WriteLine("• Sorcier : Utilise des sorts (soin, feu, bouclier) et gère du mana.");
     Console.ResetColor();
 
-    Console.WriteLine("\n📏 RÈGLES DE CRÉATION :");
+    Console.WriteLine("\nRÈGLES DE CRÉATION :");
     Console.WriteLine("- Les points de vie (PV) doivent être compris entre 10 et 100.");
     Console.WriteLine("- Le nom du guerrier doit être unique et représentatif.");
     Console.WriteLine("- Vous pouvez créer autant de combattants que vous le souhaitez.");
 
-    Console.WriteLine("\n📖 APRÈS CHAQUE ACTION :");
+    Console.WriteLine("\nAPRÈS CHAQUE ACTION :");
     Console.WriteLine("- Un message vous indique ce qui s’est passé.");
     Console.WriteLine("- Vous pouvez revenir au menu à tout moment.");
     Console.WriteLine("- Les combats sont automatiques et commentés.\n");
 
-    Console.WriteLine("🎯 OBJECTIF :");
+    Console.WriteLine("OBJECTIF :");
     Console.WriteLine("Créez vos champions, faites-les progresser, et imposez la suprématie de votre peuple\n" +
                       "dans le plus grand tournoi des Hautes Terres !");
 
