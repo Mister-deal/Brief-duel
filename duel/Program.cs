@@ -744,6 +744,8 @@ void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant
 void AfficherGuideUtilisateur()
 {
     Console.Clear();
+    var player = new SoundPlayer("Final Fantasy Tactics Guide.wav");
+    player.PlayLooping();
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                 GUIDE DU JOUEUR - GUERRES DES PEUPLES ANCESTRAUX        ║");
