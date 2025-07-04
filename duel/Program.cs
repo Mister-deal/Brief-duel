@@ -14,6 +14,25 @@ List<string> historiqueCombats = new List<string>();
 
 int choix = 0;
 int choixClass = 0;
+
+void InitialiserCombattants()
+{
+    Console.WriteLine("Invocation des anciens champions...");
+    Thread.Sleep(500);
+
+    Guerrier.guerriers.Add(new Nain("Thorin Forgefeu", 90, 5, true));
+    Guerrier.guerriers.Add(new Nain("Grimbald Marteau-d'Argent", 75, 7, true));
+    Guerrier.guerriers.Add(new Nain("Durgin Barbelac", 100, 8, false));
+    Guerrier.guerriers.Add(new Nain("Baldrick le Tenace", 65, 10, true));
+
+    Guerrier.guerriers.Add(new Elfe("Elandor Ventargent",85, 7, 30));
+    Guerrier.guerriers.Add(new Elfe("Luthien Sèveclaire", 100, 5, 25));
+    Guerrier.guerriers.Add(new Elfe("Faelar Ombreciel", 85, 8, 35));
+    Guerrier.guerriers.Add(new Elfe("Thalor de la Lune", 55, 10, 40));
+
+    Console.WriteLine("Les champions sont prêts à en découdre.\n");
+    Thread.Sleep(500);
+}
 AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
@@ -61,6 +80,10 @@ void AfficherMenuPrincipal()
 
     Console.WriteLine("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.ReadKey(true);
+    Console.WriteLine();
+    
+    InitialiserCombattants();
+    Console.WriteLine();
     while (true)
     {
         var player = new SoundPlayer("Dragon Quest III.wav");
@@ -152,7 +175,9 @@ void SupprimerGuerrier()
         Guerrier.guerriers.RemoveAt(index);
 
         Console.WriteLine($"\n{nomSupprime} a été choisi pour quitter l’arène...\n");
-        Thread.Sleep(1000);
+        var player = new SoundPlayer("Final Fantasy Tactics Game Over.wav");
+        player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
+        Thread.Sleep(2000);
 
         string[] animation = {
             "Le silence s'installe...",
@@ -165,9 +190,12 @@ void SupprimerGuerrier()
         foreach (var ligne in animation)
         {
             Console.WriteLine(ligne);
-            Thread.Sleep(1500);
+            Thread.Sleep(2500);
         }
         Console.WriteLine($"\n{nomSupprime} combattra peut-être ailleurs... ou veillera depuis l’au-delà.\n");
+        Console.WriteLine();
+        Console.WriteLine("Appuyez sur une touche pour continuer...");
+        Console.ReadKey(true);
     }
     else
     {
@@ -358,7 +386,7 @@ void LancerTournoi()
 {
     AnimationChargement();
     var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
-    player.Play();
+    player.PlayLooping();
 
     if (Guerrier.guerriers.Count < 2)
     {
@@ -383,7 +411,7 @@ void LancerTournoi()
     while (participants.Count > 1)
     {
         Console.Clear();
-        player.Play();
+        player.PlayLooping();
         Console.WriteLine($"\n--- Tour {tour} du tournoi ---");
         List<Icombattant> vainqueursTour = new List<Icombattant>();
 
@@ -547,20 +575,53 @@ void AfficherCombattant()
 
 void AfficherHistorique()
 {
+    if (historiqueCombats.Count == 0)
+    {
+        Console.WriteLine("Aucun combat n’a encore été enregistré dans les annales...");
+        return;
+    }
+
+    
+    Console.WriteLine("\n *** HISTORIQUE DES COMBATS ***\n");
+    var player = new SoundPlayer("page turn.wav");
+    player.Play();
+    Thread.Sleep(1000);
+
+    int index = 1;
     foreach (string combat in historiqueCombats)
     {
-        Console.WriteLine(combat);
+        var player1 = new SoundPlayer("Secunda.wav");
+        player1.PlayLooping();
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.Write($"⚔️ Combat {index}: ");
+        Console.ResetColor();
+
+        foreach (char c in combat)
+        {
+            Console.Write(c);
+            Thread.Sleep(25); // Effet de frappe lente
+        }
+
+        Console.WriteLine();
+        Thread.Sleep(600); // Petite pause entre les combats
+        index++;
     }
+
+    Console.WriteLine("\n Fin de l’historique.\n");
 }
 
 void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant combattant2)
 {
+    string ligneCombat;
+
     if (gagnant == combattant1)
     {
-        historiqueCombats.Add($"{combattant1.GetNom()} vs {combattant2.GetNom()} Gagant: {combattant1.GetNom()}");
+        ligneCombat = $"{combattant1.GetNom()} affronta {combattant2.GetNom()} —  Victorieux : {combattant1.GetNom()}";
     }
     else
     {
-        historiqueCombats.Add($"{combattant1.GetNom()} vs {combattant2.GetNom()} Gagant: {combattant2.GetNom()}");
+        ligneCombat = $"{combattant1.GetNom()} affronta {combattant2.GetNom()} —  Victorieux : {combattant2.GetNom()}";
     }
+
+    historiqueCombats.Add(ligneCombat);
 }
