@@ -713,7 +713,7 @@ void AfficherHistorique()
 
     
     Console.WriteLine("\n *** HISTORIQUE DES COMBATS ***\n");
-    var player = new SoundPlayer("page turn.wav");
+    var player = new SoundPlayer("Assets/Audio/page turn.wav");
     player.Play();
     Thread.Sleep(1000);
 
