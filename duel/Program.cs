@@ -108,7 +108,7 @@ void AfficherMenuPrincipal()
                 LancerTournoi();
                 break;
             case 5:
-                //SupprimerGuerrier();
+                SupprimerGuerrier();
                 return;
             case 6:
                 AfficherHistorique();
@@ -198,7 +198,55 @@ else
     Console.WriteLine($"{legolas.GetNom()} a gagné !");
 */
 
+void SupprimerGuerrier()
+{
+    if (Guerrier.guerriers.Count == 0)
+    {
+        Console.WriteLine("Il n'y a aucun combattant à supprimer.");
+        return;
+    }
 
+    Console.WriteLine(" Menu de Suppression de Guerriers");
+    Console.WriteLine("Quel guerrier souhaitez-vous envoyer rejoindre ses ancêtres ?");
+    Console.WriteLine("Appuyez sur une touche pour continuer...");
+    Console.ReadKey(true);
+
+    // Affichage des guerriers disponibles
+    for (int i = 0; i < Guerrier.guerriers.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
+    }
+
+    int index = DemanderEntier("Combattant à supprimer (index) : ", 1, Guerrier.guerriers.Count) - 1;
+
+    if (index >= 0 && index < Guerrier.guerriers.Count)
+    {
+        string nomSupprime = Guerrier.guerriers[index].GetNom();
+        Guerrier.guerriers.RemoveAt(index);
+
+        Console.WriteLine($"\n{nomSupprime} a été choisi pour quitter l’arène...\n");
+        Thread.Sleep(1000);
+
+        string[] animation = {
+            "Le silence s'installe...",
+            $"{nomSupprime} regarde une dernière fois l’arène...",
+            "Une brume épaisse s’élève sous ses pieds...",
+            "Les tambours s’arrêtent.",
+            $"{nomSupprime} disparaît lentement dans l'ombre..."
+        };
+        
+        foreach (var ligne in animation)
+        {
+            Console.WriteLine(ligne);
+            Thread.Sleep(1500);
+        }
+        Console.WriteLine($"\n{nomSupprime} combattra peut-être ailleurs... ou veillera depuis l’au-delà.\n");
+    }
+    else
+    {
+        Console.WriteLine("Index invalide.");
+    }
+}
 
 void AjouterNain()
 {
