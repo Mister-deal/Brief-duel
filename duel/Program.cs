@@ -520,10 +520,11 @@ void Victoire(Icombattant gagnant)
 
 
     var player = new SoundPlayer("Final Fantasy Fanfare.wav");
-    player.PlayLooping();
+    player.Play();
 
     Console.WriteLine("\nAppuyez sur une touche pour continuer...");
     Console.ReadKey(true);
+    player.Stop();
     Console.Clear();
 }
 
