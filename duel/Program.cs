@@ -95,9 +95,10 @@ void AfficherMenuPrincipal()
         Console.WriteLine("4. Lancer un tournoi");
         Console.WriteLine("5. Supprimer un guerrier");
         Console.WriteLine("6. Afficher historique");
-        Console.WriteLine("7. Quitter");
+        Console.WriteLine("7. Afficher le guide de jeu");
+        Console.WriteLine("8. Quitter");
 
-        choix = DemanderEntier("Faites votre choix: ", 1, 7);
+        choix = DemanderEntier("Faites votre choix: ", 1, 8);
 
         switch (choix)
         {
@@ -137,6 +138,9 @@ void AfficherMenuPrincipal()
                 AfficherHistorique();
                 break;
             case 7:
+                AfficherGuideUtilisateur();
+                break;
+            case 8:
                 Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
                 return;
         }
@@ -625,4 +629,58 @@ void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant
     }
 
     historiqueCombats.Add(ligneCombat);
+}
+
+void AfficherGuideUtilisateur()
+{
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                 GUIDE DU JOUEUR - GUERRES DES PEUPLES ANCESTRAUX        ║");
+    Console.WriteLine("║              (Nains, Elfes, Sorciers... et l’Équilibre des Lames)       ║");
+    Console.WriteLine("╚═════════════════════════════════════════════════════════════════════════╝\n");
+    Console.ResetColor();
+
+    Console.WriteLine("Bienvenue dans le grand tournoi de la Chicanerie des Hautes Terres !");
+    Console.WriteLine("Ce jeu console vous propose de créer des combattants et de les faire s'affronter\n" +
+                      "dans des duels épiques ou dans un tournoi sans pitié.\n");
+
+    Console.WriteLine("⚔️ TYPES DE COMBATTANTS DISPONIBLES :");
+
+    Console.ForegroundColor = ConsoleColor.DarkGray;
+    Console.WriteLine("• Guerrier : Classe de base avec attaque aléatoire.");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine("• Nain : Armure lourde, subit moins de dégâts.");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("• Elfe : Attaque toujours avec un minimum garanti.");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("• Sorcier : Utilise des sorts (soin, feu, bouclier) et gère du mana.");
+    Console.ResetColor();
+
+    Console.WriteLine("\n📏 RÈGLES DE CRÉATION :");
+    Console.WriteLine("- Les points de vie (PV) doivent être compris entre 10 et 100.");
+    Console.WriteLine("- Le nom du guerrier doit être unique et représentatif.");
+    Console.WriteLine("- Vous pouvez créer autant de combattants que vous le souhaitez.");
+
+    Console.WriteLine("\n📖 APRÈS CHAQUE ACTION :");
+    Console.WriteLine("- Un message vous indique ce qui s’est passé.");
+    Console.WriteLine("- Vous pouvez revenir au menu à tout moment.");
+    Console.WriteLine("- Les combats sont automatiques et commentés.\n");
+
+    Console.WriteLine("🎯 OBJECTIF :");
+    Console.WriteLine("Créez vos champions, faites-les progresser, et imposez la suprématie de votre peuple\n" +
+                      "dans le plus grand tournoi des Hautes Terres !");
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine("\nBonne chance, stratège. Que vos guerriers tombent avec gloire ou triomphent avec honneur !");
+    Console.ResetColor();
+    Console.WriteLine("\nAppuyez sur une touche pour revenir au menu principal...");
+    Console.ReadKey(true);
+    Console.Clear();
 }
