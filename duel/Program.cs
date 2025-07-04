@@ -544,9 +544,7 @@ void LancerTournoi()
             Icombattant vainqueur = Combattre(c1, c2);
 
             AjouterHistorique(vainqueur, c1, c2);
-
-            Victoire(vainqueur); // musique de victoire jouée ici
-
+            
             // Relancer musique de tournoi après la victoire
             player.PlayLooping();
 
