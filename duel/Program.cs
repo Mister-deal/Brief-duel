@@ -20,21 +20,53 @@ void InitialiserCombattants()
     Console.WriteLine("Invocation des anciens champions...");
     Thread.Sleep(500);
 
+    // Création des Nains
     Nain Thorin = new Nain("Thorin Forgefeu", 90, 5, true);
-    Guerrier.guerriers.Add(new Nain("Thorin Forgefeu", 90, 5, true));
-    Guerrier.guerriers.Add(new Nain("Grimbald Marteau-d'Argent", 75, 7, true));
-    Guerrier.guerriers.Add(new Nain("Durgin Barbelac", 100, 8, false));
-    Guerrier.guerriers.Add(new Nain("Baldrick le Tenace", 65, 10, true));
+    Nain Grimbald = new Nain("Grimbald Marteau-d'Argent", 75, 7, true);
+    Nain Durgin = new Nain("Durgin Barbelac", 100, 8, false);
+    Nain Baldrick = new Nain("Baldrick le Tenace", 65, 10, true);
 
-    Guerrier.guerriers.Add(new Elfe("Elandor Ventargent",85, 7, 30));
-    Guerrier.guerriers.Add(new Elfe("Luthien Sèveclaire", 100, 5, 25));
-    Guerrier.guerriers.Add(new Elfe("Faelar Ombreciel", 85, 8, 35));
-    Guerrier.guerriers.Add(new Elfe("Thalor de la Lune", 55, 10, 40));
-    
-    Guerrier.guerriers.Add(new Sorcier("Siri Ventador", 95, 6, 45));
-    Guerrier.guerriers.Add(new Sorcier("Eliogabalus ex", 100, 5, 50));
-    Guerrier.guerriers.Add(new Sorcier("the witch of madness", 65, 10, 70));
-    Guerrier.guerriers.Add(new Sorcier("Yuru higba", 75, 9, 60));
+    // Création des Elfes
+    Elfe Elandor = new Elfe("Elandor Ventargent", 85, 7, 30);
+    Elfe Luthien = new Elfe("Luthien Sèveclaire", 100, 5, 25);
+    Elfe Faelar = new Elfe("Faelar Ombreciel", 85, 8, 35);
+    Elfe Thalor = new Elfe("Thalor de la Lune", 55, 10, 40);
+
+    // Création des Sorciers
+    Sorcier Siri = new Sorcier("Siri Ventador", 95, 6, 45);
+    Sorcier Eliogabalus = new Sorcier("Eliogabalus ex", 100, 5, 50);
+    Sorcier TheWitch = new Sorcier("the witch of madness", 65, 10, 70);
+    Sorcier Yuru = new Sorcier("Yuru higba", 75, 9, 60);
+
+    // Ajout dans les listes spécifiques
+    guerriersNains.Add(Thorin);
+    guerriersNains.Add(Grimbald);
+    guerriersNains.Add(Durgin);
+    guerriersNains.Add(Baldrick);
+
+    guerriersElfes.Add(Elandor);
+    guerriersElfes.Add(Luthien);
+    guerriersElfes.Add(Faelar);
+    guerriersElfes.Add(Thalor);
+
+    sorciers.Add(Siri);
+    sorciers.Add(Eliogabalus);
+    sorciers.Add(TheWitch);
+    sorciers.Add(Yuru);
+
+    // Ajout dans la liste générale
+    Guerrier.guerriers.Add(Thorin);
+    Guerrier.guerriers.Add(Grimbald);
+    Guerrier.guerriers.Add(Durgin);
+    Guerrier.guerriers.Add(Baldrick);
+    Guerrier.guerriers.Add(Elandor);
+    Guerrier.guerriers.Add(Luthien);
+    Guerrier.guerriers.Add(Faelar);
+    Guerrier.guerriers.Add(Thalor);
+    Guerrier.guerriers.Add(Siri);
+    Guerrier.guerriers.Add(Eliogabalus);
+    Guerrier.guerriers.Add(TheWitch);
+    Guerrier.guerriers.Add(Yuru);
 
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
