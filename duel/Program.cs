@@ -129,7 +129,7 @@ void AfficherMenuPrincipal()
     // Affiche les options et traite le choix de l'utilisateur en boucle
     while (true)
     {
-        var player = new SoundPlayer("Dragon Quest III.wav");
+        var player = new SoundPlayer("Assets/Audio/Dragon Quest III.wav");
         player.Play(); // Joue la musique et bloque jusqu'à la fin
         Console.WriteLine("\n=== MENU PRINCIPAL ===");
         Console.WriteLine("1. Ajouter un guerrier");
@@ -248,7 +248,7 @@ void SupprimerGuerrier()
         Guerrier.guerriers.RemoveAt(index);
 
         Console.WriteLine($"\n{nomSupprime} a été choisi pour quitter l’arène...\n");
-        var player = new SoundPlayer("Final Fantasy Tactics Game Over.wav");
+        var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Game Over.wav");
         player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
         Thread.Sleep(2000);
 
@@ -278,7 +278,7 @@ void SupprimerGuerrier()
 
 void AjouterNain()
 {
-    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Menu.wav");
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
 
@@ -301,7 +301,7 @@ void AjouterNain()
 
 void AjouterSorcier()
 {
-    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Menu.wav");
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
 
@@ -324,7 +324,7 @@ void AjouterSorcier()
 
 void AjouterElfe()
 {
-    var player = new SoundPlayer("Final Fantasy Tactics Menu.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Menu.wav");
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du saint Guerrier Elfe: ");
 
@@ -471,7 +471,7 @@ bool DemanderBool(string message)
 void LancerDuel()
 {
     AnimationChargement();
-    var player = new SoundPlayer("Final Fantasy IX OST - Battle 1.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy IX OST - Battle 1.wav");
     player.Play();
 
     if (Guerrier.guerriers.Count < 2)
@@ -510,7 +510,7 @@ void LancerTournoi()
 {
     // Animation de chargement + musique d'intro du tournoi
     AnimationChargement();
-    var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
+    var player = new SoundPlayer("Assets/Audio/Tactics Ogre： Championship theme.wav");
     player.PlayLooping(); // On joue la musique UNE SEULE FOIS pour toute la durée du tournoi
 
     // Si on a moins de 2 combattants, on ne peut pas faire de tournoi
@@ -583,7 +583,7 @@ void LancerTournoi()
     player.Stop(); // stop musique de tournoi
     Console.Clear();
 
-    var player1 = new SoundPlayer("Tactics Ogre Glory.wav");
+    var player1 = new SoundPlayer("Assets/Audio/Tactics Ogre Glory.wav");
     player1.PlayLooping(); // musique de victoire finale
 
     // Annonce du gagnant
@@ -648,7 +648,7 @@ void Victoire(Icombattant gagnant)
     Console.ResetColor();
 
 
-    var player = new SoundPlayer("Final Fantasy Fanfare.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Fanfare.wav");
     player.Play();
 
     AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
@@ -718,7 +718,7 @@ void AfficherHistorique()
     Thread.Sleep(1000);
 
     int index = 1;
-    var player1 = new SoundPlayer("Secunda.wav");
+    var player1 = new SoundPlayer("Assets/Audio/Secunda.wav");
     player1.PlayLooping();
     foreach (string combat in historiqueCombats)
     {
@@ -761,7 +761,7 @@ void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant
 void AfficherGuideUtilisateur()
 {
     Console.Clear();
-    var player = new SoundPlayer("Final Fantasy Tactics Guide.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Guide.wav");
     player.PlayLooping();
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════╗");
