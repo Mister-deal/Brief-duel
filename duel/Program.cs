@@ -188,10 +188,12 @@ void AfficherMenuPrincipal()
             case 3:
                 // Lance un duel entre deux combattants choisis
                 LancerDuel();
+                Console.Clear();
                 break;
             case 4:
                 // Lance un tournoi avec tous les combattants disponibles
                 LancerTournoi();
+                Console.Clear();
                 break;
             case 5:
                 // Supprime un guerrier de la liste après sélection par l'utilisateur
@@ -627,8 +629,6 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
         c1.SubirDegats(c2.Attaquer());
 
         if (c1.GetPointsDeVie() <= 0) break;
-
-        AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
 
         tour++;
     }
