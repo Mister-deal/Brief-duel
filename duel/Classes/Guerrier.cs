@@ -3,7 +3,7 @@ using duel.Interfaces;
 
 namespace duel.Classes;
 
-public abstract class Guerrier: Icombattant
+public abstract class Guerrier : Icombattant
 {
     // Attributs 
 
@@ -59,7 +59,7 @@ public abstract class Guerrier: Icombattant
         PointsDeVie = pointsDeVie;
         Console.WriteLine($"les points de vie attribués sont: {pointsDeVie}");
     }
-    
+
     public virtual void Reset()
     {
         PointsDeVie = _pointsDeVieInitial;
@@ -77,7 +77,7 @@ public abstract class Guerrier: Icombattant
 
     public virtual int Attaquer()
     {
-        Random random  = new Random();
+        Random random = new Random();
         int totalDamage = 0;
         for (int i = 0; i < NbDesAttaque; i++)
         {
@@ -85,16 +85,19 @@ public abstract class Guerrier: Icombattant
         }
         if (totalDamage <= NbDesAttaque)
         {
-            totalDamage =  NbDesAttaque;
+            totalDamage = NbDesAttaque;
         }
         return totalDamage;
     }
 
     public virtual void SubirDegats(int degats)
     {
-        PointsDeVie -= degats;
+        if ((PointsDeVie -= degats) <= 0)
+        {
+            PointsDeVie = 0;
+        }
         Console.WriteLine($"{Nom} a reçu {degats} points de dégats. PV Restants = {PointsDeVie} ");
     }
-    
-    
+
+
 }
