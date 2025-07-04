@@ -125,7 +125,6 @@ void AfficherMenuPrincipal()
     Console.Clear();
     
     InitialiserCombattants();
-    Console.WriteLine();
     
     // Affiche les options et traite le choix de l'utilisateur en boucle
     while (true)
@@ -147,10 +146,10 @@ void AfficherMenuPrincipal()
         switch (choix)
         {
             case 1:
-                Console.WriteLine("Que voulez-vous ajouter \n" +
+                Console.WriteLine("Que voulez-vous ajouter ? \n" +
                     "  1. Ajouter un guerrier saint nain \n" +
                     "  2. Ajouter un guerrier saint elfe \n" +
-                    "  3. Ajouter un sorcier");
+                    "  3. Ajouter un sorcier\n");
                 choixClass = DemanderEntier("Donnez un chiffre: ", 1, 3);
 
                 switch (choixClass)
@@ -158,15 +157,18 @@ void AfficherMenuPrincipal()
                     case 1:
                         // Ajoute un nouveau guerrier Nain avec ses caractéristiques
                         AjouterNain();
+                        Console.Clear();
                         break;
 
                     case 2:
                         // Ajoute un nouveau guerrier Elfe avec ses caractéristiques
                         AjouterElfe();
+                        Console.Clear();
                         break;
                     case 3:
                         // Ajoute un nouveau Sorcier avec ses caractéristiques (mana inclus)
                         AjouterSorcier();
+                        Console.Clear();
                         break;
                 }
                 break;
@@ -278,9 +280,9 @@ void AjouterNain()
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
 
-    int pv = DemanderEntier("Points de vie: ", 10, 100);
+    int pv = DemanderEntier("Points de vie(10 - 100): ", 10, 100);
 
-    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
+    int nbDes = DemanderEntier("Nombre de dés d'attaque(1 - 10): ", 1, 10);
 
     bool armureLourde = DemanderBool("Souhaitez-vous donner une armure lourde à votre nain ? (oui/non): ");
 
@@ -288,7 +290,10 @@ void AjouterNain()
     guerriersNains.Add(nain);
     Guerrier.guerriers.Add(nain);
 
-    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains");
+    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains.");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+
     player.Stop();
 }
 
@@ -298,17 +303,20 @@ void AjouterSorcier()
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du Guerrier saint Nain: ");
 
-    int pv = DemanderEntier("Points de vie: ", 10, 100);
+    int pv = DemanderEntier("Points de vie(10 - 100): ", 10, 100);
 
-    int nbDes = DemanderEntier("Nombre de dés d'attaque: ", 1, 10);
+    int nbDes = DemanderEntier("Nombre de dés d'attaque(1 - 10): ", 1, 10);
 
-    int mana = DemanderEntier("Points de mana: ", 10, 75 );
+    int mana = DemanderEntier("Points de mana(10 - 75): ", 10, 75 );
 
     Sorcier sorcier = new Sorcier(nom, pv, nbDes, mana);
     sorciers.Add(sorcier);
     Guerrier.guerriers.Add(sorcier);
 
-    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour l'alliance des nains");
+    Console.WriteLine($"{nom} a été ajouté à la liste. il combattra désormais pour la ligue des sorciers");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+
     player.Stop();
 }
 
@@ -318,7 +326,7 @@ void AjouterElfe()
     player.PlayLooping(); // Joue la musique et bloque jusqu'à la fin
     string nom = DemanderTexte("Nom du saint Guerrier Elfe: ");
 
-    int pv = DemanderEntier("Points de vie: ", 10, 100);
+    int pv = DemanderEntier("Points de vie(10 - 100): ", 10, 100);
 
     int nbDes = DemanderEntier("Nombre de dés d'attaque (1-10): ", 1, 10);
 
@@ -329,6 +337,9 @@ void AjouterElfe()
     Guerrier.guerriers.Add(elfe);
 
     Console.WriteLine($"{nom} a été ajouté à la liste. il combattra vaillamment afin de sauvegarder les forêts qui lui sont chères !");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+
     player.Stop();
 }
 
@@ -469,11 +480,15 @@ void LancerDuel()
 
     AfficherCombattant();
 
-    int index1 = DemanderEntier("Combattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int index1 = DemanderEntier("\nCombattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
 
     AfficherCombattant();
 
-    int index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    int index2 = DemanderEntier("\nCombattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
 
     while (index1 == index2)
     {
@@ -627,9 +642,10 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
 // Affiche un message de victoire après le combat
 void Victoire(Icombattant gagnant)
 {
-    Console.Clear();
-    Console.WriteLine("!!!!!! VICTOIRE !!!!!!\n");
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("\n!!!!!! VICTOIRE !!!!!!\n");
     Console.WriteLine($"{gagnant.GetNom()} sort triomphant du combat ! Félicitation à ce fier guerrier !\n");
+    Console.ResetColor();
 
 
     var player = new SoundPlayer("Final Fantasy Fanfare.wav");
@@ -674,8 +690,7 @@ void AnimationChargement(int dureeEnMs = 2000, int intervalle = 300)
         Console.ResetColor();
         Thread.Sleep(intervalle);
     }
-
-    Console.WriteLine();
+    Console.Clear();
 }
 
 void AfficherCombattant()
