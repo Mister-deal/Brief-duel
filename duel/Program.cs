@@ -489,42 +489,45 @@ void LancerDuel()
 
 void LancerTournoi()
 {
+    // Animation de chargement + musique d'intro du tournoi
     AnimationChargement();
     var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
-    player.PlayLooping();
+    player.PlayLooping(); // On joue la musique UNE SEULE FOIS pour toute la durée du tournoi
 
+    // Si on a moins de 2 combattants, on ne peut pas faire de tournoi
     if (Guerrier.guerriers.Count < 2)
     {
         Console.WriteLine("Pas assez de combattants pour lancer un tournoi !");
         return;
     }
 
+    // Introduction épique du tournoi
     Console.Clear();
     Console.WriteLine("\n --- Le Grand Tournoi des Royaumes débute !!!! ---");
     Console.WriteLine("Les guerriers vont s'affronter dans une série de duels épiques...");
-    Console.WriteLine("Mais qui l'emportera t-il ? Elfes ? Nains ? Ce grand tournoi permettra d'en décider, par la grâce et faveurs des dieux !");
+    Console.WriteLine("Mais qui l'emportera ? Elfes ? Nains ? Ce tournoi le décidera !");
     Console.WriteLine("\n --- QUE LE GRAND TOURNOI COMMENCE !!!!!! ---");
-    Console.WriteLine();
     Console.WriteLine("Appuyez sur une touche pour commencer !");
     Console.ReadKey(true);
 
-    List<Icombattant> participants = Guerrier.guerriers.OrderBy(x => Guid.NewGuid()).ToList(); // mélange aléatoire
+    // Mélange aléatoire des combattants
+    List<Icombattant> participants = Guerrier.guerriers.OrderBy(x => Guid.NewGuid()).ToList();
 
     int tour = 1;
 
-
+    // Tant qu’il reste plus d’un combattant
     while (participants.Count > 1)
     {
         Console.Clear();
-        player.PlayLooping();
         Console.WriteLine($"\n--- Tour {tour} du tournoi ---");
+
         List<Icombattant> vainqueursTour = new List<Icombattant>();
 
         for (int i = 0; i < participants.Count; i += 2)
         {
             if (i + 1 >= participants.Count)
             {
-                // Nombre impair : le dernier passe automatiquement au tour suivant
+                // Si on a un nombre impair de combattants, le dernier est qualifié d'office
                 Console.WriteLine($"⚔️ {participants[i].GetNom()} est qualifié d'office !");
                 vainqueursTour.Add(participants[i]);
                 continue;
@@ -533,31 +536,41 @@ void LancerTournoi()
             Icombattant c1 = participants[i];
             Icombattant c2 = participants[i + 1];
 
+            // Affichage avant combat
             Console.WriteLine($"\nDuel : {c1.GetNom()} VS {c2.GetNom()}");
-            Console.WriteLine($"{c1.GetNom()} est prêt à en découdre mais {c2.GetNom()} ne se laisse pas intimider ! nous sommes prêts pour voir du combat de HAUT VOL !");
-            Console.WriteLine($"........... COMMENCEZ LE COMBAT !!!");
+            Console.WriteLine($"{c1.GetNom()} est prêt à en découdre mais {c2.GetNom()} ne se laisse pas intimider !");
+            Console.WriteLine("........... COMMENCEZ LE COMBAT !!!");
             Console.WriteLine("Appuyez sur une touche pour lancer le combat...");
             Console.ReadKey(true);
 
+            // Combat entre les deux
             Icombattant vainqueur = Combattre(c1, c2);
 
             AjouterHistorique(vainqueur, c1, c2);
 
-            Victoire(vainqueur);
+            Victoire(vainqueur); // musique de victoire jouée ici
+
+            // Relancer musique de tournoi après la victoire
+            player.PlayLooping();
+
             vainqueursTour.Add(vainqueur);
         }
+
         participants = vainqueursTour;
         tour++;
 
         Console.WriteLine("\nAppuyez sur une touche pour passer au tour suivant...");
         Console.ReadKey(true);
     }
-    player.Stop();
+
+    // Fin du tournoi
+    player.Stop(); // stop musique de tournoi
     Console.Clear();
 
     var player1 = new SoundPlayer("Tactics Ogre Glory.wav");
-    player1.PlayLooping();
+    player1.PlayLooping(); // musique de victoire finale
 
+    // Annonce du gagnant
     Console.WriteLine("╔════════════════════════════════════════════════════╗");
     Console.WriteLine("║           !!!! LE TOURNOI EST TERMINÉ !!!!         ║");
     Console.WriteLine("╚════════════════════════════════════════════════════╝");
@@ -567,15 +580,12 @@ void LancerTournoi()
     Console.WriteLine("Dans l’arène du destin, face à l’acier, à la magie et au sang,");
     Console.WriteLine($"{participants[0].GetNom()} a triomphé avec bravoure, ruse et puissance.");
     Console.WriteLine("Son nom résonnera dans les montagnes comme dans les forêts éternelles.");
-    Console.WriteLine("Les bardes chanteront ses exploits. Les pierres retiendront son nom.");
     Console.WriteLine("Il ne s’agit plus d’un simple combattant...");
     Console.WriteLine("C’est un **héros légendaire**, un symbole vivant de la gloire de son peuple !\n");
 
-    Console.WriteLine("Que les feux s’allument, que les cornes sonnent,");
-    Console.WriteLine("le champion est désigné, et les anciens peuvent enfin trouver la paix.\n");
-
-    Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+    Console.WriteLine("Appuyez sur une touche pour continuer...");
     Console.ReadKey(true);
+    player1.Stop();
 }
 
 // Gère un combat jusqu'à la victoire d’un combattant
@@ -697,10 +707,10 @@ void AfficherHistorique()
     Thread.Sleep(1000);
 
     int index = 1;
+    var player1 = new SoundPlayer("Secunda.wav");
+    player1.PlayLooping();
     foreach (string combat in historiqueCombats)
     {
-        var player1 = new SoundPlayer("Secunda.wav");
-        player1.PlayLooping();
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.Write($"⚔️ Combat {index}: ");
         Console.ResetColor();
