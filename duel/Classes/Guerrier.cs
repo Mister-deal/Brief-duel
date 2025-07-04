@@ -92,9 +92,8 @@ public abstract class Guerrier: Icombattant
 
     public virtual void SubirDegats(int degats)
     {
-        Console.Write(PointsDeVie);
         PointsDeVie -= degats;
-        Console.WriteLine($" - {degats} = {PointsDeVie} de point de vie actuel");
+        Console.WriteLine($"{Nom} a reçu {degats} points de dégats. PV Restants = {PointsDeVie} ");
     }
     
     

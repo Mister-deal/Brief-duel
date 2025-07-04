@@ -354,6 +354,14 @@ void LancerDuel()
     }
 
     int index1 = DemanderEntier("Combattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
+
+    Console.WriteLine("\n--- Choisissez les deux combattants ---\n");
+
+    for (int i = 0; i < Guerrier.guerriers.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
+    }
+
     int index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
 
     while (index1 == index2)
@@ -506,6 +514,7 @@ void Victoire(Icombattant gagnant)
         
     Console.WriteLine("\nAppuyez sur une touche pour continuer...");
     Console.ReadKey(true);
+    Console.Clear();
 }
 
 void AnimationAttaqueEnCours(int dureeEnMs = 2000, int intervalle = 300)

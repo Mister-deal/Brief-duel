@@ -16,8 +16,6 @@ public class Nain : Guerrier, Icombattant
         {
             degats /= 2;
         }
-        Console.Write(PointsDeVie);
-        PointsDeVie -= degats;
-        Console.WriteLine($" - {degats} = {PointsDeVie} de point de vie actuel");
+        base.SubirDegats(degats);
     }
 }
