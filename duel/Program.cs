@@ -346,21 +346,11 @@ void LancerDuel()
         return;
     }
 
-    Console.WriteLine("\n--- Choisissez les deux combattants ---\n");
-
-    for (int i = 0; i < Guerrier.guerriers.Count; i++)
-    {
-        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
-    }
+    AfficherCombattant();
 
     int index1 = DemanderEntier("Combattant 1 (index) : ", 1, Guerrier.guerriers.Count) - 1;
 
-    Console.WriteLine("\n--- Choisissez les deux combattants ---\n");
-
-    for (int i = 0; i < Guerrier.guerriers.Count; i++)
-    {
-        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
-    }
+    AfficherCombattant();
 
     int index2 = DemanderEntier("Combattant 2 (index) : ", 1, Guerrier.guerriers.Count) - 1;
 
@@ -551,4 +541,14 @@ void AnimationChargement(int dureeEnMs = 2000, int intervalle = 300)
     }
 
     Console.WriteLine();
+}
+
+void AfficherCombattant()
+{
+    Console.WriteLine("\n--- Choisissez les deux combattants ---\n");
+
+    for (int i = 0; i < Guerrier.guerriers.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
+    }
 }
