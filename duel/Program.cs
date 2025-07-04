@@ -20,6 +20,7 @@ void InitialiserCombattants()
     Console.WriteLine("Invocation des anciens champions...");
     Thread.Sleep(500);
 
+    Nain Thorin = new Nain("Thorin Forgefeu", 90, 5, true);
     Guerrier.guerriers.Add(new Nain("Thorin Forgefeu", 90, 5, true));
     Guerrier.guerriers.Add(new Nain("Grimbald Marteau-d'Argent", 75, 7, true));
     Guerrier.guerriers.Add(new Nain("Durgin Barbelac", 100, 8, false));
@@ -32,6 +33,7 @@ void InitialiserCombattants()
 
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
+    Console.Clear();
 }
 AfficherMenuPrincipal();
 
@@ -80,7 +82,7 @@ void AfficherMenuPrincipal()
 
     Console.WriteLine("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.ReadKey(true);
-    Console.WriteLine();
+    Console.Clear();
     
     InitialiserCombattants();
     Console.WriteLine();
