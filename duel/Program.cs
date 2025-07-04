@@ -5,16 +5,18 @@ using duel.Classes;
 using duel.Interfaces;
 
 
-
+// Listes pour stocker les guerriers de chaque race
 List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
 List<Sorcier> sorciers = new List<Sorcier>();
 
+// Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
 
 int choix = 0;
 int choixClass = 0;
 
+// Crée les combattants de départ pour chaque race (Nain, Elfe, Sorcier)
 void InitialiserCombattants()
 {
     Console.WriteLine("Invocation des anciens champions...");
@@ -72,6 +74,7 @@ void InitialiserCombattants()
     Thread.Sleep(500);
     Console.Clear();
 }
+// Affiche le menu principal du jeu avec ambiance et narration
 AfficherMenuPrincipal();
 
 void AfficherMenuPrincipal()
@@ -123,6 +126,8 @@ void AfficherMenuPrincipal()
     
     InitialiserCombattants();
     Console.WriteLine();
+    
+    // Affiche les options et traite le choix de l'utilisateur en boucle
     while (true)
     {
         var player = new SoundPlayer("Dragon Quest III.wav");
@@ -151,36 +156,48 @@ void AfficherMenuPrincipal()
                 switch (choixClass)
                 {
                     case 1:
+                        // Ajoute un nouveau guerrier Nain avec ses caractéristiques
                         AjouterNain();
                         break;
 
                     case 2:
+                        // Ajoute un nouveau guerrier Elfe avec ses caractéristiques
                         AjouterElfe();
                         break;
                     case 3:
+                        // Ajoute un nouveau Sorcier avec ses caractéristiques (mana inclus)
                         AjouterSorcier();
                         break;
                 }
                 break;
 
             case 2:
+                // Affiche la liste des Nains créés
+                // Affiche la liste des Elfes créés
+                // Affiche la liste des sorciers créés
                 AfficherListeguerriersElfes();
                 AfficherListeGuerriersNains();
+                AfficherListeSorciers();
                 break;
 
             case 3:
+                // Lance un duel entre deux combattants choisis
                 LancerDuel();
                 break;
             case 4:
+                // Lance un tournoi avec tous les combattants disponibles
                 LancerTournoi();
                 break;
             case 5:
+                // Supprime un guerrier de la liste après sélection par l'utilisateur
                 SupprimerGuerrier();
                 break;
             case 6:
+                // Affiche l’historique des duels passés
                 AfficherHistorique();
                 break;
             case 7:
+                // Affiche les règles et explications du jeu
                 AfficherGuideUtilisateur();
                 break;
             case 8:
@@ -342,6 +359,23 @@ void AfficherListeguerriersElfes()
     }
 }
 
+void AfficherListeSorciers()
+{
+    if (sorciers.Count == 0)
+    {
+        Console.WriteLine("Aucun sorcier créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Sorciers ---");
+    for (int i = 0; i < sorciers.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        sorciers[i].AfficherInfos();
+    }
+}
+
+// Pose une question texte et valide la saisie
 string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
 {
     string texte;
@@ -369,6 +403,7 @@ string DemanderTexte(string message, int longueurMin = 2, int longueurMax = 20)
     return texte;
 }
 
+// Pose une question numérique et valide l’intervalle
 static int DemanderEntier(string message, int min, int max)
 {
     int valeur;
@@ -395,6 +430,7 @@ static int DemanderEntier(string message, int min, int max)
     return valeur;
 }
 
+// Pose une question oui/non et retourne un booléen
 bool DemanderBool(string message)
 {
     string reponse;
@@ -539,7 +575,7 @@ void LancerTournoi()
     Console.ReadKey(true);
 }
 
-
+// Gère un combat jusqu'à la victoire d’un combattant
 Icombattant Combattre(Icombattant c1, Icombattant c2)
 {
     c1.Reset();
@@ -578,6 +614,7 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
     return vainqueur;
 }
 
+// Affiche un message de victoire après le combat
 void Victoire(Icombattant gagnant)
 {
     Console.Clear();
@@ -594,6 +631,7 @@ void Victoire(Icombattant gagnant)
     Console.Clear();
 }
 
+// Animation ASCII pour l'attaque
 void AnimationAttaqueEnCours(int dureeEnMs = 2000, int intervalle = 300)
 {
     int iterations = dureeEnMs / intervalle;
@@ -612,6 +650,7 @@ void AnimationAttaqueEnCours(int dureeEnMs = 2000, int intervalle = 300)
     Console.WriteLine();
 }
 
+// Animation ASCII pour les chargements
 void AnimationChargement(int dureeEnMs = 2000, int intervalle = 300)
 {
     int iterations = dureeEnMs / intervalle;
@@ -677,6 +716,7 @@ void AfficherHistorique()
     Console.WriteLine("\n Fin de l’historique.\n");
 }
 
+// Ajoute une ligne au journal de l'historique
 void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant combattant2)
 {
     string ligneCombat;
