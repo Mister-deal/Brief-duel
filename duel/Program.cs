@@ -736,8 +736,9 @@ void AfficherHistorique()
         Thread.Sleep(600); // Petite pause entre les combats
         index++;
     }
-
     Console.WriteLine("\n Fin de l’historique.\n");
+    Console.WriteLine("Veuillez appuyer sur une touche pour continuer...");
+    Console.ReadKey(true);
 }
 
 // Ajoute une ligne au journal de l'historique

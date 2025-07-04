@@ -32,7 +32,7 @@ public class Sorcier: Guerrier, Icombattant
             case "Boule de feu":
                 return base.Attaquer() + 10;
             case "Soin":
-                int soin = 5;
+                int soin = 15;
                 PointsDeVie += soin;
                 Console.WriteLine($"{Nom} lance le soin: {soin}; {Nom} se soigne {soin} ses points de vie.");
                 return 0;

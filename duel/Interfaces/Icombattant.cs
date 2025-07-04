@@ -10,4 +10,9 @@ public interface Icombattant
     int Attaquer();
     void SubirDegats(int degats);
     void AfficherInfos();
+    void GagnerExperience(int points);
+    int getNiveau();
+    int getExperience();
+    int getExperienceMax();
+    void MonterNiveau();
 }
