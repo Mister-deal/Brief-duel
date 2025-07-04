@@ -4,12 +4,15 @@ using duel.Classes;
 using duel.Interfaces;
 using System.Media;
 using System.Text;
+using duel.Classes.Sous_Classes;
 
 
 // Listes pour stocker les guerriers de chaque race
 List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
 List<Sorcier> sorciers = new List<Sorcier>();
+
+
 
 // Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
@@ -74,6 +77,15 @@ void InitialiserCombattants()
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
     Console.Clear();
+}
+
+void InitialiserMonstres()
+{
+    MonstreManager.AjouterMonstre(new Slime());
+    MonstreManager.AjouterMonstre(new Goblin());
+    MonstreManager.AjouterMonstre(new GoblinBrutal(true));
+    MonstreManager.AjouterMonstre(new RatGeant());
+    MonstreManager.AjouterMonstre(new Zombie());
 }
 // Affiche le menu principal du jeu avec ambiance et narration
 AfficherMenuPrincipal();
