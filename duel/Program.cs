@@ -10,6 +10,8 @@ List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
 List<Sorcier> sorciers = new List<Sorcier>();
 
+List<string> historiqueCombats = new List<string>();
+
 int choix = 0;
 int choixClass = 0;
 AfficherMenuPrincipal();
@@ -23,7 +25,7 @@ void AfficherMenuPrincipal()
     for (int i = 0; i <= totalBlocks; i++)
     {
         Console.Write("#");
-        Thread.Sleep(100); 
+        Thread.Sleep(100);
     }
 
     Console.WriteLine("] Terminé !");
@@ -37,11 +39,11 @@ void AfficherMenuPrincipal()
     Console.WriteLine("non pas du fracas des armes, mais du chant des alliances. Les Nains,");
     Console.WriteLine("forgerons du roc et bâtisseurs d'empire, partageaient jadis la montagne");
     Console.WriteLine("avec les Elfes, maîtres des arcanes et gardiens des forêts éternelles.");
-    
+
     Console.WriteLine("\nMais le temps corrompt, et l’orgueil creuse des failles plus profondes que la pierre.");
     Console.WriteLine("Un différend ancien, oublié des sages mais nourri par les rancunes séculaires,");
     Console.WriteLine("ressurgit aujourd’hui dans le fracas d’un dernier serment.");
-    
+
     Console.WriteLine("\nLes traités sont rompus. Les anciennes runes de paix se sont éteintes.");
     Console.WriteLine("Les chants elfiques ne résonnent plus que comme des promesses brisées,");
     Console.WriteLine("et les marteaux des Nains battent l’appel à la guerre.");
@@ -56,7 +58,7 @@ void AfficherMenuPrincipal()
 
     Console.WriteLine("Êtes-vous prêt à forger la légende ? À inscrire votre nom dans les chroniques éternelles ?");
     Console.WriteLine("Prenez les armes, invoquez le courage, et entrez dans l’arène sacrée.");
-    
+
     Console.WriteLine("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.ReadKey(true);
     while (true)
@@ -72,7 +74,7 @@ void AfficherMenuPrincipal()
         Console.WriteLine("6. Afficher historique");
         Console.WriteLine("7. Quitter");
 
-        choix = DemanderEntier("Faites votre choix: ", 1, 6);
+        choix = DemanderEntier("Faites votre choix: ", 1, 7);
 
         switch (choix)
         {
@@ -80,7 +82,7 @@ void AfficherMenuPrincipal()
                 Console.WriteLine("Que voulez-vous ajouter \n" +
                     "  1. Ajouter un guerrier saint nain \n" +
                     "  2. Ajouter un guerrier saint elfe");
-               choixClass =  DemanderEntier("Donnez un chiffre: ", 1, 2);
+                choixClass = DemanderEntier("Donnez un chiffre: ", 1, 2);
 
                 switch (choixClass)
                 {
@@ -109,8 +111,8 @@ void AfficherMenuPrincipal()
                 //SupprimerGuerrier();
                 return;
             case 6:
-                //AfficherHistorique();
-                return;
+                AfficherHistorique();
+                break;
             case 7:
                 Console.WriteLine("Reposez vous, combattant ! et revenez nous vaillant et courageux !");
                 return;
@@ -370,6 +372,9 @@ void LancerDuel()
     }
 
     Icombattant gagnant = Combattre(Guerrier.guerriers[index1], Guerrier.guerriers[index2]);
+
+    AjouterHistorique(gagnant, Guerrier.guerriers[index1], Guerrier.guerriers[index2]);
+
     Console.WriteLine($"\nLe gagnant est {gagnant.GetNom()} !");
     player.Stop();
 }
@@ -379,7 +384,7 @@ void LancerTournoi()
     AnimationChargement();
     var player = new SoundPlayer("Tactics Ogre： Championship theme.wav");
     player.Play();
-    
+
     if (Guerrier.guerriers.Count < 2)
     {
         Console.WriteLine("Pas assez de combattants pour lancer un tournoi !");
@@ -394,7 +399,7 @@ void LancerTournoi()
     Console.WriteLine();
     Console.WriteLine("Appuyez sur une touche pour commencer !");
     Console.ReadKey(true);
-    
+
     List<Icombattant> participants = Guerrier.guerriers.OrderBy(x => Guid.NewGuid()).ToList(); // mélange aléatoire
 
     int tour = 1;
@@ -406,7 +411,7 @@ void LancerTournoi()
         player.Play();
         Console.WriteLine($"\n--- Tour {tour} du tournoi ---");
         List<Icombattant> vainqueursTour = new List<Icombattant>();
-        
+
         for (int i = 0; i < participants.Count; i += 2)
         {
             if (i + 1 >= participants.Count)
@@ -427,6 +432,9 @@ void LancerTournoi()
             Console.ReadKey(true);
 
             Icombattant vainqueur = Combattre(c1, c2);
+
+            AjouterHistorique(vainqueur, c1, c2);
+
             Victoire(vainqueur);
             vainqueursTour.Add(vainqueur);
         }
@@ -438,10 +446,10 @@ void LancerTournoi()
     }
     player.Stop();
     Console.Clear();
-    
+
     var player1 = new SoundPlayer("Tactics Ogre Glory.wav");
     player1.PlayLooping();
-    
+
     Console.WriteLine("╔════════════════════════════════════════════════════╗");
     Console.WriteLine("║           !!!! LE TOURNOI EST TERMINÉ !!!!         ║");
     Console.WriteLine("╚════════════════════════════════════════════════════╝");
@@ -457,7 +465,7 @@ void LancerTournoi()
 
     Console.WriteLine("Que les feux s’allument, que les cornes sonnent,");
     Console.WriteLine("le champion est désigné, et les anciens peuvent enfin trouver la paix.\n");
-    
+
     Console.WriteLine("\nAppuyez sur une touche pour continuer...");
     Console.ReadKey(true);
 }
@@ -481,7 +489,7 @@ Icombattant Combattre(Icombattant c1, Icombattant c2)
         c2.SubirDegats(c1.Attaquer());
 
         if (c2.GetPointsDeVie() <= 0) break;
-        
+
 
         Console.WriteLine($"{c2.GetNom()} contre-attaque !");
         AnimationAttaqueEnCours();
@@ -506,11 +514,11 @@ void Victoire(Icombattant gagnant)
     Console.Clear();
     Console.WriteLine("!!!!!! VICTOIRE !!!!!!\n");
     Console.WriteLine($"{gagnant.GetNom()} sort triomphant du combat ! Félicitation à ce fier guerrier !\n");
-    
-    
+
+
     var player = new SoundPlayer("Final Fantasy Fanfare.wav");
     player.PlayLooping();
-        
+
     Console.WriteLine("\nAppuyez sur une touche pour continuer...");
     Console.ReadKey(true);
     Console.Clear();
@@ -559,5 +567,25 @@ void AfficherCombattant()
     for (int i = 0; i < Guerrier.guerriers.Count; i++)
     {
         Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
+    }
+}
+
+void AfficherHistorique()
+{
+    foreach (string combat in historiqueCombats)
+    {
+        Console.WriteLine(combat);
+    }
+}
+
+void AjouterHistorique(Icombattant gagnant, Icombattant combattant1, Icombattant combattant2)
+{
+    if (gagnant == combattant1)
+    {
+        historiqueCombats.Add($"{combattant1.GetNom()} vs {combattant2.GetNom()} Gagant: {combattant1.GetNom()}");
+    }
+    else
+    {
+        historiqueCombats.Add($"{combattant1.GetNom()} vs {combattant2.GetNom()} Gagant: {combattant2.GetNom()}");
     }
 }
