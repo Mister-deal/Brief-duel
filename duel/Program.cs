@@ -222,8 +222,23 @@ void SupprimerGuerrier()
         string nomSupprime = Guerrier.guerriers[index].GetNom();
         Guerrier.guerriers.RemoveAt(index);
 
-        Console.WriteLine($"{nomSupprime} a été retiré de l'arène.");
-        Console.WriteLine($"Il combattra désormais pour l'ombre éternelle... ou pour l'alliance secrète des Nains !");
+        Console.WriteLine($"\n{nomSupprime} a été choisi pour quitter l’arène...\n");
+        Thread.Sleep(1000);
+
+        string[] animation = {
+            "Le silence s'installe...",
+            $"{nomSupprime} regarde une dernière fois l’arène...",
+            "Une brume épaisse s’élève sous ses pieds...",
+            "Les tambours s’arrêtent.",
+            $"{nomSupprime} disparaît lentement dans l'ombre..."
+        };
+        
+        foreach (var ligne in animation)
+        {
+            Console.WriteLine(ligne);
+            Thread.Sleep(1500);
+        }
+        Console.WriteLine($"\n{nomSupprime} combattra peut-être ailleurs... ou veillera depuis l’au-delà.\n");
     }
     else
     {
