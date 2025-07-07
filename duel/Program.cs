@@ -13,6 +13,8 @@ using duel.Classes.Sous_Classes;
 List<Nain> guerriersNains = new List<Nain>();
 List<Elfe> guerriersElfes = new List<Elfe>();
 List<Sorcier> sorciers = new List<Sorcier>();
+List<Berserker> berserkers = new List<Berserker>();
+List<Samourai> samourais = new List<Samourai>();
 
 // Listes spécifiques pour catégories de monstres
 List<Monstre> monstresSlimes = new List<Monstre>();
@@ -58,6 +60,14 @@ void InitialiserCombattants()
     Sorcier Eliogabalus = new Sorcier("Eliogabalus ex", 100, 5, 50);
     Sorcier TheWitch = new Sorcier("the witch of madness", 65, 10, 70);
     Sorcier Yuru = new Sorcier("Yuru higba", 75, 9, 60);
+    
+    //création des samourais
+    Samourai takeshi = new Samourai("Takeshi", 120, 6);
+    Samourai hiroshi = new Samourai("Hiroshi", 110, 7);
+
+    // Création des Berserkers
+    Berserker ragnar = new Berserker("Ragnar", 150, 7);
+    Berserker bjorn = new Berserker("Bjorn", 140, 6);
 
     // Ajout dans les listes spécifiques
     guerriersNains.Add(Thorin);
@@ -74,6 +84,12 @@ void InitialiserCombattants()
     sorciers.Add(Eliogabalus);
     sorciers.Add(TheWitch);
     sorciers.Add(Yuru);
+    
+    samourais.Add(takeshi);
+    samourais.Add(hiroshi);
+    
+    berserkers.Add(ragnar);
+    berserkers.Add(bjorn);
 
     // Ajout dans la liste générale
     Guerrier.guerriers.Add(Thorin);
@@ -88,6 +104,10 @@ void InitialiserCombattants()
     Guerrier.guerriers.Add(Eliogabalus);
     Guerrier.guerriers.Add(TheWitch);
     Guerrier.guerriers.Add(Yuru);
+    Guerrier.guerriers.Add(takeshi);
+    Guerrier.guerriers.Add(hiroshi);
+    Guerrier.guerriers.Add(ragnar);
+    Guerrier.guerriers.Add(bjorn);
 
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
@@ -210,10 +230,12 @@ void AfficherMenuPrincipal()
         {
             case 1:
                 Console.WriteLine("Que voulez-vous ajouter ? \n" +
-                    "  1. Ajouter un guerrier saint nain \n" +
-                    "  2. Ajouter un guerrier saint elfe \n" +
-                    "  3. Ajouter un sorcier\n");
-                choixClass = DemanderEntier("Donnez un chiffre: ", 1, 3);
+                                  "  1. Ajouter un guerrier saint nain \n" +
+                                  "  2. Ajouter un guerrier saint elfe \n" +
+                                  "  3. Ajouter un sorcier \n" +
+                                  "  4. Ajouter un Berserker \n" +
+                                  "  5. Ajouter un Samouraï\n");
+                choixClass = DemanderEntier("Donnez un chiffre: ", 1, 5);
 
                 switch (choixClass)
                 {
@@ -228,9 +250,22 @@ void AfficherMenuPrincipal()
                         AjouterElfe();
                         Console.Clear();
                         break;
+
                     case 3:
                         // Ajoute un nouveau Sorcier avec ses caractéristiques (mana inclus)
                         AjouterSorcier();
+                        Console.Clear();
+                        break;
+
+                    case 4:
+                        // Ajoute un nouveau Berserker avec ses caractéristiques
+                        AjouterBerserker();
+                        Console.Clear();
+                        break;
+
+                    case 5:
+                        // Ajoute un nouveau Samouraï avec ses caractéristiques
+                        AjouterSamourai();
                         Console.Clear();
                         break;
                 }
@@ -243,6 +278,8 @@ void AfficherMenuPrincipal()
                 AfficherListeguerriersElfes();
                 AfficherListeGuerriersNains();
                 AfficherListeSorciers();
+                AfficherListeBerserkers();
+                AfficherListeSamourais();
 
                 AppuyerSurUneTouche("\nAppuyez sur une touche pour fermer la liste");
                 Console.Clear();
@@ -443,7 +480,49 @@ void AjouterElfe()
 
     player.Stop();
 }
+void AjouterBerserker()
+{
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Menu.wav");
+    player.PlayLooping();
 
+    string nom = DemanderTexte("Nom du Berserker : ");
+
+    int pv = DemanderEntier("Points de vie (10 - 150) : ", 10, 150);
+
+    int nbDes = DemanderEntier("Nombre de dés d'attaque (1 - 10) : ", 1, 10);
+
+    Berserker berserker = new Berserker(nom, pv, nbDes);
+    berserkers.Add(berserker);
+    Guerrier.guerriers.Add(berserker);
+
+    Console.WriteLine($"{nom} a été ajouté à la liste des Berserkers et combattra avec rage !");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+
+    player.Stop();
+}
+
+void AjouterSamourai()
+{
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Menu.wav");
+    player.PlayLooping();
+
+    string nom = DemanderTexte("Nom du Samouraï : ");
+
+    int pv = DemanderEntier("Points de vie (10 - 120) : ", 10, 120);
+
+    int nbDes = DemanderEntier("Nombre de dés d'attaque (1 - 10) : ", 1, 10);
+
+    Samourai samourai = new Samourai(nom, pv, nbDes);
+    samourais.Add(samourai);
+    Guerrier.guerriers.Add(samourai);
+
+    Console.WriteLine($"{nom} a été ajouté à la liste des Samouraïs et combattra avec honneur !");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+
+    player.Stop();
+}
 void AfficherListeGuerriersNains()
 {
     if (guerriersNains.Count == 0)
@@ -489,6 +568,37 @@ void AfficherListeSorciers()
     {
         Console.Write($"{i + 1}. ");
         sorciers[i].AfficherInfos();
+    }
+}
+void AfficherListeBerserkers()
+{
+    if (berserkers.Count == 0)
+    {
+        MessageAlerte("Aucun berserker créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Berserkers ---");
+    for (int i = 0; i < berserkers.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        berserkers[i].AfficherInfos();
+    }
+}
+
+void AfficherListeSamourais()
+{
+    if (samourais.Count == 0)
+    {
+        MessageAlerte("Aucun samouraï créé pour l’instant.");
+        return;
+    }
+
+    Console.WriteLine("--- Liste des Samouraïs ---");
+    for (int i = 0; i < samourais.Count; i++)
+    {
+        Console.Write($"{i + 1}. ");
+        samourais[i].AfficherInfos();
     }
 }
 
