@@ -237,14 +237,17 @@ void AfficherMenuPrincipal()
             case 5:
                 // Supprime un guerrier de la liste après sélection par l'utilisateur
                 SupprimerGuerrier();
+                Console.Clear();
                 break;
             case 6:
                 // Affiche l’historique des duels passés
                 AfficherHistorique();
+                Console.Clear();
                 break;
             case 7:
                 // Affiche les règles et explications du jeu
                 AfficherGuideUtilisateur();
+                Console.Clear();
                 break;
             case 8:
                 Console.Clear();
@@ -299,9 +302,7 @@ void SupprimerGuerrier()
     }
 
     Console.WriteLine(" Menu de Suppression de Guerriers");
-    Console.WriteLine("Quel guerrier souhaitez-vous envoyer rejoindre ses ancêtres ?");
-
-    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+    Console.WriteLine("\nQuel guerrier souhaitez-vous envoyer rejoindre ses ancêtres ?\n");
 
     // Affichage des guerriers disponibles
     for (int i = 0; i < Guerrier.guerriers.Count; i++)
@@ -309,7 +310,9 @@ void SupprimerGuerrier()
         Console.WriteLine($"{i + 1}. {Guerrier.guerriers[i].GetNom()}");
     }
 
-    int index = DemanderEntier("Combattant à supprimer (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int index = DemanderEntier("\nCombattant à supprimer (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
 
     if (index >= 0 && index < Guerrier.guerriers.Count)
     {
@@ -777,6 +780,8 @@ void AfficherHistorique()
     if (historiqueCombats.Count == 0)
     {
         MessageAlerte("Aucun combat n’a encore été enregistré dans les annales...");
+
+        AppuyerSurUneTouche("\nVeuillez appuyer sur une touche pour continuer...");
         return;
     }
 
@@ -806,8 +811,7 @@ void AfficherHistorique()
         index++;
     }
     Console.WriteLine("\n Fin de l’historique.\n");
-    Console.WriteLine("Veuillez appuyer sur une touche pour continuer...");
-    Console.ReadKey(true);
+    AppuyerSurUneTouche("Veuillez appuyer sur une touche pour continuer...");
 }
 
 // Ajoute une ligne au journal de l'historique
