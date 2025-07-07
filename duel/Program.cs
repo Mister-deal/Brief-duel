@@ -4,6 +4,8 @@ using duel.Classes;
 using duel.Interfaces;
 using System.Media;
 using System.Text;
+using System.Text.Json;
+using duel;
 using duel.Classes.Sous_Classes;
 
 
@@ -24,59 +26,36 @@ List<string> historiqueCombats = new List<string>();
 int choix = 0;
 int choixClass = 0;
 
-// Crée les combattants de départ pour chaque race (Nain, Elfe, Sorcier)
+//chemin afin d'appeler guerriers.json
+string chemin = Path.Combine(AppContext.BaseDirectory, "guerriers.json");
+Console.WriteLine($"Chemin utilisé : {chemin}");
+
+
+// Crée les combattants de départ pour chaque race (Nain, Elfe, Sorcier) en appelant un fichier Json
 void InitialiserCombattants()
 {
     Console.WriteLine("Invocation des anciens champions...");
     Thread.Sleep(500);
+    
+    var liste = ChargerGuerriersDepuisJson(chemin);
 
-    // Création des Nains
-    Nain Thorin = new Nain("Thorin Forgefeu", 90, 5, true);
-    Nain Grimbald = new Nain("Grimbald Marteau-d'Argent", 75, 7, true);
-    Nain Durgin = new Nain("Durgin Barbelac", 100, 8, false);
-    Nain Baldrick = new Nain("Baldrick le Tenace", 65, 10, true);
+    foreach (var guerrier in liste)
+    {
+        Guerrier.guerriers.Add(guerrier);
 
-    // Création des Elfes
-    Elfe Elandor = new Elfe("Elandor Ventargent", 85, 7, 30);
-    Elfe Luthien = new Elfe("Luthien Sèveclaire", 100, 5, 25);
-    Elfe Faelar = new Elfe("Faelar Ombreciel", 85, 8, 35);
-    Elfe Thalor = new Elfe("Thalor de la Lune", 55, 10, 40);
-
-    // Création des Sorciers
-    Sorcier Siri = new Sorcier("Siri Ventador", 95, 6, 45);
-    Sorcier Eliogabalus = new Sorcier("Eliogabalus ex", 100, 5, 50);
-    Sorcier TheWitch = new Sorcier("the witch of madness", 65, 10, 70);
-    Sorcier Yuru = new Sorcier("Yuru higba", 75, 9, 60);
-
-    // Ajout dans les listes spécifiques
-    guerriersNains.Add(Thorin);
-    guerriersNains.Add(Grimbald);
-    guerriersNains.Add(Durgin);
-    guerriersNains.Add(Baldrick);
-
-    guerriersElfes.Add(Elandor);
-    guerriersElfes.Add(Luthien);
-    guerriersElfes.Add(Faelar);
-    guerriersElfes.Add(Thalor);
-
-    sorciers.Add(Siri);
-    sorciers.Add(Eliogabalus);
-    sorciers.Add(TheWitch);
-    sorciers.Add(Yuru);
-
-    // Ajout dans la liste générale
-    Guerrier.guerriers.Add(Thorin);
-    Guerrier.guerriers.Add(Grimbald);
-    Guerrier.guerriers.Add(Durgin);
-    Guerrier.guerriers.Add(Baldrick);
-    Guerrier.guerriers.Add(Elandor);
-    Guerrier.guerriers.Add(Luthien);
-    Guerrier.guerriers.Add(Faelar);
-    Guerrier.guerriers.Add(Thalor);
-    Guerrier.guerriers.Add(Siri);
-    Guerrier.guerriers.Add(Eliogabalus);
-    Guerrier.guerriers.Add(TheWitch);
-    Guerrier.guerriers.Add(Yuru);
+        switch (guerrier)
+        {
+            case Nain n:
+                guerriersNains.Add(n);
+                break;
+            case Elfe e:
+                guerriersElfes.Add(e);
+                break;
+            case Sorcier s:
+                sorciers.Add(s);
+                break;
+        }
+    }
 
     Console.WriteLine("Les champions sont prêts à en découdre.\n");
     Thread.Sleep(500);
@@ -1031,4 +1010,17 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
     Victoire(vainqueur);
 
     return vainqueur;
+}
+
+List<Guerrier> ChargerGuerriersDepuisJson(string chemin)
+{
+    var options = new JsonSerializerOptions
+    {
+        Converters = { new GuerrierConverter() },
+        PropertyNameCaseInsensitive = true
+    };
+
+    string json = File.ReadAllText(chemin);
+    List<Guerrier> guerriers = JsonSerializer.Deserialize<List<Guerrier>>(json, options);
+    return guerriers ?? new List<Guerrier>();
 }

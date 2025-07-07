@@ -20,6 +20,10 @@ public abstract class Guerrier : Icombattant, IEvolutif
     protected int experience = 0;
     protected int experienceMax = 10;
 
+    protected Guerrier()
+    {
+    }
+
     // Constructeur
     public Guerrier(string nom, int pointsDeVie, int nbDesAttaque)
     {

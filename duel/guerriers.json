@@ -1,0 +1,86 @@
+﻿[
+  {
+    "Type": "Nain",
+    "Nom": "Thorin Forgefeu",
+    "PointsDeVie": 90,
+    "NbDesAttaque": 5,
+    "ArmureLourde": true
+  },
+  {
+    "Type": "Nain",
+    "Nom": "Grimbald Marteau-d'Argent",
+    "PointsDeVie": 75,
+    "NbDesAttaque": 7,
+    "ArmureLourde": true
+  },
+  {
+    "Type": "Nain",
+    "Nom": "Durgin Barbelac",
+    "PointsDeVie": 100,
+    "NbDesAttaque": 8,
+    "ArmureLourde": false
+  },
+  {
+    "Type": "Nain",
+    "Nom": "Baldrick le Tenace",
+    "PointsDeVie": 65,
+    "NbDesAttaque": 10,
+    "ArmureLourde": true
+  },
+  {
+    "Type": "Elfe",
+    "Nom": "Elandor Ventargent",
+    "PointsDeVie": 85,
+    "NbDesAttaque": 7,
+    "Magie": 30
+  },
+  {
+    "Type": "Elfe",
+    "Nom": "Luthien Sèveclaire",
+    "PointsDeVie": 100,
+    "NbDesAttaque": 5,
+    "Magie": 25
+  },
+  {
+    "Type": "Elfe",
+    "Nom": "Faelar Ombreciel",
+    "PointsDeVie": 85,
+    "NbDesAttaque": 8,
+    "Magie": 35
+  },
+  {
+    "Type": "Elfe",
+    "Nom": "Thalor de la Lune",
+    "PointsDeVie": 55,
+    "NbDesAttaque": 10,
+    "Magie": 40
+  },
+  {
+    "Type": "Sorcier",
+    "Nom": "Siri Ventador",
+    "PointsDeVie": 95,
+    "NbDesAttaque": 6,
+    "Mana": 45
+  },
+  {
+    "Type": "Sorcier",
+    "Nom": "Eliogabalus ex",
+    "PointsDeVie": 100,
+    "NbDesAttaque": 5,
+    "Mana": 50
+  },
+  {
+    "Type": "Sorcier",
+    "Nom": "the witch of madness",
+    "PointsDeVie": 65,
+    "NbDesAttaque": 10,
+    "Mana": 70
+  },
+  {
+    "Type": "Sorcier",
+    "Nom": "Yuru higba",
+    "PointsDeVie": 75,
+    "NbDesAttaque": 9,
+    "Mana": 60
+  }
+]
