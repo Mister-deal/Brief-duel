@@ -1098,13 +1098,15 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
 void LancerCombatContreBoss()
 {
     Console.Clear();
+    var player = new SoundPlayer("Assets/Audio/Tactics Ogre Catastrophe");
+    player.PlayLooping();
     Console.WriteLine("\n=== CHOISISSEZ VOTRE BOSS À AFFRONTER ===");
     Console.WriteLine("1. Seigneur Dévoreur");
     Console.WriteLine("2. Dragon de Glace");
     Console.WriteLine("3. Azaroth le Fléau");
     Console.WriteLine("4. retour");
 
-    int choix = DemanderEntier("Votre choix : ", 1, 3);
+    int choix = DemanderEntier("Votre choix : ", 1, 4);
     Console.WriteLine();
 
     switch (choix)
