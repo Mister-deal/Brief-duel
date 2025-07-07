@@ -4,6 +4,8 @@ using duel.Classes;
 using duel.Interfaces;
 using System.Media;
 using System.Text;
+using System.Text.Json;
+using duel;
 using duel.Classes.Sous_Classes;
 
 
@@ -24,7 +26,13 @@ List<string> historiqueCombats = new List<string>();
 int choix = 0;
 int choixClass = 0;
 
-// Crée les combattants de départ pour chaque race (Nain, Elfe, Sorcier)
+//chemin afin d'appeler guerriers.json
+/*
+string chemin = Path.Combine(AppContext.BaseDirectory, "guerriers.json");
+Console.WriteLine($"Chemin utilisé : {chemin}");
+*/
+
+// Crée les combattants de départ pour chaque race (Nain, Elfe, Sorcier) en appelant un fichier Json
 void InitialiserCombattants()
 {
     Console.WriteLine("Invocation des anciens champions...");
@@ -1034,3 +1042,17 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
 
     return vainqueur;
 }
+/*
+List<Guerrier> ChargerGuerriersDepuisJson(string chemin)
+{
+    var options = new JsonSerializerOptions
+    {
+        Converters = { new GuerrierConverter() },
+        PropertyNameCaseInsensitive = true
+    };
+
+    string json = File.ReadAllText(chemin);
+    List<Guerrier> guerriers = JsonSerializer.Deserialize<List<Guerrier>>(json, options);
+    return guerriers ?? new List<Guerrier>();
+}
+*/

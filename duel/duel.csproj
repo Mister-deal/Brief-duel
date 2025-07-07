@@ -14,4 +14,11 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="guerriers.json" />
+    <Content Include="guerriers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ public class Sorcier: Guerrier, Icombattant
     private int _mana;
     private bool bouclierActif = false;
     private List<string> Sorts = new List<string>() { "Boule de feu", "Soin", "Bouclier magique" };
+    
     public Sorcier(string nom, int pointsDeVie, int nbDesAttaque, int mana) : base(nom, pointsDeVie, nbDesAttaque)
     {
         _mana = mana;
