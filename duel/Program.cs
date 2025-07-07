@@ -24,6 +24,7 @@ List<Monstre> monstresZombies = new List<Monstre>();
 List<Monstre> SeigneurDevoreur = new List<Monstre>();
 List<Monstre> Dragon = new List<Monstre>();
 List<Monstre> Fleau = new List<Monstre>();
+List<Monstre> Gruik = new List<Monstre>();
 
 // Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
@@ -125,6 +126,7 @@ void InitialiserMonstres()
     GoblinBrutal goblinBrutal = new GoblinBrutal(true);
     RatGeant ratGeantNormal = new RatGeant();
     Zombie zombieCommun = new Zombie();
+    GruikOrcGoblin gruikOrcGoblin = new GruikOrcGoblin("gruik l'orc goblin", "l'orc mi-goblin, mi-porcin horrible et dégoutant",150, 3, 150);
     SeigneurDevoreur seigneurDevoreur = new SeigneurDevoreur("Zor'kath", "le dévoreur de chair", 300, 5, 500);
     DragonDeGlace dragonDeGlace = new DragonDeGlace("paarturnax dragon de glace", "ragnarok", 450, 6, 1000);
     AzarothLeFleau azarothLeFleau = new AzarothLeFleau("azaroth le fleau", "le faiseur de calamités", 950, 8, 2000);
@@ -138,12 +140,16 @@ void InitialiserMonstres()
     SeigneurDevoreur.Add(seigneurDevoreur);
     Dragon.Add(dragonDeGlace);
     Fleau.Add(azarothLeFleau);
+    Gruik.Add(gruikOrcGoblin);
     
     //ajout boss
     Monstre.monstres.Add(seigneurDevoreur);
     Monstre.monstres.Add(dragonDeGlace);
     Monstre.monstres.Add(azarothLeFleau);
-
+    
+    //ajout mini boss
+    Monstre.monstres.Add(gruikOrcGoblin);
+    
     //ajout monstres classiques
     Monstre.monstres.Add(slime);
     Monstre.monstres.Add(goblinBrutal);
@@ -1155,9 +1161,40 @@ void LancerCombatContreMonstres()
         }
 
         Console.WriteLine($"Bravo ! Vous avez terminé la vague {vague} sans perdre votre guerrier.");
+        
         Thread.Sleep(700);
     }
+    
+    // Combat contre un mini-boss
+    Console.WriteLine("\n Un mini-boss surgit après les vagues !");
+    Thread.Sleep(1000);
+    guerrier.Reset();
 
+    if (Gruik.Count == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Aucun mini boss n'est présent");
+        return;
+    }
+    Icombattant gruik = Gruik[0];
+    Icombattant gagnantBoss = CombattreMonstre(guerrier, gruik);
+    
+    if (gagnantBoss != guerrier)
+    {
+        MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+        return;
+    }
+    
+    AjouterHistorique(gagnantBoss, guerrier, gruik);
+    
+    Console.WriteLine("\n Félicitations ! Vous avez vaincu toutes les vagues et le mini-boss !");
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+
+    
+    
+    
+    
     Console.WriteLine("\nFélicitations ! Toutes les vagues ont été vaincues.");
 
     AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer ...");
