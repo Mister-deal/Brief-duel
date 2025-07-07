@@ -994,7 +994,8 @@ void LancerCombatContreMonstre()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
-        return;
+        YouLose();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
     player.Stop();
 }
@@ -1038,8 +1039,8 @@ void LancerCombatContreMonstres()
             if (gagnant != guerrier)
             {
                 MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
-                player.Stop();
-                return;  // On arrête tout si le guerrier meurt
+                YouLose();
+                AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
             }
 
             Thread.Sleep(500);
@@ -1092,6 +1093,8 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
     } else
     {
         MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
+        YouLose();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
     return vainqueur;
