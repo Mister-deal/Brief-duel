@@ -270,6 +270,7 @@ void AfficherMenuPrincipal()
                         break;
                     case 3:
                         LancerCombatContreMonstres();
+                        Console.Clear();
                         break;
                     case 4:
                         Console.WriteLine("Merci et au revoir.");
@@ -982,7 +983,6 @@ void LancerCombatContreMonstres()
 
             Icombattant gagnant = CombattreMonstre(guerrier, monstre);
 
-            Console.WriteLine($"Le gagnant est {gagnant.GetNom()} !");
             Thread.Sleep(500);
 
             if (gagnant != guerrier)
@@ -997,6 +997,8 @@ void LancerCombatContreMonstres()
     }
 
     Console.WriteLine("\nFélicitations ! Toutes les vagues ont été vaincues.");
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer ...");
 }
 
 Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
