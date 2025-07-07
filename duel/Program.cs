@@ -248,6 +248,8 @@ void AfficherMenuPrincipal()
                 break;
             case 8:
                 Console.Clear();
+                var player1 = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Painful Battle.wav");
+                player1.PlayLooping();
                 Console.WriteLine("==== Zone PvE ====");
                 Console.WriteLine("1. Affronter un monstre");
                 Console.WriteLine("2. Affronter un boss");
@@ -899,7 +901,7 @@ void MessageAlerte (string alerte)
 void LancerCombatContreMonstre()
 {
     AnimationChargement();
-    var player = new SoundPlayer("Assets/Audio/Final Fantasy IX OST - Battle 1.wav");
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
     player.Play();
 
     if (Guerrier.guerriers.Count < 1)
@@ -942,6 +944,8 @@ void LancerCombatContreMonstre()
 
 void LancerCombatContreMonstres()
 {
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
+    player.Play();
     if (Guerrier.guerriers.Count < 1)
     {
         MessageAlerte("Pas assez de combattants pour affronter les vagues !");
