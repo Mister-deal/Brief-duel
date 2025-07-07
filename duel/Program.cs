@@ -737,6 +737,26 @@ void Victoire(Icombattant gagnant)
     Console.Clear();
 }
 
+void VictoireMonstre(Guerrier guerrierGagnant, Monstre monstreVaincu)
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("\n!!!!!! VICTOIRE !!!!!!\n");
+    Console.WriteLine($"{guerrierGagnant.GetNom()} sort triomphant du combat ! Félicitation à ce fier guerrier !\n");
+    Console.ResetColor();
+
+
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Fanfare.wav");
+    player.Play();
+
+    guerrierGagnant.GagnerExperience(monstreVaincu.DonnerExperience());
+
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
+    player.Stop();
+    Console.Clear();
+}
+
+
+
 // Animation ASCII pour l'attaque
 void AnimationAttaqueEnCours(int dureeEnMs = 2000, int intervalle = 300)
 {
@@ -949,9 +969,15 @@ void LancerCombatContreMonstre()
 
     Console.WriteLine($"\n Vous affrontez un {monstre.GetNom()} !");
     
-    Icombattant gagnant = Combattre(guerrier, monstre);
+    Icombattant gagnant = CombattreMonstre(guerrier, monstre);
 
-    Console.WriteLine($"\nLe gagnant est {gagnant.GetNom()} !");
+    guerrier.Reset();
+
+    if (gagnant != guerrier)
+    {
+        MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
+        return;
+    }
     player.Stop();
 }
 
@@ -991,13 +1017,14 @@ void LancerCombatContreMonstres()
 
             Icombattant gagnant = CombattreMonstre(guerrier, monstre);
 
-            Thread.Sleep(500);
-
             if (gagnant != guerrier)
             {
-                Console.WriteLine("Votre guerrier est tombé au combat. Fin des vagues.");
-                return;  // Le guerrier est mort, on arrête
+                MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
+                player.Stop();
+                return;  // On arrête tout si le guerrier meurt
             }
+
+            Thread.Sleep(500);
         }
 
         Console.WriteLine($"Bravo ! Vous avez terminé la vague {vague} sans perdre votre guerrier.");
@@ -1038,7 +1065,16 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
     }
 
     Icombattant vainqueur = c1.GetPointsDeVie() > 0 ? c1 : c2;
-    Victoire(vainqueur);
+
+    if (vainqueur == c1)
+    {
+        var guerrierGagnant = (Guerrier)c1;
+        var monstreVaincu = (Monstre)c2;
+        VictoireMonstre(guerrierGagnant, monstreVaincu);
+    } else
+    {
+        MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
+    }
 
     return vainqueur;
 }

@@ -84,7 +84,9 @@ public abstract class Guerrier : Icombattant, IEvolutif
     public virtual void GagnerExperience(int points)
     {
         experience += points;
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine($"{Nom} a gagné {points} d'experience !");
+        Console.ResetColor();
         while (experience >= experienceMax)
         {
             MonterNiveau();
@@ -113,11 +115,17 @@ public abstract class Guerrier : Icombattant, IEvolutif
         
         experienceMax = (int)(experienceMax * 1.25);
 
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"✨ {Nom} passe au niveau {niveau} !");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"\n{Nom} passe au niveau {niveau} !\n");
         Console.ResetColor();
 
-        _pointsDeVie += 10;
+        PointsDeVie += 10;
+        _pointsDeVieInitial += 10;
+
+        if (niveau % 5 == 0)
+        {
+            NbDesAttaque ++;
+        }
     }
 
 
