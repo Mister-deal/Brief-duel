@@ -19,8 +19,8 @@ public class Slime: Monstre
             Console.WriteLine($"{Nom} se divise en deux mini-slimes !");
             Console.ResetColor();
 
-            MonstreManager.AjouterMonstre(new MiniSlime());
-            MonstreManager.AjouterMonstre(new MiniSlime());
+            Monstre.monstres.Add(new MiniSlime());
+            Monstre.monstres.Add(new MiniSlime());
         }
     }
 }

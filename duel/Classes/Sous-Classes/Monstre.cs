@@ -71,7 +71,7 @@ public abstract class Monstre: Icombattant
         Console.WriteLine($"{Nom}: [PV= {PointsDeVie}, Nbr= {NbDesAttaque}, Niveau = {niveau}]");
     }
     
-    public int Attaquer()
+    public virtual int Attaquer()
     {
         Random random = new Random();
         int totalDamage = 0;

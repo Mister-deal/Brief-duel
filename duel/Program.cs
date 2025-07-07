@@ -19,6 +19,9 @@ List<Monstre> monstresSlimes = new List<Monstre>();
 List<Monstre> monstresGobelins = new List<Monstre>();
 List<Monstre> monstresRats = new List<Monstre>();
 List<Monstre> monstresZombies = new List<Monstre>();
+List<Monstre> SeigneurDevoreur = new List<Monstre>();
+List<Monstre> Dragon = new List<Monstre>();
+List<Monstre> Fleau = new List<Monstre>();
 
 // Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
@@ -102,14 +105,26 @@ void InitialiserMonstres()
     GoblinBrutal goblinBrutal = new GoblinBrutal(true);
     RatGeant ratGeantNormal = new RatGeant();
     Zombie zombieCommun = new Zombie();
-
+    SeigneurDevoreur seigneurDevoreur = new SeigneurDevoreur("Zor'kath", "le dévoreur de chair", 300, 5, 500);
+    DragonDeGlace dragonDeGlace = new DragonDeGlace("paarturnax dragon de glace", "ragnarok", 450, 6, 1000);
+    AzarothLeFleau azarothLeFleau = new AzarothLeFleau("azaroth le fleau", "le faiseur de calamités", 950, 8, 2000);
+    
     // Ajout dans les listes spécifiques
     monstresSlimes.Add(slime);
     monstresGobelins.Add(goblinSimple);
     monstresGobelins.Add(goblinBrutal);
     monstresRats.Add(ratGeantNormal);
     monstresZombies.Add(zombieCommun);
+    SeigneurDevoreur.Add(seigneurDevoreur);
+    Dragon.Add(dragonDeGlace);
+    Fleau.Add(azarothLeFleau);
+    
+    //ajout boss
+    Monstre.monstres.Add(seigneurDevoreur);
+    Monstre.monstres.Add(dragonDeGlace);
+    Monstre.monstres.Add(azarothLeFleau);
 
+    //ajout monstres classiques
     Monstre.monstres.Add(slime);
     Monstre.monstres.Add(goblinBrutal);
     Monstre.monstres.Add(goblinBrutal);
@@ -117,6 +132,7 @@ void InitialiserMonstres()
     Monstre.monstres.Add(zombieCommun);
 
     Console.WriteLine("Les monstres rôdent dans les environs.\n");
+    Console.WriteLine("... un monstre extrêmement puissant rôde également ! soyez sur vos gardes, combattants !");
     Thread.Sleep(500);
 }
 // Affiche le menu principal du jeu avec ambiance et narration
@@ -274,7 +290,7 @@ void AfficherMenuPrincipal()
                         LancerCombatContreMonstre();
                         break;
                     case 2:
-                        //LancerCombatContreBoss();
+                        LancerCombatContreBoss();
                         break;
                     case 3:
                         LancerCombatContreMonstres();
@@ -1078,6 +1094,154 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
 
     return vainqueur;
 }
+
+void LancerCombatContreBoss()
+{
+    Console.Clear();
+    Console.WriteLine("\n=== CHOISISSEZ VOTRE BOSS À AFFRONTER ===");
+    Console.WriteLine("1. Seigneur Dévoreur");
+    Console.WriteLine("2. Dragon de Glace");
+    Console.WriteLine("3. Azaroth le Fléau");
+    Console.WriteLine("4. retour");
+
+    int choix = DemanderEntier("Votre choix : ", 1, 3);
+    Console.WriteLine();
+
+    switch (choix)
+    {
+        case 1:
+            LancerCombatContreSeigneurDevoreur();
+            break;
+        case 2:
+            LancerCombatContreDragon();
+            break;
+        case 3:
+            LancerCombatContreAzaroth();
+            break;
+        case 4:
+            Console.WriteLine("merci et au revoir.");
+            Console.Clear();
+            break;
+        default:
+            Console.WriteLine("Choix invalide. Retour au menu principal.");
+            break;
+    }
+}
+void LancerCombatContreSeigneurDevoreur()
+{
+    AnimationChargement();
+    var player = new SoundPlayer("Assets/Audio/Winter Absolution.wav");
+    player.Play();
+
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Pas assez de combattants pour affronter le Seigneur Dévoreur !");
+        return;
+    }
+
+    if (SeigneurDevoreur.Count == 0)
+    {
+        MessageAlerte("Aucun Seigneur Dévoreur disponible !");
+        player.Stop();
+        return;
+    }
+
+    AfficherCombattant();
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    int indexGuerrier = DemanderEntier("\nChoisissez votre héros pour affronter le Dévoreur : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+    Icombattant boss = SeigneurDevoreur[0];
+
+    Console.WriteLine($"\n⚔️ Duel légendaire : {guerrier.GetNom()} VS {boss.GetNom()} !");
+    Icombattant gagnant = CombattreMonstre(guerrier, boss);
+
+    guerrier.Reset();
+    if (gagnant != guerrier)
+    {
+        MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
+    }
+
+    player.Stop();
+}
+void LancerCombatContreDragon()
+{
+    AnimationChargement();
+    var player = new SoundPlayer("Assets/Audio/Xenoblade Chronicles Dragon.wav");
+    player.Play();
+
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Pas assez de combattants pour affronter le Dragon de Glace !");
+        return;
+    }
+
+    if (Dragon.Count == 0)
+    {
+        MessageAlerte("Aucun Dragon de Glace n'a été trouvé !");
+        player.Stop();
+        return;
+    }
+
+    AfficherCombattant();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int indexGuerrier = DemanderEntier("\nChoisissez un combattant pour défier le Dragon : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+    Icombattant boss = Dragon[0];
+
+    Console.WriteLine($"\n❄️ Le froid mord... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Icombattant gagnant = CombattreMonstre(guerrier, boss);
+
+    guerrier.Reset();
+    if (gagnant != guerrier)
+    {
+        MessageAlerte("Votre guerrier a été gelé à jamais...");
+    }
+
+    player.Stop();
+}
+void LancerCombatContreAzaroth()
+{
+    AnimationChargement();
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy X.wav");
+    player.Play();
+
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Vous n'avez aucun guerrier pour affronter le Fléau du Néant !");
+        return;
+    }
+
+    if (Fleau.Count == 0)
+    {
+        MessageAlerte("Azaroth est introuvable... Le Néant vous épargne cette fois.");
+        player.Stop();
+        return;
+    }
+
+    AfficherCombattant();
+    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+    int indexGuerrier = DemanderEntier("\nQuel héros ose défier Azaroth ? : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+    Icombattant boss = Fleau[0];
+
+    Console.WriteLine($"\n🌌 Le destin s'effondre... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Icombattant gagnant = CombattreMonstre(guerrier, boss);
+
+    guerrier.Reset();
+    if (gagnant != guerrier)
+    {
+        MessageAlerte("Le Néant a englouti votre espoir.");
+    }
+
+    player.Stop();
+}
+
 /*
 List<Guerrier> ChargerGuerriersDepuisJson(string chemin)
 {
