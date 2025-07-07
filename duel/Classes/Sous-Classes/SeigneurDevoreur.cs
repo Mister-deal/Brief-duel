@@ -13,7 +13,7 @@ public class SeigneurDevoreur : Monstre
         this.pointsDeVieMax = pointsDeVie;
 
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine($"\n️ {titre} {Nom} émerge des ténèbres ! Tremblez, misérables ! ⚠️\n");
+        Console.WriteLine($"️ {titre} {Nom} émerge des ténèbres ! Tremblez, misérables !");
         Console.ResetColor();
     }
 
@@ -33,7 +33,7 @@ public class SeigneurDevoreur : Monstre
         {
             nbDes += 2;
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"\n {titre} {Nom} entre en RAGE ! Ses attaques deviennent féroces ! 🔥");
+            Console.WriteLine($" {titre} {Nom} entre en RAGE ! Ses attaques deviennent féroces !");
             Console.ResetColor();
         }
 
@@ -60,7 +60,7 @@ public class SeigneurDevoreur : Monstre
     private int AttaqueUltime()
     {
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine($"\n {titre} {Nom} libère son ATTAQUE ULTIME : 'Jugement Obscur' ! 💀");
+        Console.WriteLine($" {titre} {Nom} libère son ATTAQUE ULTIME : 'Jugement Obscur' !");
         Console.ResetColor();
         Thread.Sleep(1000);
         Console.WriteLine(" Un déluge de ténèbres s'abat sur le champ de bataille !");
@@ -83,7 +83,7 @@ public class SeigneurDevoreur : Monstre
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"\n {titre} {Nom} s'effondre dans un dernier râle de haine... ☠️");
+            Console.WriteLine($" {titre} {Nom} s'effondre dans un dernier râle de haine...");
             Console.ResetColor();
         }
     }

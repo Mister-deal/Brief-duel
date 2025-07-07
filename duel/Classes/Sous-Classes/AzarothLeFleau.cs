@@ -13,16 +13,16 @@ public class AzarothLeFleau : Monstre
         pointsDeVieMax = pointsDeVie;
 
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine($"\n Une brèche s'ouvre dans le tissu de la réalité... Azaroth, le Fléau du Néant, apparaît !");
+        Console.WriteLine($"Une brèche s'ouvre dans le tissu de la réalité... Azaroth, le Fléau du Néant, apparaît !");
         Thread.Sleep(1000);
-        Console.WriteLine("🌑 Sa présence seule fait vaciller les âmes faibles...");
+        Console.WriteLine("Sa présence seule fait vaciller les âmes faibles...");
         Console.ResetColor();
     }
 
     public override void AfficherInfos()
     {
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine($"☠️ Azaroth le Fléau : [PV = {PointsDeVie}, Dés = {NbDesAttaque}]");
+        Console.WriteLine($"Azaroth le Fléau : [PV = {PointsDeVie}, Dés = {NbDesAttaque}]");
         Console.ResetColor();
     }
 
