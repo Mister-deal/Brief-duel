@@ -17,14 +17,11 @@ List<Berserker> berserkers = new List<Berserker>();
 List<Samourai> samourais = new List<Samourai>();
 
 // Listes spécifiques pour catégories de monstres
-List<Monstre> monstresSlimes = new List<Monstre>();
-List<Monstre> monstresGobelins = new List<Monstre>();
-List<Monstre> monstresRats = new List<Monstre>();
-List<Monstre> monstresZombies = new List<Monstre>();
+List<Monstre> monstresClassiques = new List<Monstre>();
 List<Monstre> SeigneurDevoreur = new List<Monstre>();
 List<Monstre> Dragon = new List<Monstre>();
 List<Monstre> Fleau = new List<Monstre>();
-List<Monstre> Gruik = new List<Monstre>();
+List<Monstre> MiniBoss = new List<Monstre>();
 
 // Liste pour enregistrer les combats passés
 List<string> historiqueCombats = new List<string>();
@@ -120,27 +117,51 @@ void InitialiserMonstres()
     Console.WriteLine("Invocation des créatures sauvages...");
     Thread.Sleep(500);
 
-    // Création des Slimes
-    Slime slime = new Slime(); // exemple d’un slime plus fort
+    // Instanciation monstres
+    Slime slime = new Slime(); 
     Goblin goblinSimple = new Goblin();
     GoblinBrutal goblinBrutal = new GoblinBrutal(true);
     RatGeant ratGeantNormal = new RatGeant();
     Zombie zombieCommun = new Zombie();
+    MortVivantDémoniaque mortVivantDémoniaque = new MortVivantDémoniaque();
+    SerpentGéant serpentGéant = new SerpentGéant();
+    ChauveSourisSanguinaire chauveSourisSanguinaire = new ChauveSourisSanguinaire();
+    EspritDeBraise espritDeBraise = new EspritDeBraise();
+    SpectreDuTrépas spectreDuTrépas = new SpectreDuTrépas();
+    SqueletteArmé squeletteArmé = new SqueletteArmé();
+    
+    //Instanciation mini boss
+    BrugLeBriseur brug = new BrugLeBriseur("Brugg le Briseur", "Un ogre massif à la peau écailleuse, dont chaque coup peut broyer un bouclier en deux.", 195, 5, 250);
+    Morbax morbax = new Morbax("Morbax, l’Ombre Putréfiée", "Un être suintant de ténèbres, réanimé par des rituels interdits.", 240, 6, 350);
     GruikOrcGoblin gruikOrcGoblin = new GruikOrcGoblin("gruik l'orc goblin", "l'orc mi-goblin, mi-porcin horrible et dégoutant",150, 3, 150);
+    
+    //Instanciation Boss
     SeigneurDevoreur seigneurDevoreur = new SeigneurDevoreur("Zor'kath", "le dévoreur de chair", 300, 5, 500);
     DragonDeGlace dragonDeGlace = new DragonDeGlace("paarturnax dragon de glace", "ragnarok", 450, 6, 1000);
     AzarothLeFleau azarothLeFleau = new AzarothLeFleau("azaroth le fleau", "le faiseur de calamités", 950, 8, 2000);
     
-    // Ajout dans les listes spécifiques
-    monstresSlimes.Add(slime);
-    monstresGobelins.Add(goblinSimple);
-    monstresGobelins.Add(goblinBrutal);
-    monstresRats.Add(ratGeantNormal);
-    monstresZombies.Add(zombieCommun);
+    // Ajout dans les listes spécifiques monstres
+    monstresClassiques.Add(slime);
+    monstresClassiques.Add(goblinSimple);
+    monstresClassiques.Add(goblinBrutal);
+    monstresClassiques.Add(ratGeantNormal);
+    monstresClassiques.Add(zombieCommun);
+    monstresClassiques.Add(mortVivantDémoniaque);
+    monstresClassiques.Add(serpentGéant);
+    monstresClassiques.Add(chauveSourisSanguinaire);
+    monstresClassiques.Add(espritDeBraise);
+    monstresClassiques.Add(spectreDuTrépas);
+    monstresClassiques.Add(squeletteArmé);
+    
+    // Ajout dans les listes spécifiques BOSS
     SeigneurDevoreur.Add(seigneurDevoreur);
     Dragon.Add(dragonDeGlace);
     Fleau.Add(azarothLeFleau);
-    Gruik.Add(gruikOrcGoblin);
+    
+    // Ajout dans les listes spécifiques mini BOSS
+    MiniBoss.Add(gruikOrcGoblin);
+    MiniBoss.Add(morbax);
+    MiniBoss.Add(brug);
     
     //ajout boss
     Monstre.monstres.Add(seigneurDevoreur);
@@ -149,6 +170,8 @@ void InitialiserMonstres()
     
     //ajout mini boss
     Monstre.monstres.Add(gruikOrcGoblin);
+    Monstre.monstres.Add(morbax);
+    Monstre.monstres.Add(brug);
     
     //ajout monstres classiques
     Monstre.monstres.Add(slime);
@@ -156,10 +179,16 @@ void InitialiserMonstres()
     Monstre.monstres.Add(goblinBrutal);
     Monstre.monstres.Add(ratGeantNormal);
     Monstre.monstres.Add(zombieCommun);
+    Monstre.monstres.Add(serpentGéant);
+    Monstre.monstres.Add(espritDeBraise);
+    Monstre.monstres.Add(mortVivantDémoniaque);
+    Monstre.monstres.Add(squeletteArmé);
+    Monstre.monstres.Add(chauveSourisSanguinaire);
+    Monstre.monstres.Add(spectreDuTrépas);
 
     Console.WriteLine("Les monstres rôdent dans les environs.\n");
-    Console.WriteLine("... un monstre extrêmement puissant rôde également ! soyez sur vos gardes, combattants !");
-    Thread.Sleep(500);
+    Console.WriteLine("... des monstres extrêmement puissant rôdent également ! soyez sur vos gardes, combattants !");
+    Thread.Sleep(1500);
 }
 // Affiche le menu principal du jeu avec ambiance et narration
 AfficherMenuPrincipal();
@@ -176,36 +205,54 @@ void AfficherMenuPrincipal()
         Thread.Sleep(100);
     }
 
-    Console.WriteLine("] Terminé !");
+    Console.WriteLine("] Terminé !"); 
     Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════╗");
-    Console.WriteLine("║                      NAINS VS ELFES : LE DESTIN DES CIMES                    ║");
+    Console.WriteLine("║               LE TOURNOI DES CIMES : L'épopée des trois terres               ║");
     Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════╝\n");
 
-    Console.WriteLine("  *Récit des Chroniques Anciennes...*\n");
+Console.WriteLine("  *Extrait du Codex des Hautes Arènes...*\n");
 
-    Console.WriteLine("Il fut un temps, oublié de la plupart, où les hautes terres résonnaient");
-    Console.WriteLine("non pas du fracas des armes, mais du chant des alliances. Les Nains,");
-    Console.WriteLine("forgerons du roc et bâtisseurs d'empire, partageaient jadis la montagne");
-    Console.WriteLine("avec les Elfes, maîtres des arcanes et gardiens des forêts éternelles.");
+Console.WriteLine("« Nul ne se souvient de l'époque exacte.");
+Console.WriteLine("Seuls les anciens, aux voix usées par le temps, murmurent encore les mots.");
+Console.WriteLine("Il fut un âge où les peuples de ce monde vivaient côte à côte.");
+Console.WriteLine("Non sans tensions, mais liés par un pacte plus fort que l'acier :");
+Console.WriteLine("celui du respect mutuel, de la mémoire des origines, et de la paix sacrée des cimes. »\n");
 
-    Console.WriteLine("\nMais le temps corrompt, et l’orgueil creuse des failles plus profondes que la pierre.");
-    Console.WriteLine("Un différend ancien, oublié des sages mais nourri par les rancunes séculaires,");
-    Console.WriteLine("ressurgit aujourd’hui dans le fracas d’un dernier serment.");
+Console.WriteLine("Mais le monde tourne, inlassable.");
+Console.WriteLine("Les alliances se brisent comme des chaînes rouillées, et les vieilles rancunes,");
+Console.WriteLine("enfouies sous des siècles de silence, s'élèvent à nouveau avec le vent des montagnes.\n");
 
-    Console.WriteLine("\nLes traités sont rompus. Les anciennes runes de paix se sont éteintes.");
-    Console.WriteLine("Les chants elfiques ne résonnent plus que comme des promesses brisées,");
-    Console.WriteLine("et les marteaux des Nains battent l’appel à la guerre.");
+Console.WriteLine("Les anciennes terres, jadis partagées entre les forêts elfes, les citadelles naines,");
+Console.WriteLine("et les bastions des ordres mystiques, sont redevenues des zones de discorde.");
+Console.WriteLine("Des mots de guerre ont été prononcés. Des serments oubliés ont été brisés.");
+Console.WriteLine("Mais plutôt que de plonger le monde dans un bain de feu et de ruine… une voie fut choisie.\n");
 
-    Console.WriteLine("\nPlutôt que de voir leurs royaumes s’anéantir, les anciens souverains décidèrent :");
-    Console.WriteLine("UN TOURNOI. Une épreuve d'honneur. Un affrontement rituel.");
-    Console.WriteLine("Chaque race y enverra ses champions. Et lorsque le sang aura coulé,");
-    Console.WriteLine("l’un des peuples sera déclaré vainqueur. L'autre devra plier le genou...");
+Console.WriteLine("Une voie ancienne. Une voie sacrée.");
+Console.WriteLine("Celle du **Tournoi des Cimes**.\n");
 
-    Console.WriteLine("\nCe tournoi ne désignera pas simplement un gagnant.");
-    Console.WriteLine("Il écrira l’avenir. Il fera taire les poètes. Il scellera le destin des cimes.\n");
+Console.WriteLine("Dans l’ombre de pics millénaires, un cercle d’arènes fut érigé.");
+Console.WriteLine("Chaque peuple, chaque culture, chaque lignage fut appelé à désigner ses champions.");
+Console.WriteLine("Guerriers et guerrières, mages et stratèges, lames silencieuses et bêtes rugissantes — tous convergent vers ce sommet interdit.");
+Console.WriteLine("Non pour détruire. Mais pour vaincre.");
+Console.WriteLine("Car ici, dans ces hauteurs gelées par le souffle des anciens dieux, le sort du monde sera décidé par l'épreuve rituelle.\n");
 
-    Console.WriteLine("Êtes-vous prêt à forger la légende ? À inscrire votre nom dans les chroniques éternelles ?");
-    Console.WriteLine("Prenez les armes, invoquez le courage, et entrez dans l’arène sacrée.");
+Console.WriteLine("Les Nains, aux marteaux aussi lourds que leur fierté.");
+Console.WriteLine("Les Elfes, porteurs de magie et d’arrogance millénaire.");
+Console.WriteLine("Les Sorciers, dont les yeux ont vu l’invisible.");
+Console.WriteLine("Les Berserkers, que la rage consume plus vite que la peur.");
+Console.WriteLine("Les Samouraïs, lames de l’honneur, silencieux comme la neige.");
+Console.WriteLine("Tous ont répondu à l’appel ancestral.\n");
+
+Console.WriteLine("Et toi, étranger, inconnu, peut-être élu… es-tu prêt à inscrire ton nom parmi eux ?");
+Console.WriteLine("Es-tu prêt à embrasser la gloire ou à tomber pour l’éternité ?");
+Console.WriteLine("Car ce tournoi ne couronne pas seulement des héros.");
+Console.WriteLine("Il scelle des pactes, brise des lignées, et grave dans la pierre le destin des peuples.\n");
+
+Console.WriteLine("Tu n'es plus un simple combattant.");
+Console.WriteLine("Tu es un porteur de flamme. Un héraut du jugement.");
+Console.WriteLine("Tu entres dans l’arène des légendes.\n");
+
+Console.WriteLine("Bienvenue... dans le **Tournoi des Cimes**.");
 
     AppuyerSurUneTouche("\nAppuyez sur une touche pour débuter votre ascension dans les cendres de l’Histoire...");
     Console.Clear();
@@ -864,7 +911,7 @@ void Victoire(Icombattant gagnant)
 
 
     var player = new SoundPlayer("Assets/Audio/Final Fantasy Fanfare.wav");
-    player.Play();
+    player.PlayLooping();
 
     AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer...");
     player.Stop();
@@ -880,7 +927,7 @@ void VictoireMonstre(Guerrier guerrierGagnant, Monstre monstreVaincu)
 
 
     var player = new SoundPlayer("Assets/Audio/Final Fantasy Fanfare.wav");
-    player.Play();
+    player.PlayLooping();
 
     guerrierGagnant.GagnerExperience(monstreVaincu.DonnerExperience());
 
@@ -1069,7 +1116,7 @@ void LancerCombatContreMonstre()
 {
     AnimationChargement();
     var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
-    player.Play();
+    player.PlayLooping();
 
     if (Guerrier.guerriers.Count < 1)
     {
@@ -1094,12 +1141,12 @@ void LancerCombatContreMonstre()
     
     
     Random rnd = new Random();
-    int indexMonstre = rnd.Next(Monstre.monstres.Count);
+    int indexMonstre = rnd.Next(monstresClassiques.Count);
     Console.ForegroundColor = ConsoleColor.Magenta;
     Console.ResetColor();
     
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
-    Icombattant monstre = Monstre.monstres[indexMonstre];
+    Icombattant monstre = monstresClassiques[indexMonstre];
 
     Console.WriteLine($"\n Vous affrontez un {monstre.GetNom()} !");
     
@@ -1118,10 +1165,12 @@ void LancerCombatContreMonstre()
 void LancerCombatContreMonstres()
 {
     var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
-    player.Play();
+    player.PlayLooping();
+
     if (Guerrier.guerriers.Count < 1)
     {
         MessageAlerte("Pas assez de combattants pour affronter les vagues !");
+        player.Stop();
         return;
     }
 
@@ -1140,12 +1189,16 @@ void LancerCombatContreMonstres()
     {
         Console.WriteLine($"\n--- Vague {vague} ---");
         Thread.Sleep(500);
+        player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
+        player.Play();
 
         for (int i = 0; i < monstresParVague; i++)
         {
+            player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Adventurer's knowledge.wav");
+            player.Play();
             Random rnd = new Random();
-            int indexMonstre = rnd.Next(Monstre.monstres.Count);
-            Icombattant monstre = Monstre.monstres[indexMonstre];
+            int indexMonstre = rnd.Next(monstresClassiques.Count);
+            Icombattant monstre = monstresClassiques[indexMonstre];
 
             Console.WriteLine($"Votre guerrier {guerrier.GetNom()} affronte un {monstre.GetNom()} !");
 
@@ -1154,50 +1207,79 @@ void LancerCombatContreMonstres()
             if (gagnant != guerrier)
             {
                 MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
+                player.Stop();
                 AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+                return;
             }
 
             Thread.Sleep(500);
         }
 
         Console.WriteLine($"Bravo ! Vous avez terminé la vague {vague} sans perdre votre guerrier.");
-        
         Thread.Sleep(700);
     }
-    
-    // Combat contre un mini-boss
-    Console.WriteLine("\n Un mini-boss surgit après les vagues !");
-    Thread.Sleep(1000);
-    guerrier.Reset();
 
-    if (Gruik.Count == 0)
+    // Stop la musique initiale en boucle avant d'en lancer une autre
+    player.Stop();
+
+    var player1 = new SoundPlayer("Assets/Audio/nature.wav");
+    player1.Play();
+
+    guerrier.Reset();
+    Console.WriteLine("...Après une lutte acharnée, vous pensez enfin pouvoir souffler.");
+    Thread.Sleep(2000);
+    Console.WriteLine("Le calme semble revenir, les ombres se dissipent, et l’espoir renaît.");
+    Thread.Sleep(2000);
+    Console.WriteLine("Mais dans l’obscurité, un souffle furtif trahit une présence sournoise...");
+    Thread.Sleep(3000);
+
+    player1.Stop();
+    var player2 = new SoundPlayer("Assets/Audio/roar.wav");
+    player2.Play();
+
+    Console.WriteLine("Un monstre grotesque et grand, guettant l’instant parfait pour porter un coup fatal.");
+    Thread.Sleep(1500);
+    Console.WriteLine("Prêt à profiter de votre faiblesse, il avance, impitoyable et opportuniste !!!!");
+    Thread.Sleep(1000);
+
+    Console.WriteLine("\nUn mini-boss surgit après les vagues !");
+    Thread.Sleep(1000);
+    Console.WriteLine("PREPAREZ VOUS AU COMBAT !");
+
+    player2.Stop();
+    var player3 = new SoundPlayer("Assets/Audio/Survival of the fittest.wav");
+    player3.PlayLooping();
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour affronter le monstre abject !");
+    Console.ReadKey(true);
+
+    Console.WriteLine("Vous affrontez le pouilleux opportuniste ! Aucune Pitié face aux chiens !");
+
+    if (MiniBoss.Count == 0)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Aucun mini boss n'est présent");
+        player.Stop();
         return;
     }
-    Icombattant gruik = Gruik[0];
-    Icombattant gagnantBoss = CombattreMonstre(guerrier, gruik);
-    
+
+    Icombattant miniBoss = MiniBoss[0];
+    Icombattant gagnantBoss = CombattreMonstre(guerrier, miniBoss);
+
     if (gagnantBoss != guerrier)
     {
         MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
+        player.Stop();
         AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
         return;
     }
-    
-    AjouterHistorique(gagnantBoss, guerrier, gruik);
-    
-    Console.WriteLine("\n Félicitations ! Vous avez vaincu toutes les vagues et le mini-boss !");
+
+    AjouterHistorique(gagnantBoss, guerrier, miniBoss);
+
+    player.Stop();
+
+    Console.WriteLine("\nFélicitations ! Vous avez vaincu toutes les vagues et le mini-boss !");
     AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
-
-    
-    
-    
-    
-    Console.WriteLine("\nFélicitations ! Toutes les vagues ont été vaincues.");
-
-    AppuyerSurUneTouche("\nAppuyez sur une touche pour continuer ...");
 }
 
 Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)

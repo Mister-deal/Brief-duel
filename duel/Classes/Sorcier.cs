@@ -11,6 +11,9 @@ public class Sorcier: Guerrier, Icombattant
     public Sorcier(string nom, int pointsDeVie, int nbDesAttaque, int mana) : base(nom, pointsDeVie, nbDesAttaque)
     {
         _mana = mana;
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine($"\n{nom}, le sorcier d'Arzandar est prêt à se battre pour montrer la suprématie des mages !");
+        Console.ResetColor();
     }
     
     public override int Attaquer()

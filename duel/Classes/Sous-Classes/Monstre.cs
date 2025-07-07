@@ -13,6 +13,7 @@ public abstract class Monstre: Icombattant
     private int _nbDesAttaque;
     private int _pointsDeVieInitial;
     private int experienceDonnee;
+    private string titre;
     
     
     protected int niveau = 1;
@@ -26,7 +27,7 @@ public abstract class Monstre: Icombattant
         _pointsDeVieInitial = pointsDeVie;
         experienceDonnee = experience;
     }
-
+    
 
     public string Nom
     {

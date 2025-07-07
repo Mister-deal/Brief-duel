@@ -9,6 +9,9 @@ public class Nain : Guerrier, Icombattant
     public Nain(string nom, int pointsDeVie, int nbDesAttaque, bool armureLourde) : base(nom, pointsDeVie, nbDesAttaque)
     {
         this.armureLourde = armureLourde;
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine($"\n{nom}, le saint guerrier nain est prêt à tout pour le royaume nain !");
+        Console.ResetColor();
     }
     
     public bool ArmureLourde { get => armureLourde; set => armureLourde = value; }
