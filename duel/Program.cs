@@ -1050,56 +1050,70 @@ void AfficherGuideUtilisateur()
 {
     Console.Clear();
     var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Guide.wav");
-    player.PlayLooping();
+    player.PlayLooping(); 
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════╗");
     Console.WriteLine("║                 GUIDE DU JOUEUR - GUERRES DES PEUPLES ANCESTRAUX        ║");
-    Console.WriteLine("║              (Nains, Elfes, Sorciers... et l’Équilibre des Lames)       ║");
+    Console.WriteLine("║    (Nains, Elfes, Sorciers... et les Tournois de l'Équilibre Éternel)   ║");
     Console.WriteLine("╚═════════════════════════════════════════════════════════════════════════╝\n");
     Console.ResetColor();
 
-    Console.WriteLine("Bienvenue dans le grand tournoi de la Chicanerie des Hautes Terres !");
-    Console.WriteLine("Ce jeu console vous propose de créer des combattants et de les faire s'affronter\n" +
-                      "dans des duels épiques ou dans un tournoi sans pitié.\n");
+Console.WriteLine("Bienvenue dans l’arène ancestrale de la Chicanerie des Hautes Terres !");
+Console.WriteLine("Ce jeu console vous permet de créer des combattants, d'explorer des zones PvE,\n" +
+                  "et de vous mesurer à des adversaires redoutables dans des tournois épiques.\n");
 
-    Console.WriteLine("TYPES DE COMBATTANTS DISPONIBLES :");
+Console.WriteLine("TYPES DE COMBATTANTS DISPONIBLES :");
 
-    Console.ForegroundColor = ConsoleColor.DarkGray;
-    Console.WriteLine("• Guerrier : Classe de base avec attaque aléatoire.");
-    Console.ResetColor();
+Console.ForegroundColor = ConsoleColor.DarkGray;
+Console.WriteLine("• Guerrier : Classe de base à attaque aléatoire.");
+Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine("• Nain : Armure lourde, subit moins de dégâts.");
-    Console.ResetColor();
+Console.ForegroundColor = ConsoleColor.DarkRed;
+Console.WriteLine("• Nain : Tank robuste, subit moins de dégâts grâce à son armure lourde.");
+Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("• Elfe : Attaque toujours avec un minimum garanti.");
-    Console.ResetColor();
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("• Elfe : Agile et précis, garantit un minimum de dégâts à chaque attaque.");
+Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("• Sorcier : Utilise des sorts (soin, feu, bouclier) et gère du mana.");
-    Console.ResetColor();
+Console.ForegroundColor = ConsoleColor.Cyan;
+Console.WriteLine("• Sorcier : Manipule la magie, utilise le feu, le soin et la protection via le mana.");
+Console.ResetColor();
 
-    Console.WriteLine("\nRÈGLES DE CRÉATION :");
-    Console.WriteLine("- Les points de vie (PV) doivent être compris entre 10 et 100.");
-    Console.WriteLine("- Le nom du guerrier doit être unique et représentatif.");
-    Console.WriteLine("- Vous pouvez créer autant de combattants que vous le souhaitez.");
+Console.ForegroundColor = ConsoleColor.Red;
+Console.WriteLine("• Berserker : Inflige d’énormes dégâts en contrepartie d’une défense faible.");
+Console.ResetColor();
 
-    Console.WriteLine("\nAPRÈS CHAQUE ACTION :");
-    Console.WriteLine("- Un message vous indique ce qui s’est passé.");
-    Console.WriteLine("- Vous pouvez revenir au menu à tout moment.");
-    Console.WriteLine("- Les combats sont automatiques et commentés.\n");
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.WriteLine("• Samouraï : Maître du duel, riposte souvent et mise sur la précision létale.");
+Console.ResetColor();
 
-    Console.WriteLine("OBJECTIF :");
-    Console.WriteLine("Créez vos champions, faites-les progresser, et imposez la suprématie de votre peuple\n" +
-                      "dans le plus grand tournoi des Hautes Terres !");
+Console.WriteLine("\nNOUVEAUTÉS :");
+Console.WriteLine("- Une zone **PvE** est désormais disponible : survivez à des vagues de monstres !");
+Console.WriteLine("- Un mini-boss surgit parfois dans l’ombre après les combats classiques.");
+Console.WriteLine("- Un **boss final** vous attend pour conclure les tournois les plus périlleux.");
+Console.WriteLine("- Le **Tournoi des Cimes** a été ajouté : une épreuve extrême mêlant monstres,\n  mini-boss et boss final pour les combattants les plus téméraires.");
 
-    Console.ForegroundColor = ConsoleColor.Magenta;
-    Console.WriteLine("\nBonne chance, stratège. Que vos guerriers tombent avec gloire ou triomphent avec honneur !");
-    Console.ResetColor();
+Console.WriteLine("\nRÈGLES DE CRÉATION :");
+Console.WriteLine("- Les points de vie (PV) doivent être compris entre 10 et 150.");
+Console.WriteLine("- Le nom du combattant doit être unique et refléter sa gloire future.");
+Console.WriteLine("- Vous pouvez créer autant de combattants que vous le souhaitez.");
 
-    AppuyerSurUneTouche("\nAppuyez sur une touche pour revenir au menu principal...");
-    Console.Clear();
+Console.WriteLine("\nAPRÈS CHAQUE ACTION :");
+Console.WriteLine("- Un message décrit les événements marquants.");
+Console.WriteLine("- Vous pouvez revenir au menu principal à tout moment.");
+Console.WriteLine("- Les combats sont automatisés et richement commentés.\n");
+
+Console.WriteLine("OBJECTIF :");
+Console.WriteLine("Constituez votre armée de champions, affrontez d’autres peuples et monstres,\n" +
+                  "et imposez la suprématie de votre lignée dans les Tournois des Hautes Terres !");
+
+Console.ForegroundColor = ConsoleColor.Magenta;
+Console.WriteLine("\nBonne chance, stratège. Que vos guerriers tombent avec panache ou triomphent avec honneur !");
+Console.ResetColor();
+
+AppuyerSurUneTouche("\nAppuyez sur une touche pour revenir au menu principal...");
+Console.Clear();
 }
 
 void AppuyerSurUneTouche (string message)
