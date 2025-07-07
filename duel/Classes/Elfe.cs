@@ -6,7 +6,6 @@ public class Elfe: Guerrier, Icombattant
 {
     private int magie;
     
-    public Elfe() : base() {} // nécessaire pour la désérialisation
     public Elfe(string nom, int pointsDeVie, int nbDesAttaque, int magie) : base(nom, pointsDeVie, nbDesAttaque)
     {
         this.magie = magie;

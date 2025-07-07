@@ -6,7 +6,6 @@ public class Nain : Guerrier, Icombattant
 {
     private bool armureLourde;
     
-    public Nain() : base() {} // nécessaire pour la désérialisation
     public Nain(string nom, int pointsDeVie, int nbDesAttaque, bool armureLourde) : base(nom, pointsDeVie, nbDesAttaque)
     {
         this.armureLourde = armureLourde;
