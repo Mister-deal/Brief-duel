@@ -275,7 +275,8 @@ Console.WriteLine("Bienvenue... dans le **Tournoi des Cimes**.");
         Console.WriteLine("6. Afficher historique");
         Console.WriteLine("7. Afficher le guide de jeu");
         Console.WriteLine("8. Entrer dans la zone PVE");
-        Console.WriteLine("9. Quitter");
+        Console.WriteLine("9. Entrer dans le tournoi des cimes");
+        Console.WriteLine("10. Quitter");
 
         choix = DemanderEntier("Faites votre choix: ", 1, 9);
 
@@ -371,9 +372,10 @@ Console.WriteLine("Bienvenue... dans le **Tournoi des Cimes**.");
                 Console.WriteLine("1. Affronter un monstre");
                 Console.WriteLine("2. Affronter un boss");
                 Console.WriteLine("3. Affronter une vague de monstres");
-                Console.WriteLine("4. Retour au menu principal");
+                Console.WriteLine("4. Lancer tournoi des cimes");
+                Console.WriteLine("5. Retour au menu principal");
                 Console.Write("Votre choix : ");
-                choix = DemanderEntier("Faites votre choix: ", 1, 4);
+                choix = DemanderEntier("Faites votre choix: ", 1, 5);
                 switch (choix)
                 {
                     case 1:
@@ -389,6 +391,9 @@ Console.WriteLine("Bienvenue... dans le **Tournoi des Cimes**.");
                         Console.Clear();
                         break;
                     case 4:
+                        LancerTournoiDesCimes();
+                        break;
+                    case 5:
                         Console.WriteLine("Merci et au revoir.");
                         break;
                     default:
@@ -1589,3 +1594,151 @@ List<Guerrier> ChargerGuerriersDepuisJson(string chemin)
     return guerriers ?? new List<Guerrier>();
 }
 */
+void LancerTournoiDesCimes()
+{
+    var musiqueTournoi = new SoundPlayer("Assets/Audio/Tactics Ogre： Championship theme.wav");;
+    musiqueTournoi.PlayLooping();
+
+    if (Guerrier.guerriers.Count < 1)
+    {
+        MessageAlerte("Pas assez de combattants pour participer au tournoi !");
+        musiqueTournoi.Stop();
+        return;
+    }
+
+    AfficherCombattant();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    int indexGuerrier = DemanderEntier("\nChoisissez votre champion (index) : ", 1, Guerrier.guerriers.Count) - 1;
+    Console.ResetColor();
+
+    Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
+
+    int nombreRounds = 3;      // rounds = vagues de monstres
+    int monstresParRound = 4;  // monstres par round
+
+    for (int round = 1; round <= nombreRounds; round++)
+    {
+        Console.WriteLine($"\n=== Round {round} du Tournoi ===");
+        Thread.Sleep(700);
+        musiqueTournoi.Play();
+
+        for (int i = 0; i < monstresParRound; i++)
+        {
+            musiqueTournoi.Play();
+            Random rnd = new Random();
+            int indexMonstre = rnd.Next(monstresClassiques.Count);
+            Icombattant monstre = monstresClassiques[indexMonstre];
+
+            Console.WriteLine($"Votre champion {guerrier.GetNom()} affronte un {monstre.GetNom()} !");
+            Icombattant gagnant = CombattreMonstre(guerrier, monstre);
+
+            if (gagnant != guerrier)
+            {
+                MessageAlerte("Votre champion est tombé. Le tournoi s'arrête ici.");
+                musiqueTournoi.Stop();
+                AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+                return;
+            }
+
+            Thread.Sleep(500);
+        }
+
+        Console.WriteLine($"Bravo ! Vous avez remporté le round {round}.");
+        Thread.Sleep(800);
+    }
+
+    musiqueTournoi.Stop();
+
+    Console.WriteLine("\nAprès ces combats acharnés, vous sentez le souffle du tournoi s'intensifier...");
+    Thread.Sleep(2000);
+
+    // Mini-boss opportuniste
+    var musiqueMiniBoss = new SoundPlayer("Assets/Audio/roar.wav");
+    musiqueMiniBoss.Play();
+
+    Console.WriteLine("\nUn souffle sournois se fait entendre dans l'ombre...");
+    Thread.Sleep(1500);
+    Console.WriteLine("Un mini-boss surgit, prêt à frapper au moment où vous baissez la garde !");
+    Thread.Sleep(1500);
+    Console.WriteLine("PREPAREZ-VOUS À CE COMBAT DÉCISIF !");
+
+    musiqueMiniBoss.Stop();
+    var musiqueCombatMiniBoss = new SoundPlayer("Assets/Audio/Survival of the fittest.wav");
+    musiqueCombatMiniBoss.PlayLooping();
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour défier le mini-boss !");
+    Console.ReadKey(true);
+
+    if (MiniBoss.Count == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Aucun mini-boss n'est disponible. Le tournoi continue...");
+        Console.ResetColor();
+    }
+    else
+    {
+        Icombattant miniBoss = MiniBoss[0];
+        Icombattant gagnantMiniBoss = CombattreMonstre(guerrier, miniBoss);
+
+        if (gagnantMiniBoss != guerrier)
+        {
+            MessageAlerte("Votre champion a été vaincu par le mini-boss. Fin du tournoi.");
+            musiqueCombatMiniBoss.Stop();
+            AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+            return;
+        }
+        else
+        {
+            Console.WriteLine("\nVotre champion a terrassé le mini-boss !");
+            Thread.Sleep(1500);
+        }
+    }
+
+    musiqueCombatMiniBoss.Stop();
+
+    // Combat final contre le boss du tournoi
+    var musiqueBoss = new SoundPlayer("Assets/Audio/Winter Absolution.wav");
+    musiqueBoss.PlayLooping();
+
+    Console.WriteLine("\nL'arène tremble... Le champion du tournoi fait son entrée !");
+    Thread.Sleep(2000);
+    Console.WriteLine("Voici venu le moment décisif : le combat final contre le BOSS !");
+    Thread.Sleep(1500);
+
+    if (SeigneurDevoreur.Count == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Erreur : Aucun boss final n'est défini !");
+        musiqueBoss.Stop();
+        return;
+    }
+
+    Icombattant bossFinal = SeigneurDevoreur[0];
+    Icombattant gagnantBoss = CombattreMonstre(guerrier, bossFinal);
+
+    if (gagnantBoss != guerrier)
+    {
+        MessageAlerte("Votre champion a été écrasé par le boss final... Fin du tournoi.");
+        musiqueBoss.Stop();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+        return;
+    }
+
+    musiqueBoss.Stop();
+
+    var glory = new SoundPlayer("Assets/Audio/Tactics Ogre Glory.wav");
+    glory.PlayLooping(); // musique de victoire finale
+
+    // Annonce du gagnant
+    Console.WriteLine("╔════════════════════════════════════════════════════╗");
+    Console.WriteLine("║           !!!! LE TOURNOI EST TERMINÉ !!!!         ║");
+    Console.WriteLine("╚════════════════════════════════════════════════════╝");
+    Console.WriteLine("\n\nFélicitations ! Vous avez remporté le Tournoi des Cimes !");
+    Console.WriteLine("Votre nom sera gravé dans les annales comme un héros légendaire !");
+    Console.WriteLine("Il ne s’agit plus d’un simple combattant...");
+    Console.WriteLine("C’est un **héros légendaire**, un symbole vivant de la gloire de son peuple !\n");
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+    glory.Stop();
+}
