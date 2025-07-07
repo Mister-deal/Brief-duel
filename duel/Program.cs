@@ -275,8 +275,7 @@ Console.WriteLine("Bienvenue... dans le **Tournoi des Cimes**.");
         Console.WriteLine("6. Afficher historique");
         Console.WriteLine("7. Afficher le guide de jeu");
         Console.WriteLine("8. Entrer dans la zone PVE");
-        Console.WriteLine("9. Entrer dans le tournoi des cimes");
-        Console.WriteLine("10. Quitter");
+        Console.WriteLine("9. Quitter");
 
         choix = DemanderEntier("Faites votre choix: ", 1, 9);
 
