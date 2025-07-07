@@ -34,9 +34,9 @@ public class Sorcier: Guerrier, Icombattant
         switch (sortChoisi)
         {
             case "Boule de feu":
-                return base.Attaquer() + 10;
+                return base.Attaquer() + 25;
             case "Soin":
-                int soin = 15;
+                int soin = 25;
                 PointsDeVie += soin;
                 Console.WriteLine($"{Nom} lance le soin: {soin}; {Nom} se soigne {soin} ses points de vie.");
                 return 0;

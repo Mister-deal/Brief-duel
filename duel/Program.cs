@@ -131,14 +131,14 @@ void InitialiserMonstres()
     SqueletteArmé squeletteArmé = new SqueletteArmé();
     
     //Instanciation mini boss
-    BrugLeBriseur brug = new BrugLeBriseur("Brugg le Briseur", "Un ogre massif à la peau écailleuse, dont chaque coup peut broyer un bouclier en deux.", 195, 5, 250);
+    BrugLeBriseur brug = new BrugLeBriseur("Brugg le Briseur", "Un ogre massif à la peau écailleuse, dont chaque coup peut broyer un bouclier en deux.", 195, 6, 250);
     Morbax morbax = new Morbax("Morbax, l’Ombre Putréfiée", "Un être suintant de ténèbres, réanimé par des rituels interdits.", 240, 6, 350);
-    GruikOrcGoblin gruikOrcGoblin = new GruikOrcGoblin("gruik l'orc goblin", "l'orc mi-goblin, mi-porcin horrible et dégoutant",150, 3, 150);
+    GruikOrcGoblin gruikOrcGoblin = new GruikOrcGoblin("gruik l'orc goblin", "l'orc mi-goblin, mi-porcin horrible et dégoutant",150, 5, 150);
     
     //Instanciation Boss
-    SeigneurDevoreur seigneurDevoreur = new SeigneurDevoreur("Zor'kath", "le dévoreur de chair", 300, 5, 500);
-    DragonDeGlace dragonDeGlace = new DragonDeGlace("paarturnax dragon de glace", "ragnarok", 450, 6, 1000);
-    AzarothLeFleau azarothLeFleau = new AzarothLeFleau("azaroth le fleau", "le faiseur de calamités", 950, 8, 2000);
+    SeigneurDevoreur seigneurDevoreur = new SeigneurDevoreur("Zor'kath", "le dévoreur de chair", 400, 7, 700);
+    DragonDeGlace dragonDeGlace = new DragonDeGlace("paarturnax dragon de glace", "ragnarok", 450, 7, 1000);
+    AzarothLeFleau azarothLeFleau = new AzarothLeFleau("azaroth le fleau", "le faiseur de calamités", 900, 8, 2000);
     
     // Ajout dans les listes spécifiques monstres
     monstresClassiques.Add(slime);
@@ -1364,8 +1364,6 @@ void LancerCombatContreBoss()
 void LancerCombatContreSeigneurDevoreur()
 {
     AnimationChargement();
-    var player = new SoundPlayer("Assets/Audio/Winter Absolution.wav");
-    player.Play();
 
     if (Guerrier.guerriers.Count < 1)
     {
@@ -1376,7 +1374,6 @@ void LancerCombatContreSeigneurDevoreur()
     if (SeigneurDevoreur.Count == 0)
     {
         MessageAlerte("Aucun Seigneur Dévoreur disponible !");
-        player.Stop();
         return;
     }
 
@@ -1388,7 +1385,30 @@ void LancerCombatContreSeigneurDevoreur()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = SeigneurDevoreur[0];
 
-    Console.WriteLine($"\nDuel légendaire : {guerrier.GetNom()} VS {boss.GetNom()} !");
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine("╔═════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                    L'HEURE DU JUGEMENT SONNE                   ║");
+    Console.WriteLine("╚═════════════════════════════════════════════════════════════════╝");
+    Console.WriteLine($"{guerrier.GetNom().ToUpper()} s'avance lentement, porté par la rumeur des âmes déchues.");
+    Thread.Sleep(3000);
+    Console.WriteLine("Devant lui, un titan abject surgit d’un gouffre béant, vomissant cendres et flammes.");
+    Thread.Sleep(3000);
+    Console.WriteLine($"C’est le SEIGNEUR DÉVOREUR, fléau des royaumes et destructeur de mondes.");
+    var player1 = new SoundPlayer("Assets/Audio/warrior roar.wav");
+    player1.Play();
+    Thread.Sleep(5000);
+    Console.WriteLine();
+    Console.WriteLine("Les terres frémissent, l’air se gorge de malédictions, et le ciel s’assombrit.");
+    var player = new SoundPlayer("Assets/Audio/Winter Absolution.wav");
+    player.Play();
+    Thread.Sleep(2000);
+    Console.WriteLine("Un seul faux pas... et c’est l’anéantissement.");
+    Thread.Sleep(3000);
+    Console.WriteLine($"\nDuel légendaire : {guerrier.GetNom().ToUpper()} VS {boss.GetNom()} !");
+    Console.WriteLine("═════════════════════════════════════════════════════════════════");
+    Console.ResetColor();
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour affronter le Dévoreur...");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();
@@ -1407,8 +1427,6 @@ void LancerCombatContreSeigneurDevoreur()
 void LancerCombatContreDragon()
 {
     AnimationChargement();
-    var player = new SoundPlayer("Assets/Audio/Xenoblade Chronicles Dragon.wav");
-    player.Play();
 
     if (Guerrier.guerriers.Count < 1)
     {
@@ -1419,7 +1437,6 @@ void LancerCombatContreDragon()
     if (Dragon.Count == 0)
     {
         MessageAlerte("Aucun Dragon de Glace n'a été trouvé !");
-        player.Stop();
         return;
     }
 
@@ -1431,7 +1448,30 @@ void LancerCombatContreDragon()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = Dragon[0];
 
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("╔═════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                AFFRONTEMENT DANS LES CIMES GLACÉES              ║");
+    Console.WriteLine("╚═════════════════════════════════════════════════════════════════╝");
+    Console.WriteLine($"{guerrier.GetNom().ToUpper()} grimpe les falaises figées par le temps et le froid éternel...");
+    Thread.Sleep(3000);
+    Console.WriteLine("Au sommet, le ciel s’ouvre sur un hurlement venu d’ailleurs.");
+    var player1 = new SoundPlayer("Assets/Audio/dragon roar.wav");
+    player1.Play();
+    Thread.Sleep(5000);
+    Console.WriteLine($"LE DRAGON DE GLACE, millénaire et invincible, étend ses ailes gelées.");
+    Thread.Sleep(2000);
+    Console.WriteLine();
+    var player = new SoundPlayer("Assets/Audio/Xenoblade Chronicles Dragon.wav");
+    player.Play();
+    Console.WriteLine("Son souffle glace la lumière elle-même. Même les dieux hésitent à s’en approcher.");
+    Thread.Sleep(3000);
+    Console.WriteLine("Mais {0} ne recule pas. Car aujourd’hui, c’est le feu contre la glace.", guerrier.GetNom());
+    Thread.Sleep(2000);
     Console.WriteLine($"\n Le froid mord... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Console.WriteLine("═════════════════════════════════════════════════════════════════");
+    Console.ResetColor();
+    AppuyerSurUneTouche("\nAppuyez sur une touche pour défier le Dragon...");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();
@@ -1450,8 +1490,6 @@ void LancerCombatContreDragon()
 void LancerCombatContreAzaroth()
 {
     AnimationChargement();
-    var player = new SoundPlayer("Assets/Audio/Final Fantasy X.wav");
-    player.Play();
 
     if (Guerrier.guerriers.Count < 1)
     {
@@ -1462,7 +1500,6 @@ void LancerCombatContreAzaroth()
     if (Fleau.Count == 0)
     {
         MessageAlerte("Azaroth est introuvable... Le Néant vous épargne cette fois.");
-        player.Stop();
         return;
     }
 
@@ -1474,7 +1511,32 @@ void LancerCombatContreAzaroth()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = Fleau[0];
 
-    Console.WriteLine($"\n Le destin s'effondre... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine("═══════════════════════════════════════════════════════════════");
+    Console.WriteLine($"{guerrier.GetNom().ToUpper()} s'avance, l'arme au poing, le regard brûlant de détermination !");
+    Thread.Sleep(3000);
+    Console.WriteLine("Devant lui, les cieux se fendent, le sol se fissure, et le Néant prend forme...");
+    Thread.Sleep(3000);
+    Console.WriteLine("Une silhouette monstrueuse émerge, noyée dans les ténèbres absolues.");
+    Thread.Sleep(3000);
+    Console.WriteLine($"  C’est AZAROTH, le Fléau du Néant — incarnation de la fin, tisseur du désespoir.");
+    var player1 = new SoundPlayer("Assets/Audio/Boss roar.wav");
+    player1.Play();
+    Thread.Sleep(6000);
+    
+    Console.WriteLine();
+    Console.WriteLine("Les étoiles s'éteignent, le vent se tait. Le monde retient son souffle.");
+    Thread.Sleep(3000);
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy X.wav");
+    player.Play();
+    Console.WriteLine("C’est l’ultime combat. Il n’y aura ni fuite... ni seconde chance.");
+    Thread.Sleep(1000);
+    Console.WriteLine($"\n Le destin s'effondre... {guerrier.GetNom().ToUpper()} affronte {boss.GetNom()} !");
+    Console.WriteLine("═══════════════════════════════════════════════════════════════");
+    Console.ResetColor();
+    Console.WriteLine($"\n Le destin s'effondre... {guerrier.GetNom().ToUpper()} affronte {boss.GetNom()} !");
+    AppuyerSurUneTouche("Appuyez sur une touche pour affronter le faiseur de calamités...");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();
@@ -1486,7 +1548,7 @@ void LancerCombatContreAzaroth()
 
     AjouterHistorique(gagnant, guerrier, boss);
 
-    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+    //AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
 
     player.Stop();
 }
