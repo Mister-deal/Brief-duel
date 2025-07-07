@@ -288,9 +288,11 @@ void AfficherMenuPrincipal()
                 {
                     case 1:
                         LancerCombatContreMonstre();
+                        Console.Clear();
                         break;
                     case 2:
                         LancerCombatContreBoss();
+                        Console.Clear();
                         break;
                     case 3:
                         LancerCombatContreMonstres();
@@ -1098,7 +1100,7 @@ Icombattant CombattreMonstre(Icombattant c1, Icombattant c2)
 void LancerCombatContreBoss()
 {
     Console.Clear();
-    var player = new SoundPlayer("Assets/Audio/Tactics Ogre Catastrophe");
+    var player = new SoundPlayer("Assets/Audio/Tactics Ogre Catastrophe.wav");
     player.PlayLooping();
     Console.WriteLine("\n=== CHOISISSEZ VOTRE BOSS À AFFRONTER ===");
     Console.WriteLine("1. Seigneur Dévoreur");
@@ -1165,6 +1167,10 @@ void LancerCombatContreSeigneurDevoreur()
         MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
     }
 
+    AjouterHistorique(gagnant, guerrier, boss);
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+
     player.Stop();
 }
 void LancerCombatContreDragon()
@@ -1203,6 +1209,10 @@ void LancerCombatContreDragon()
         MessageAlerte("Votre guerrier a été gelé à jamais...");
     }
 
+    AjouterHistorique(gagnant, guerrier, boss);
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
+
     player.Stop();
 }
 void LancerCombatContreAzaroth()
@@ -1240,6 +1250,10 @@ void LancerCombatContreAzaroth()
     {
         MessageAlerte("Le Néant a englouti votre espoir.");
     }
+
+    AjouterHistorique(gagnant, guerrier, boss);
+
+    AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
 
     player.Stop();
 }
