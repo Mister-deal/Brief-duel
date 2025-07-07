@@ -1104,7 +1104,6 @@ void LancerCombatContreMonstre()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
-        YouLose();
         AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
     player.Stop();
@@ -1149,7 +1148,6 @@ void LancerCombatContreMonstres()
             if (gagnant != guerrier)
             {
                 MessageAlerte("Votre guerrier est tombé au combat. Fin des vagues.");
-                YouLose();
                 AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
             }
 
@@ -1278,7 +1276,6 @@ void LancerCombatContreSeigneurDevoreur()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
-        YouLose();
         AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
@@ -1322,7 +1319,6 @@ void LancerCombatContreDragon()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre guerrier a été gelé à jamais...");
-        YouLose();
         AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
@@ -1366,7 +1362,6 @@ void LancerCombatContreAzaroth()
     if (gagnant != guerrier)
     {
         MessageAlerte("Le Néant a englouti votre espoir.");
-        YouLose();
         AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
