@@ -119,10 +119,10 @@ public abstract class Guerrier : Icombattant, IEvolutif
         Console.WriteLine($"\n{Nom} passe au niveau {niveau} !\n");
         Console.ResetColor();
 
-        PointsDeVie += 5;
-        _pointsDeVieInitial += 5;
+        PointsDeVie += 10;
+        _pointsDeVieInitial += 10;
 
-        if (niveau % 4 == 0)
+        if (niveau % 3 == 0)
         {
             NbDesAttaque ++;
         }

@@ -1675,6 +1675,7 @@ void LancerTournoiDesCimes()
     Thread.Sleep(1500);
     Console.WriteLine("Un mini-boss surgit, prêt à frapper au moment où vous baissez la garde !");
     Thread.Sleep(1500);
+    guerrier.Reset();
     Console.WriteLine("PREPAREZ-VOUS À CE COMBAT DÉCISIF !");
 
     musiqueMiniBoss.Stop();
@@ -1718,6 +1719,7 @@ void LancerTournoiDesCimes()
     Console.WriteLine("\nL'arène tremble... Le champion du tournoi fait son entrée !");
     Thread.Sleep(2000);
     Console.WriteLine("Voici venu le moment décisif : le combat final contre le BOSS !");
+    guerrier.Reset();
     Thread.Sleep(1500);
 
     if (SeigneurDevoreur.Count == 0)
