@@ -12,7 +12,7 @@ public class DragonDeGlace : Monstre
         this.titre = titre;
         pointsDeVieMax = pointsDeVie;
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine($"\n❄️ Le Dragon de Glace {Nom} surgit des montagnes gelées ! Préparez-vous au froid glacial ! ❄️\n");
+        Console.WriteLine($"\n Le Dragon de Glace {Nom} surgit des montagnes gelées ! Préparez-vous au froid glacial ! ❄️\n");
         Console.ResetColor();
     }
 
@@ -32,7 +32,7 @@ public class DragonDeGlace : Monstre
         {
             nbDes += 2;
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"\n🧊 Dragon de Glace {Nom} est en furie glaciale ! Ses attaques se renforcent ! 🧊");
+            Console.WriteLine($"\n Dragon de Glace {Nom} est en furie glaciale ! Ses attaques se renforcent ! 🧊");
             Console.ResetColor();
         }
 
@@ -57,12 +57,12 @@ public class DragonDeGlace : Monstre
     private int AttaqueUltime()
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine($"\n🌨️ Dragon de Glace {Nom} déclenche son ATTAQUE ULTIME : 'Tempête de Glace' ! 🌨️");
+        Console.WriteLine($"\n Dragon de Glace {Nom} déclenche son ATTAQUE ULTIME : 'Tempête de Glace' ! 🌨️");
         Console.ResetColor();
         Thread.Sleep(1000);
-        Console.WriteLine("❄️ Un blizzard furieux enveloppe le champ de bataille !");
+        Console.WriteLine(" Un blizzard furieux enveloppe le champ de bataille !");
         Thread.Sleep(1000);
-        Console.WriteLine("🧊 Le froid mordant gèle tout sur son passage...");
+        Console.WriteLine(" Le froid mordant gèle tout sur son passage...");
         Thread.Sleep(1000);
 
         return 15 + new Random().Next(15, 36); // Dégâts entre 30 et 50 environ
@@ -80,7 +80,7 @@ public class DragonDeGlace : Monstre
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine($"\n🧊 Dragon de Glace {Nom} s'effondre, emporté par la chaleur ennemie... 🧊");
+            Console.WriteLine($"\n Dragon de Glace {Nom} s'effondre, emporté par la chaleur ennemie... 🧊");
             Console.ResetColor();
         }
     }

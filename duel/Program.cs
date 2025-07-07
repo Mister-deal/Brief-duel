@@ -1154,7 +1154,7 @@ void LancerCombatContreSeigneurDevoreur()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = SeigneurDevoreur[0];
 
-    Console.WriteLine($"\n⚔️ Duel légendaire : {guerrier.GetNom()} VS {boss.GetNom()} !");
+    Console.WriteLine($"\nDuel légendaire : {guerrier.GetNom()} VS {boss.GetNom()} !");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();
@@ -1192,7 +1192,7 @@ void LancerCombatContreDragon()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = Dragon[0];
 
-    Console.WriteLine($"\n❄️ Le froid mord... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Console.WriteLine($"\n Le froid mord... {guerrier.GetNom()} affronte {boss.GetNom()} !");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();
@@ -1230,7 +1230,7 @@ void LancerCombatContreAzaroth()
     Icombattant guerrier = Guerrier.guerriers[indexGuerrier];
     Icombattant boss = Fleau[0];
 
-    Console.WriteLine($"\n🌌 Le destin s'effondre... {guerrier.GetNom()} affronte {boss.GetNom()} !");
+    Console.WriteLine($"\n Le destin s'effondre... {guerrier.GetNom()} affronte {boss.GetNom()} !");
     Icombattant gagnant = CombattreMonstre(guerrier, boss);
 
     guerrier.Reset();

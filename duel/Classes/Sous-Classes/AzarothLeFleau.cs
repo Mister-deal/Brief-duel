@@ -13,7 +13,7 @@ public class AzarothLeFleau : Monstre
         pointsDeVieMax = pointsDeVie;
 
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine($"\n🌌 Une brèche s'ouvre dans le tissu de la réalité... Azaroth, le Fléau du Néant, apparaît !");
+        Console.WriteLine($"\n Une brèche s'ouvre dans le tissu de la réalité... Azaroth, le Fléau du Néant, apparaît !");
         Thread.Sleep(1000);
         Console.WriteLine("🌑 Sa présence seule fait vaciller les âmes faibles...");
         Console.ResetColor();
@@ -35,7 +35,7 @@ public class AzarothLeFleau : Monstre
         {
             nbDes += 3;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n💢 Azaroth s'enrage ! Le Néant se tord sous sa volonté !");
+            Console.WriteLine($"\n Azaroth s'enrage ! Le Néant se tord sous sa volonté !");
             Console.ResetColor();
         }
 
@@ -57,12 +57,12 @@ public class AzarothLeFleau : Monstre
     private int AttaqueUltime()
     {
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine($"\n🌠 Azaroth invoque son ATTAQUE ULTIME : 'Anéantissement Cosmique' !");
+        Console.WriteLine($"\n Azaroth invoque son ATTAQUE ULTIME : 'Anéantissement Cosmique' !");
         Console.ResetColor();
         Thread.Sleep(1000);
-        Console.WriteLine("☄️ Les cieux s'assombrissent, le sol s'effondre...");
+        Console.WriteLine(" Les cieux s'assombrissent, le sol s'effondre...");
         Thread.Sleep(1000);
-        Console.WriteLine("🕳️ Le néant aspire la lumière elle-même !");
+        Console.WriteLine(" Le néant aspire la lumière elle-même !");
         Thread.Sleep(1500);
 
         return 30 + new Random().Next(30, 51); // Dégâts de 60 à 80
@@ -74,13 +74,13 @@ public class AzarothLeFleau : Monstre
         if (PointsDeVie > 0)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine($"🩸 Azaroth ne saigne pas... il absorbe vos attaques avec mépris.");
+            Console.WriteLine($" Azaroth ne saigne pas... il absorbe vos attaques avec mépris.");
             Console.ResetColor();
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n🔥 Azaroth pousse un hurlement cosmique alors qu'il est renvoyé dans l'abîme !");
+            Console.WriteLine($"\n Azaroth pousse un hurlement cosmique alors qu'il est renvoyé dans l'abîme !");
             Console.ResetColor();
         }
     }
