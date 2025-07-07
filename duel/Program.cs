@@ -1165,6 +1165,8 @@ void LancerCombatContreSeigneurDevoreur()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre champion a été dévoré par le Seigneur... Fin.");
+        YouLose();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
     AjouterHistorique(gagnant, guerrier, boss);
@@ -1207,6 +1209,8 @@ void LancerCombatContreDragon()
     if (gagnant != guerrier)
     {
         MessageAlerte("Votre guerrier a été gelé à jamais...");
+        YouLose();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
     AjouterHistorique(gagnant, guerrier, boss);
@@ -1249,6 +1253,8 @@ void LancerCombatContreAzaroth()
     if (gagnant != guerrier)
     {
         MessageAlerte("Le Néant a englouti votre espoir.");
+        YouLose();
+        AppuyerSurUneTouche("Appuyez sur une touche pour continuer...");
     }
 
     AjouterHistorique(gagnant, guerrier, boss);
@@ -1258,6 +1264,28 @@ void LancerCombatContreAzaroth()
     player.Stop();
 }
 
+
+void YouLose()
+{
+    Console.Clear();
+    var player = new SoundPlayer("Assets/Audio/Final Fantasy Tactics Game Over.wav");
+    player.Play();
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+
+    Console.WriteLine("\n VOUS ÊTES TOMBÉ AU COMBAT... \n");
+    Thread.Sleep(1800);
+    Console.WriteLine("Les ténèbres s'étendent...");
+    Thread.Sleep(1800);
+    Console.WriteLine("Votre nom s'efface dans les mémoires...");
+    Thread.Sleep(1800);
+
+    Console.ForegroundColor = ConsoleColor.Black;
+    Console.BackgroundColor = ConsoleColor.Red;
+    Console.WriteLine("\n        GAME OVER        ");
+    Console.ResetColor();
+
+    Thread.Sleep(1500);
+}
 /*
 List<Guerrier> ChargerGuerriersDepuisJson(string chemin)
 {
